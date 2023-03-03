@@ -30,11 +30,11 @@ const routes: Routes = [
   component: SearchItemsLayoutComponent
 },
 {
-  path: 'sign-in',
+  path: '',
   component: SignInLayoutComponent
 },
 {
-  path: '',
+  path: 'sign-out',
   component: SignOutLayoutComponent
 }
 ];
