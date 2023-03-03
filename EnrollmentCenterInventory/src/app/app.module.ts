@@ -10,6 +10,7 @@ import { SearchItemsLayoutComponent } from './Layouts/search-items-layout/search
 import { ReportLayoutComponent } from './Layouts/report-layout/report-layout.component';
 import { AuditLayoutComponent } from './Layouts/audit-layout/audit-layout.component';
 import { AddRemoveLayoutComponent } from './Layouts/add-remove-layout/add-remove-layout.component';
+import { NavBarComponent } from './Components/Common/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AddRemoveLayoutComponent } from './Layouts/add-remove-layout/add-remove
     SearchItemsLayoutComponent,
     ReportLayoutComponent,
     AuditLayoutComponent,
-    AddRemoveLayoutComponent
+    AddRemoveLayoutComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
