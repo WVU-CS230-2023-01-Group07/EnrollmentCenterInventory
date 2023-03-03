@@ -1,0 +1,30 @@
+input {
+    width: 80%;
+
+    padding: 15px;
+    margin: 15px;
+}
+
+#sign-in {
+    margin-left: 15px;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.outer {
+    width: 30%;
+}
+
+.inner {
+    display: flex;
+    width: 100%;
+    justify-content: center;;
+}
