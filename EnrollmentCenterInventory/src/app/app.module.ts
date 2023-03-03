@@ -11,6 +11,7 @@ import { ReportLayoutComponent } from './Layouts/report-layout/report-layout.com
 import { AuditLayoutComponent } from './Layouts/audit-layout/audit-layout.component';
 import { AddRemoveLayoutComponent } from './Layouts/add-remove-layout/add-remove-layout.component';
 import { NavBarComponent } from './Components/Common/nav-bar/nav-bar.component';
+import { ProductListComponent } from './Components/LayoutComponents/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NavBarComponent } from './Components/Common/nav-bar/nav-bar.component';
     ReportLayoutComponent,
     AuditLayoutComponent,
     AddRemoveLayoutComponent,
-    NavBarComponent
+    NavBarComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
