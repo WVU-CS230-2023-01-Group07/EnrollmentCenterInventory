@@ -1,18 +1,16 @@
 input {
-    width: 80%;
+    width: 100%;
 
     padding: 15px;
-    margin: 15px;
 }
 
 #sign-in {
     margin-left: 15px;
     justify-content: center;
-    align-items: center;
     left: 50%;
 }
 
-.container {
+.container-fluid {
     height: 100%;
     display: flex;
     justify-content: center;
@@ -20,11 +18,31 @@ input {
 }
 
 .outer {
-    width: 30%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display:flex;
 }
 
 .inner {
     display: flex;
     width: 100%;
-    justify-content: center;;
+    justify-content: center;
+}
+
+.header {
+    width: 100%;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+.organize {
+    justify-content: center;
+    align-items: center;
+}
+
+.organizeInner {
+    width: 30%;
 }
