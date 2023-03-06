@@ -1,0 +1,45 @@
+.container-fluid {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-select{
+    display:inline;
+}
+
+.card{
+    min-width:18rem;
+    border-radius: 10%;
+}
+
+select{
+    display:block;
+}
+
+.card-title{
+    padding-bottom:-3rem;
+    text-align:center;
+    padding-top:1rem;
+}
+
+.form-label{
+    padding-top:1rem;
+}
+
+.btn{
+    margin-top:1rem;
+    background-color: #eaaa00;
+    color: #002855;
+}
+
+.btn:active{
+    background-color:#002855;
+    color: #eaaa00;
+    border:#002855;
+}
+
+body{
+    background-image: url('../../../assets/background-image.png')
+}

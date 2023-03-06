@@ -1,0 +1,65 @@
+/* Everything goes in this */
+.middle{
+    /* margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 13em; */
+    
+    background-color: white;
+    outline: .3em solid gray;
+    border-radius: 5px;
+
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 2em;
+    padding-top: 2em;
+    
+}
+
+/* Text at the top of page */
+.header{
+    /* font-family: "Segoe UI"; */
+    color: whi;
+    /* font-weight: bold; */
+    font-size: 3em;
+}
+
+.lable{
+    font-size: 2em;
+    color: black;
+
+}
+
+/* Toggle Buttons */
+.btn-outline-success{
+    background-color: #e4dfcf;
+    border-color: #EAAA00;
+    color: black;
+}
+.btn-check:checked+.btn-outline-success {
+    color: #fff;
+    background-color: #002855;
+    border-color: #002855;
+}
+.btn-check:hover+.btn-outline-success {
+
+    color: #fff;
+    background-color: #002855;
+    border-color: #002855;
+}
+
+/* Generate Button */
+.btn-generate{
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 5%;
+    background-color: #002855;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.btn-generate:hover{
+    background-color: #02162d;
+}
+.btn-generate:active{
+    background-color: #000912;
+}
