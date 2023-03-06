@@ -1,1 +1,31 @@
-<p>report-layout works!</p>
+<!-- Puts in the navbar -->
+<app-nav-bar></app-nav-bar>
+
+<form class="container-fluid mx-auto" style="background-color: white; background-image: url('/assets/background-image.png'); width: 1610px; height: 930px; margin-top: 90px">
+
+    <b class="text-center header">Generate Report</b>
+<div class = "d-flex flex-column middle gap-2">
+    
+
+    <b class="lable">Include:</b>
+    <div class="d-flex gap-3 flex-wrap align-middle">
+        
+        <input type="checkbox" class="btn-check" id="btn-shelf-capacity" autocomplete="off" checked>
+        <label class="btn btn-outline-success" for="btn-shelf-capacity">Shelf Capacity</label><br>
+
+        <input type="checkbox" class="btn-check" id="btn-item-quanity" autocomplete="off" checked>
+        <label class="btn btn-outline-success" for="btn-item-quanity">Item Quantity</label><br>
+
+        <input type="checkbox" class="btn-check" id="btn-item-type" autocomplete="off" checked>
+        <label class="btn btn-outline-success" for="btn-item-type">Item Type</label><br>
+
+        <input type="checkbox" class="btn-check" id="btn-item-barcode" autocomplete="off" checked>
+        <label class="btn btn-outline-success" for="btn-item-barcode">Item Barcode</label><br>
+
+    </div>
+
+    <b class="lable">Some way of selecting what items should be included</b>
+    
+    <button type="button" class="btn-generate">Generate</button>
+</div>
+
