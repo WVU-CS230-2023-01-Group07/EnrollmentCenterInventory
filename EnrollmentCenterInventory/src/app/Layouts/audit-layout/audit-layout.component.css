@@ -1,0 +1,11 @@
+.controls{
+    font-size: 25px;
+    background-color: #ffc14c ;
+    color:blue;
+}
+.flag{
+    color:rgba(27, 27, 27, 0.466);
+}
+.flag:hover{
+    color: rgb(255, 98, 0);
+}
