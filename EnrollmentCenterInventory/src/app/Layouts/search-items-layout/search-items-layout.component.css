@@ -1,5 +1,4 @@
 .container-fluid {
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,6 +11,7 @@
 .card{
     min-width:18rem;
     border-radius: 10%;
+    margin-top:22.5%;
 }
 
 select{
@@ -41,5 +41,8 @@ select{
 }
 
 body{
-    background-image: url('../../../assets/background-image.png')
+    background-image: url('../../../assets/background-image.png');
+    width:1610px;
+    margin:auto;
+    background-position-y:80px;
 }

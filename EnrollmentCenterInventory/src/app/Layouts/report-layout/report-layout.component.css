@@ -1,26 +1,28 @@
 /* Everything goes in this */
 .middle{
-    /* margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 13em; */
+    margin-left: 20%;
+    margin-right: 20%;
     
     background-color: white;
-    outline: .3em solid gray;
+    outline: .2em solid rgb(188, 188, 188);
     border-radius: 5px;
 
     padding-left: 5%;
     padding-right: 5%;
     padding-bottom: 2em;
     padding-top: 2em;
-    
+    text-align: left;
+}
+
+.container-fluid{
+    text-align: center;
 }
 
 /* Text at the top of page */
 .header{
-    /* font-family: "Segoe UI"; */
     color: whi;
-    /* font-weight: bold; */
     font-size: 3em;
+    text-align: center;
 }
 
 .lable{
@@ -49,16 +51,18 @@
 
 /* Generate Button */
 .btn-generate{
-    margin-left: 35%;
-    margin-right: 35%;
+    margin-left: 20%;
+    margin-right: 20%;
     margin-top: 5%;
-    background-color: #002855;
+    height: 2em;
+    background-color: #EAAA00;
     color: white;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 10px;
+    font-size: 1.5em;
 }
 .btn-generate:hover{
-    background-color: #02162d;
+    background-color: #f5b915;
 }
 .btn-generate:active{
     background-color: #000912;
