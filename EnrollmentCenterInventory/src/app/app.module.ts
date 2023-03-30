@@ -12,6 +12,13 @@ import { AuditLayoutComponent } from './Layouts/audit-layout/audit-layout.compon
 import { AddRemoveLayoutComponent } from './Layouts/add-remove-layout/add-remove-layout.component';
 import { NavBarComponent } from './Components/Common/nav-bar/nav-bar.component';
 import { ProductListComponent } from './Components/LayoutComponents/product-list/product-list.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -28,7 +35,13 @@ import { ProductListComponent } from './Components/LayoutComponents/product-list
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
+    provideRemoteConfig(() => getRemoteConfig()),
+    provideStorage(() => getStorage())
   ],
   providers: [],
   bootstrap: [AppComponent]

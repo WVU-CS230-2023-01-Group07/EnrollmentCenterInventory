@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "wvu-ec-database": {
+      "hosting": {
+        "EnrollmentCenterInventory": [
+          "wvu-ec-database"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "wvu-ec-database"
+  }
+}
