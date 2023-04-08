@@ -36,7 +36,7 @@
         }
 
         /* CONTINUE BUTTON */
-        a.btn {
+        button.btn {
             width: 498.8px;
             height: 50px;
             font-size: 25px;
@@ -64,68 +64,99 @@
                     <div class="d-flex">
                         <p id="right">Adding or Removing: </p>
                         <div id="input">
-                            <select id="dropdown" style="width:211px">
+                            <select id="dropdown" style="width:211px" (change)="isAdd(selectField1.value)"
+                                #selectField1>
                                 <option value="blank"></option>
                                 <option value="Add">Adding</option>
                                 <option value="Remove">Removing</option>
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex">
-                        <p id="right">Item Name: </p>
-                        <div id="input">
-                            <datalist id="suggestions2">
-                            </datalist>
-                            <input autoComplete="on" list="suggestions2" />
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <p id="right">Capacity: </p>
-                        <div id="input">
-                            <input type="number"/>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <p id="right">Quantity: </p>
-                        <div id="input">
-                            <input type="number" id="capacity"/>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <p id="right">Storage Location: </p>
-                        <div id="input">
-                            <datalist id="suggestions3">
-                            </datalist>
-                            <input autoComplete="on" list="suggestions3" />
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <p id="right">Classification/Type: </p>
-                        <div id="input">
-                            <datalist id="suggestions4">
-                                <option>Expendable</option>
-                                <option>Reusable</option>
-                            </datalist>
-                            <input autoComplete="on" list="suggestions4" />
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <p id="right">Barcode: </p>
-                        <div id="input">
-                            <datalist id="suggestions5">
-                            </datalist>
-                            <input autoComplete="on" list="suggestions5" />
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <p id="right">Link to Product: </p>
-                        <div id="input">
-                            <datalist id="suggestions6">
-                            </datalist>
-                            <input autoComplete="on" list="suggestions6" />
-                        </div>
-                    </div>
-                    <a type="button" class="btn btn-warning" style="border-radius: 40px" href="home">COMPLETE</a>
+                    <span *ngIf=!blankFlag>
+                        <!-- DISPLAY FOR ADDING -->
+                        <form #postForm="ngForm" *ngIf="addFlag; else removing" (ngSubmit)="addItem(postForm.value)" [formGroup]="add">
+                            <div class="d-flex">
+                                <p id="right">Barcode: </p>
+                                <div id="input">
+                                    <datalist id="suggestions5">
+                                    </datalist>
+                                    <input autoComplete="on" list="suggestions5" required ngModel name="itemBarcode"
+                                        id="barcode" [formControl]="barcode" />
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <p id="right">Item Name: </p>
+                                <div id="input">
+                                    <datalist id="suggestions2">
+                                    </datalist>
+                                    <input autoComplete="on" list="suggestions2" required ngModel name="itemName" id="name" [formControl]="name"/>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <p id="right">Capacity: </p>
+                                <div id="input">
+                                    <input type="number" ngModel name="shelfCapacity" [formControl]="capacity"/>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <p id="right">Quantity: </p>
+                                <div id="input">
+                                    <input type="number" id="capacity" required ngModel name="itemQuantity" id="quantity" [formControl]="quantity"/>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <p id="right">Storage Location: </p>
+                                <div id="input">
+                                    <datalist id="suggestions3">
+                                    </datalist>
+                                    <input autoComplete="on" list="suggestions3" ngModel name="storageLocation"
+                                        id="storage" [formControl]="location"/>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <p id="right">Classification/Type: </p>
+                                <div id="input">
+                                    <datalist id="suggestions4">
+                                        <option>Expendable</option>
+                                        <option>Reusable</option>
+                                    </datalist>
+                                    <input autoComplete="on" list="suggestions4" required ngModel name="itemType" id="type" [formControl]="type"/>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <p id="right">Link to Product: </p>
+                                <div id="input">
+                                    <datalist id="suggestions6">
+                                    </datalist>
+                                    <input autoComplete="on" list="suggestions6" ngModel name="itemLink" id="link"/>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-warning" style="border-radius: 40px"
+                                [disabled]="!postForm.valid">COMPLETE</button>
+                                <!-- ondblclick=reset() -->
+                        </form>
+                        <!-- ELSE DISPLAY FOR REMOVING -->
+                        <ng-template #removing>
+                            <form #postForm="ngForm" (ngSubmit)="removeItem(postForm.value)" [formGroup]="remove">
+                                <div class="d-flex">
+                                    <p id="right">Barcode: </p>
+                                    <div id="input">
+                                        <datalist id="suggestions5">
+                                        </datalist>
+                                        <input autoComplete="on" list="suggestions5" required ngModel name="itemBarcode"
+                                            id="barcode" [formControl]="barcode"/>
+                                    </div>
+                                </div>
+                                <!-- <div class="d-flex">
+                                    <p id="right">Quantity: </p>
+                                    <div id="input">
+                                        <input type="number" id="capacity" ngModel name="itemQuantity" id="quantity" [formControl]="quantity"/>
+                                    </div>
+                                </div> -->
+                                <button type="submit" class="btn btn-warning" style="border-radius: 40px" [disabled]="!postForm.valid">COMPLETE</button>
+                            </form>
+                        </ng-template>
+                    </span>
                 </div>
             </div>
         </div>
