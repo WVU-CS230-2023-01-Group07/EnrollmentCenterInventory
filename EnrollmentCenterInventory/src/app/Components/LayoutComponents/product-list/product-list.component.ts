@@ -21,4 +21,10 @@ export class ProductListComponent {
     this.itemType ="No Item Type Found";
     this.itemBarcode ="No Item Barcode Found";
   }
+
+  //constuctor(private httpClient: HttpClient){
+
+ // }
+
+
 }
