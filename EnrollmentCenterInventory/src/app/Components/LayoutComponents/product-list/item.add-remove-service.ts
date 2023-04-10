@@ -1,11 +1,11 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import{Observable } from 'rxjs';
+import { HttpClient} from "@angular/common/http";
+// import{Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { ItemModel } from "./item.model";
-import { AngularFireDatabase } from "@angular/fire/compat/database";
-import { getDatabase, ref, set, push, child, update, get } from "firebase/database";
-import { getFirestore } from "@firebase/firestore";
-import { getAuth } from "firebase-admin/auth";
+// import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { getDatabase, ref, set} from "firebase/database";
+// import { getFirestore } from "@firebase/firestore";
+// import { getAuth } from "firebase-admin/auth";
 
 @Injectable(
     {providedIn: 'root'}
