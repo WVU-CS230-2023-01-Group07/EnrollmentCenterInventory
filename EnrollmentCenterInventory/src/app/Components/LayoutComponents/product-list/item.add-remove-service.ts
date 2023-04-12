@@ -1,11 +1,7 @@
 import { HttpClient} from "@angular/common/http";
-// import{Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { ItemModel } from "./item.model";
-// import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { getDatabase, ref, set} from "firebase/database";
-// import { getFirestore } from "@firebase/firestore";
-// import { getAuth } from "firebase-admin/auth";
 
 @Injectable(
     {providedIn: 'root'}
@@ -42,11 +38,6 @@ export class ProductService{
             storage: product.storageLocation,
             classification: product.itemType
         })
-
-        // .subscribe(data => {
-        //     if (!alert("Contract created successfully")) {
-        //        this.addForm.reset();
-        //     }
     }
 
     removeProduct(product:ItemModel){

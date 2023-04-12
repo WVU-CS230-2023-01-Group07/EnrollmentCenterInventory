@@ -3,9 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item.model"
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove-service';
-// import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-// import { getDatabase } from 'firebase-admin/database';
 
 @Component({
   selector: 'app-add-remove-layout',
@@ -38,10 +36,6 @@ export class AddRemoveLayoutComponent implements OnInit {
     this.add.valueChanges.subscribe(x => {
       console.log(x);
     })
-    // this.add.get("")
-    // this.add.addControl("itemBarcode",this.barcode);
-    // this.createFormControls();
-    // this.createForm();
   }
 
   // Interacts with  Adding or Removing dropdown box for add/remove layout
@@ -93,7 +87,6 @@ export class AddRemoveLayoutComponent implements OnInit {
 
     if (this.remove.valid && barcode != null && barcode != '') {
       const products = new ItemModel('', 0, 0, '', '', barcode.trim())
-      // console.log("Removing Item: " + JSON.stringify(product));
       this.ps.removeProduct(products);
       this.remove.reset();
       alert("Item Removed Successfully");
