@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item.model"
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove-service';
 // import { HttpClient } from '@angular/common/http';
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 // import { getDatabase } from 'firebase-admin/database';
 
 @Component({
@@ -17,70 +17,31 @@ export class AddRemoveLayoutComponent implements OnInit {
   addFlag = false;
   itemInfo: ItemModel | undefined;
 
-  barcode = new FormControl('');
-  name = new FormControl('');
-  type = new FormControl('');
-  quantity = new FormControl('');
-  capacity = new FormControl('');
-  location = new FormControl('');
-  // link = new FormControl('');
+  //Remove Form Group 
   remove = new FormGroup({
-    itemBarcode: this.barcode
+    itemBarcode: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
+  //Add Form Group 
   add = new FormGroup({
-    itemBarcode: this.barcode,
-    itemName: this.name,
-    itemType: this.type,
-    itemQuantity: this.quantity,
-    shelfCapacity: this.capacity,
-    storageLocation: this.location
+    itemBarcode: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern('([a-zA-z0-9-]+)')]),
+    itemName: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')]),
+    itemType: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')]),
+    itemQuantity: new FormControl(undefined, [Validators.required, Validators.pattern('([1-9]+[0-9]*)')]),
+    shelfCapacity: new FormControl(undefined, [Validators.required, Validators.pattern('([1-9]+[0-9]*)')]),
+    storageLocation: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')])
   });
 
   constructor(private ps: ProductService) { }
 
   ngOnInit() {
+    this.add.valueChanges.subscribe(x => {
+      console.log(x);
+    })
+    // this.add.get("")
     // this.add.addControl("itemBarcode",this.barcode);
-    this.createFormControls();
-    this.createForm();
-  }
-
-  createFormControls() {
-    this.barcode = new FormControl('', Validators.required);
-    this.name = new FormControl('', Validators.required);
-    this.type = new FormControl('', Validators.required);
-    this.quantity = new FormControl('', [
-      Validators.required,
-      Validators.pattern("([1-9]+)"
-      )]);
-    this.capacity = new FormControl('', [
-      Validators.required,
-      Validators.pattern("([1-9]+)"
-      )]);
-    this.location = new FormControl('', Validators.required);
-    // this.email = new FormControl('', [
-    //   Validators.required,
-    //   Validators.pattern("[^ @]*@[^ @]*")
-    // ]);
-    // this.password = new FormControl('', [
-    //   Validators.required,
-    //   Validators.minLength(8)
-    // ]);
-    // this.language = new FormControl('');
-  }
-
-  createForm() {
-    this.add = new FormGroup({
-      itemBarcode: this.barcode,
-      itemName: this.name,
-      itemType: this.type,
-      itemQuantity: this.quantity,
-      shelfCapacity: this.capacity,
-      storageLocation: this.location
-    });
-    this.remove = new FormGroup({
-      itemBarcode: this.barcode
-    });
+    // this.createFormControls();
+    // this.createForm();
   }
 
   // Interacts with  Adding or Removing dropdown box for add/remove layout
@@ -102,30 +63,42 @@ export class AddRemoveLayoutComponent implements OnInit {
 
   //Adds items into the database
   //Once added to database, form resets to add/remove other products
-  addItem(product: ItemModel) {
-    if (this.add.valid) {
-      if (product.shelfCapacity < product.itemQuantity) {
-        alert("Error: Item Quantity Cannot Exceed Item Capacity")
+  addItem() {
+    console.log("Is the Form valid? " + this.add.valid)
+    const quantity = this.add.value.itemQuantity;
+    const capacity = this.add.value.shelfCapacity;
+    const name = this.add.value.itemName;
+    const storage = this.add.value.storageLocation;
+    const barcode = this.add.value.itemBarcode;
+    const type = this.add.value.itemType;
+
+    if (this.add.valid && capacity != null && quantity != null && name != null && storage != null && barcode != null && type != null) {
+      const products = new ItemModel(name, capacity, quantity, storage, type, barcode)
+      if (capacity < quantity) {
+        alert("ERROR: Item Quantity Cannot Exceed Item Capacity")
       } else {
-        console.log("Adding Item: " + JSON.stringify(product));
-        this.ps.addProduct(product);
+        console.log("Adding Item: " + JSON.stringify(this.add.value));
+        this.ps.addProduct(products);
         this.add.reset();
-        alert("Item Added Successfully \n" + product.itemQuantity + " of " + product.itemName + "Is in Inventory");
+        alert("Item Added Successfully \n" + quantity + " " + name + " Is now in Inventory");
       }
     } else {
-      alert("Error: Item was not added to Inventory");
+      alert("ERROR: Item was not added to Inventory");
     }
   }
 
   //Removes items from database upon user interaction through add/remove layout
-  removeItem(product: ItemModel) {
-    if (this.remove.valid) {
-      console.log("Removing Item: " + JSON.stringify(product));
-      this.ps.removeProduct(product);
+  removeItem() {
+    const barcode = this.remove.value.itemBarcode;
+
+    if (this.remove.valid && barcode != null && barcode != '') {
+      const products = new ItemModel('', 0, 0, '', '', barcode.trim())
+      // console.log("Removing Item: " + JSON.stringify(product));
+      this.ps.removeProduct(products);
       this.remove.reset();
       alert("Item Removed Successfully");
     } else {
-      alert("Error: Item was not removed");
+      alert("ERROR: Item was not removed");
     }
   }
 }

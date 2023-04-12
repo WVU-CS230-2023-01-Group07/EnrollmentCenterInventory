@@ -58,6 +58,14 @@
     <div class="box mx-auto"
         style="background-color: white; background-image: url('/assets/background-image.png'); width: 1610px; height: 930px; margin-top: 90px">
         <div class="container-fluid center">
+            <div class="card" style="width: 500px; background-color: white; border: none; border-radius: 40px" id="description">
+                <div class="d-flex">INSTRUCTIONS:</div>
+                <div class="d-flex"> 
+                1) BARCODE MUST BE LONGER THAN 6 CHARACTERS <br>
+                2) ILLEGAL CHARACTERS (BARCODE, NAME, STORAGE, TYPE): <br>SPACES, COMMAS, !, @, #, $, %, ^, &, *, (, ), +, =, ?, /, \, |, `, ', "
+                3) CAPACITY MUST BE GREATER THAN QUANTITY
+            </div>
+            </div>
             <div class="card" style="width: 500px; background-color: white; border: none; border-radius: 40px">
                 <h1>Add/Remove</h1>
                 <div class="attributes">
@@ -74,14 +82,14 @@
                     </div>
                     <span *ngIf=!blankFlag>
                         <!-- DISPLAY FOR ADDING -->
-                        <form #postForm="ngForm" *ngIf="addFlag; else removing" (ngSubmit)="addItem(postForm.value)" [formGroup]="add">
+                        <form *ngIf="addFlag; else removing" (ngSubmit)="addItem()" [formGroup]="add">
                             <div class="d-flex">
                                 <p id="right">Barcode: </p>
                                 <div id="input">
                                     <datalist id="suggestions5">
                                     </datalist>
-                                    <input autoComplete="on" list="suggestions5" required ngModel name="itemBarcode"
-                                        id="barcode" [formControl]="barcode" />
+                                    <input autoComplete="on" list="suggestions5" id="itemBarcode"
+                                        formControlName="itemBarcode"  required ngModel/>
                                 </div>
                             </div>
                             <div class="d-flex">
@@ -89,19 +97,21 @@
                                 <div id="input">
                                     <datalist id="suggestions2">
                                     </datalist>
-                                    <input autoComplete="on" list="suggestions2" required ngModel name="itemName" id="name" [formControl]="name"/>
+                                    <input autoComplete="on" list="suggestions2" id="itemName"
+                                        formControlName="itemName"  required ngModel/>
                                 </div>
                             </div>
                             <div class="d-flex">
                                 <p id="right">Capacity: </p>
                                 <div id="input">
-                                    <input type="number" ngModel name="shelfCapacity" [formControl]="capacity"/>
+                                    <input type="number" formControlName="shelfCapacity"  required ngModel/>
                                 </div>
                             </div>
                             <div class="d-flex">
                                 <p id="right">Quantity: </p>
                                 <div id="input">
-                                    <input type="number" id="capacity" required ngModel name="itemQuantity" id="quantity" [formControl]="quantity"/>
+                                    <input type="number" id="capacity" id="itemQuantity"
+                                        formControlName="itemQuantity"  required ngModel/>
                                 </div>
                             </div>
                             <div class="d-flex">
@@ -109,8 +119,8 @@
                                 <div id="input">
                                     <datalist id="suggestions3">
                                     </datalist>
-                                    <input autoComplete="on" list="suggestions3" ngModel name="storageLocation"
-                                        id="storage" [formControl]="location"/>
+                                    <input autoComplete="on" list="suggestions3" id="storage"
+                                        formControlName="storageLocation"  required ngModel/>
                                 </div>
                             </div>
                             <div class="d-flex">
@@ -120,7 +130,8 @@
                                         <option>Expendable</option>
                                         <option>Reusable</option>
                                     </datalist>
-                                    <input autoComplete="on" list="suggestions4" required ngModel name="itemType" id="type" [formControl]="type"/>
+                                    <input autoComplete="on" list="suggestions4" id="itemType"
+                                        formControlName="itemType"  required ngModel/>
                                 </div>
                             </div>
                             <div class="d-flex">
@@ -128,7 +139,7 @@
                                 <div id="input">
                                     <datalist id="suggestions6">
                                     </datalist>
-                                    <input autoComplete="on" list="suggestions6" ngModel name="itemLink" id="link"/>
+                                    <input autoComplete="on" list="suggestions6" id="link" ngModel/>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-warning" style="border-radius: 40px"
@@ -136,17 +147,18 @@
                         </form>
                         <!-- ELSE DISPLAY FOR REMOVING -->
                         <ng-template #removing>
-                            <form #postForm="ngForm" (ngSubmit)="removeItem(postForm.value)" [formGroup]="remove">
+                            <form (ngSubmit)="removeItem()" [formGroup]="remove">
                                 <div class="d-flex">
                                     <p id="right">Barcode: </p>
                                     <div id="input">
                                         <datalist id="suggestions5">
                                         </datalist>
-                                        <input autoComplete="on" list="suggestions5" required ngModel name="itemBarcode"
-                                            id="barcode" [formControl]="barcode"/>
+                                        <input autoComplete="on" list="suggestions5" required ngModel id="barcode"
+                                            formControlName="itemBarcode" />
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-warning" style="border-radius: 40px" [disabled]="!postForm.valid">COMPLETE</button>
+                                <button type="submit" class="btn btn-warning" style="border-radius: 40px"
+                                    [disabled]="!remove.valid">COMPLETE</button>
                             </form>
                         </ng-template>
                     </span>
