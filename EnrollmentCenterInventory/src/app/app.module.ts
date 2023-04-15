@@ -12,7 +12,7 @@ import { AuditLayoutComponent } from './Layouts/audit-layout/audit-layout.compon
 import { AddRemoveLayoutComponent } from './Layouts/add-remove-layout/add-remove-layout.component';
 import { NavBarComponent } from './Components/Common/nav-bar/nav-bar.component';
 import { ProductListComponent } from './Components/LayoutComponents/product-list/product-list.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp,provideFirebaseApp, getApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
@@ -20,7 +20,9 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ProductService } from './Components/LayoutComponents/product-list/item.add-remove-service';
+
 
 @NgModule({
   declarations: [
@@ -51,4 +53,5 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
+

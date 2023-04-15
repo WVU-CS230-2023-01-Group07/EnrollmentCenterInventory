@@ -11,6 +11,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/database';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
+import { SearchItemsLayoutComponent } from './app/Layouts/search-items-layout/search-items-layout.component';
 
 // Initialize Firebase app
 const firebaseConfig = {
@@ -31,3 +32,7 @@ const dbRef = ref(getDatabase(app));
 onValue(dbRef, (snapshot) => {
   console.log(snapshot.val());
 });
+
+
+
+

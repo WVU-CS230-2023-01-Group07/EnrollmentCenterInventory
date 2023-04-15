@@ -5,7 +5,10 @@ import { ItemModel } from "./item.model";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { getDatabase, ref, set, push, child, update, get } from "firebase/database";
 import { getFirestore } from "@firebase/firestore";
-import { getAuth } from "firebase-admin/auth";
+import { item_list } from "./item_list";
+// import { getAuth } from "firebase-admin/auth";
+
+console.log("test");
 
 @Injectable(
     {providedIn: 'root'}
@@ -15,10 +18,26 @@ export class ProductService{
     private productsEndPoint = "Products";
 
     constructor(private http: HttpClient){
+
     }
 
-    // getProduct(product:ItemModel){
-    //     console.log(JSON.stringify(product.itemBarcode));
+    getProduct(product:ItemModel){
+        console.log(JSON.stringify(product.itemBarcode));
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, 'Products/' + product.itemBarcode)).then((snapshot) => {
+            if(snapshot.exists()){
+                console.log(snapshot.val());
+                this.removeProduct(product);
+            } else {
+                console.log('No Quantity Available');
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
+    // getProduct(itemName: string){
+    //     //console.log(JSON.stringify(product.itemBarcode));
     //     const dbRef = ref(getDatabase());
     //     get(child(dbRef, 'Products/' + product.itemBarcode)).then((snapshot) => {
     //         if(snapshot.exists()){
