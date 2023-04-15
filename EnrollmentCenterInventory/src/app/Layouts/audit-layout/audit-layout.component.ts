@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuditModel } from './audit.model';
 
 @Component({
   selector: 'app-audit-layout',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./audit-layout.component.css']
 })
 export class AuditLayoutComponent {
+  items: AuditModel[] = [];
+  
 
 }
