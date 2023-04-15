@@ -3,7 +3,7 @@ import{Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { ItemModel } from "./item.model";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
-import { getDatabase, ref, set, push, child, update, get } from "firebase/database";
+import { getDatabase, ref, set, push, child, update, get, onValue } from "firebase/database";
 import { getFirestore } from "@firebase/firestore";
 import { item_list } from "./item_list";
 // import { getAuth } from "firebase-admin/auth";
@@ -36,20 +36,32 @@ export class ProductService{
         });
     }
 
-    // getProduct(itemName: string){
-    //     //console.log(JSON.stringify(product.itemBarcode));
-    //     const dbRef = ref(getDatabase());
-    //     get(child(dbRef, 'Products/' + product.itemBarcode)).then((snapshot) => {
-    //         if(snapshot.exists()){
-    //             console.log(snapshot.val());
-    //             this.removeProduct(product);
-    //         } else {
-    //             console.log('No Quantity Available');
-    //         }
-    //     }).catch((error) => {
-    //         console.error(error);
-    //     });
-    // }
+    searchProduct(itemName: string) {
+        //console.log(JSON.stringify(product.itemBarcode));
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, 'Products/')).then((snapshot) => {
+            if(snapshot.exists()){
+                console.log(snapshot.val());
+                const data = snapshot.val();
+
+                for (const key in data) {
+                    console.log(key);
+                    const keyRef = ref(getDatabase(), 'Products/' + key);
+                    get(child(keyRef, '/itemName')).then((snapshot2) => {
+                        if (snapshot2.exists() && snapshot2.val() == itemName) {
+                            console.log("snapshot2: " + snapshot2.val());
+                        }
+                    });
+
+                }
+
+            } else {
+                console.log('No Quantity Available');
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
 
     addProduct(product:ItemModel){
         const db = getDatabase();
