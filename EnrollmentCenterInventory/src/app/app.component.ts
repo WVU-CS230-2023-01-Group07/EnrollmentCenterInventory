@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
-import { inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ItemModel } from './Components/LayoutComponents/product-list/item.model';

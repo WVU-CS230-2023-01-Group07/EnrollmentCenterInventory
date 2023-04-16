@@ -25,6 +25,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuditProductsComponent } from './Components/LayoutComponents/audit-products/audit-products.component';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { ProductService } from './Components/LayoutComponents/product-list/item.add-remove-service';
+import { ItemsService } from './Components/Common/items.service';
 
 
 

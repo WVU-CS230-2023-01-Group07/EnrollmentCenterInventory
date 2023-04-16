@@ -24,7 +24,6 @@ const firebaseConfig = {
   measurementId: "G-6JWJ4FNF16"
 };
 
-
 // Get a reference to the database
 const dbRef = ref(getDatabase(app));
 
