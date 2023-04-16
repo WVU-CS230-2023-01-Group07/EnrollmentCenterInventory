@@ -8,7 +8,6 @@ import { getFirestore } from "@firebase/firestore";
 import { item_list } from "./item_list";
 // import { getAuth } from "firebase-admin/auth";
 
-console.log("test");
 
 @Injectable(
     {providedIn: 'root'}
@@ -40,42 +39,7 @@ export class ProductService{
         });
     }
 
-    // TODO: Refer to notes in word doc
-    searchProduct(itemName: string) {
-        //console.log(JSON.stringify(product.itemBarcode));
 
-        let branch = this.getProductBranch();
-        for (const newKey in branch)
-        {
-            console.log("newKey: " + newKey);
-        }
-        console.log("branch: " + branch);
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, 'Products/')).then((snapshot) => {
-            if(snapshot.exists()){
-                console.log(snapshot.val());
-                const data = snapshot.val();
-
-                for (const key in data) {
-                    console.log(key);
-                    const keyRef = ref(getDatabase(), 'Products/' + key);
-                    get(child(keyRef, '/itemName')).then((snapshot2) => {
-                        if (snapshot2.exists() && snapshot2.val() == itemName) {
-                            console.log("snapshot2: " + snapshot2.val());
-                            //createItem(snapshot.val());
-                            let item = new ItemModel("1", 1, 1, "1", "1", "1");
-                        }
-                    });
-
-                }
-
-            } else {
-                console.log('No Quantity Available');
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
 
     addProduct(product:ItemModel){
         const db = getDatabase();
