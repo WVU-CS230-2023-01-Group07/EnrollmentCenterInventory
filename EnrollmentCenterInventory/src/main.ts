@@ -23,7 +23,7 @@ const firebaseConfig = {
   appId: "1:822312610806:web:31d6079d4fece09d4cf5d7",
   measurementId: "G-6JWJ4FNF16"
 };
-const app = initializeApp(firebaseConfig);
+
 
 // Get a reference to the database
 const dbRef = ref(getDatabase(app));
@@ -32,7 +32,5 @@ const dbRef = ref(getDatabase(app));
 onValue(dbRef, (snapshot) => {
   console.log(snapshot.val());
 });
-
-
 
 
