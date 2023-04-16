@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AuditModel } from 'src/app/Layouts/audit-layout/audit.model';
 import { ItemsService } from 'src/app/Components/Common/items.service';
+import { AuditLayoutComponent } from 'src/app/Layouts/audit-layout/audit-layout.component';
 
 @Component({
   selector: 'app-audit-products',
@@ -31,9 +32,8 @@ export class AuditProductsComponent {
   }
 
   submitChanges(product:AuditModel){
-    console.log("test");
     product.itemName = this.itemName;
-    product.flag = this.flag;
+    product.flag = "true";
     product.shelfCapacity = this.shelfCapacity;
     product.itemType = this.itemType;
     product.itemBarcode = this.itemBarcode;
@@ -44,6 +44,28 @@ export class AuditProductsComponent {
   }
 
   flagControl(){
-    console.log("flag test");
+    if(this.isFlagged(this)){
+      this.unflagItem(this);
+      console.log("Manually unflagged item:" + this.itemName)
+    } else{ 
+      this.flagItem(this);
+      console.log("Manually flagged item:" + this.itemName)
+    }
+    this.itemsService.addProduct(this);
+  }
+
+  flagItem(item: AuditModel){
+    item.flag = "true";
+  }
+
+  unflagItem(item: AuditModel){
+    item.flag = "false";
+  }
+
+  isFlagged(item: AuditModel){
+    if (item.flag == "true"){
+      return true;
+    } else
+      return false;
   }
 }

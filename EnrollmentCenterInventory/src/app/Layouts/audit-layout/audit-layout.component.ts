@@ -10,6 +10,7 @@ import { AuditModel } from './audit.model';
 export class AuditLayoutComponent {
   items: AuditModel[] = [];
   flaggedItems: AuditModel[] = [];
+  showingFlagged: boolean = false;
 
   constructor(private itemsService:ItemsService){
     
@@ -17,17 +18,21 @@ export class AuditLayoutComponent {
 
   ngOnInit(): void {
     this.itemsService.getItems().subscribe((data: AuditModel []) => {
-      console.log("Fetching items");
-      for (var item of data){
+      console.log("Fetching stories");
+      for (var story of data){
         console.log(data);
-        this.items.push(item);
-        console.log();
+        this.items.push(story);
+        console.log()
       }
     });
   }
   
-  auditControl() {
-
+  showFlagged(){
+    this.flagItems();
+    if(this.showingFlagged)
+      this.showingFlagged = false;
+    else
+    this.showingFlagged = true;
   }
 
   editLocation(item: AuditModel, location: string){
@@ -55,7 +60,7 @@ export class AuditLayoutComponent {
   }
 
   isFlagged(item: AuditModel){
-    if (item.flag){
+    if (item.flag == "true"){
       return true;
     } else
       return false;
@@ -65,7 +70,7 @@ export class AuditLayoutComponent {
     this.flaggedItems.splice(0);
     this.items.forEach(element => {
       if(this.isFlagged(element)){
-        this.flaggedItems.push()
+        this.flaggedItems.push(element)
       }
     });
   }
