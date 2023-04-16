@@ -3,7 +3,7 @@ import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove-service';
 import { HttpClient } from '@angular/common/http';
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms'
-import { getDatabase } from 'firebase-admin/database';
+// import { getDatabase } from 'firebase-admin/database';
 
 @Component({
   selector: 'app-add-remove-layout',

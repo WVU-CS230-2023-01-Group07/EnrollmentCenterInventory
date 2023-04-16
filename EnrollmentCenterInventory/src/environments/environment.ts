@@ -1,3 +1,6 @@
+import * as firebase from "firebase/compat";
+import 'firebase/database';
+
 export const environment = {
   firebase: {
     projectId: 'wvu-ec-database',
@@ -29,3 +32,5 @@ const firebaseConfig = {
   measurementId: "G-6JWJ4FNF16"
 
 };
+
+
