@@ -34,16 +34,27 @@ export class SearchItemsLayoutComponent implements OnInit {
   productsRef = ref(this.db, '/Products');
 
   constructor(private ps: ProductService){
-    this.search();
+    this.search("Clipboard");
   }
 
   ngOnInit(): void {
-    console.log(this.productsRef);
+
   }
 
-  search(): void {
-    let productList = this.ps.searchProduct("example2");
-    console.log("Test" + productList);
+  search(itemName: String): any {
+    return this.ps.getProductBranch().subscribe((data:ItemModel []) => {
+      console.log("test 7");
+      for (var product of data) {
+        if (product.itemName == itemName)
+        {
+          console.log("value is returned");
+          console.log(product);
+          return product;
+        }
+        
+      }
+      return null;
+    })
   }
   
 

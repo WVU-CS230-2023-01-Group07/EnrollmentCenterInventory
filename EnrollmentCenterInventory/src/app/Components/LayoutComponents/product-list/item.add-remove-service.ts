@@ -14,8 +14,12 @@ console.log("test");
     {providedIn: 'root'}
 )
 export class ProductService{
-    private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/Products.json";
-    private productsEndPoint = "Products";
+    private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
+    private productsEndPoint:string = "Products.json";
+
+    getProductBranch() {
+        return this.http.get<ItemModel []>(this.baseUrl + this.productsEndPoint);
+    }
 
     constructor(private http: HttpClient){
 
@@ -36,8 +40,16 @@ export class ProductService{
         });
     }
 
+    // TODO: Refer to notes in word doc
     searchProduct(itemName: string) {
         //console.log(JSON.stringify(product.itemBarcode));
+
+        let branch = this.getProductBranch();
+        for (const newKey in branch)
+        {
+            console.log("newKey: " + newKey);
+        }
+        console.log("branch: " + branch);
         const dbRef = ref(getDatabase());
         get(child(dbRef, 'Products/')).then((snapshot) => {
             if(snapshot.exists()){
@@ -50,6 +62,8 @@ export class ProductService{
                     get(child(keyRef, '/itemName')).then((snapshot2) => {
                         if (snapshot2.exists() && snapshot2.val() == itemName) {
                             console.log("snapshot2: " + snapshot2.val());
+                            //createItem(snapshot.val());
+                            let item = new ItemModel("1", 1, 1, "1", "1", "1");
                         }
                     });
 
@@ -84,4 +98,6 @@ export class ProductService{
         this.http.delete('https://wvu-ec-database-default-rtdb.firebaseio.com/Products/' + product.itemBarcode +'.json')
         .subscribe();
     }
+
+
 }
