@@ -72,7 +72,7 @@ export class ProductService{
         });
     }
 
-    addProduct(product:ItemModel){
+    removeProduct(number:number){
         const db = getDatabase();
         set(ref(db, `Products/${number}`), {
             flag: null,
