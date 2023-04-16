@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item.model"
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove-service';
+import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service'
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms'
 
 @Component({
@@ -11,7 +12,7 @@ import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms'
   styleUrls: ['./add-remove-layout.component.css']
 })
 export class AddRemoveLayoutComponent implements OnInit {
-  constructor(private ps: ProductService) { }
+  constructor(private ps: ProductService, private psGet: DisplayService) { }
   
   ngOnInit(): void {
     //Logs changes in realtime in Add-Remove page
@@ -28,7 +29,7 @@ export class AddRemoveLayoutComponent implements OnInit {
   isNull() {
     //Counter to find Null value
     var counter = 0;
-    this.ps.getProduct().subscribe((data: ItemModel[]) => {
+    this.psGet.getProduct().subscribe((data: ItemModel[]) => {
       for (var items of data) {
         if (items.itemBarcode == null) {
           break;
@@ -112,7 +113,7 @@ export class AddRemoveLayoutComponent implements OnInit {
 
     if (this.remove.valid && barcode != null && barcode != '') {
 
-      this.ps.getProduct().subscribe((data: ItemModel[]) => {
+      this.psGet.getProduct().subscribe((data: ItemModel[]) => {
         let counter = 0;
         for (var items of data) {
           //COMPARE input Barcode with Database Barcode

@@ -14,36 +14,6 @@ export class ProductService{
 
     }
 
-    getProduct(product:ItemModel){
-        console.log(JSON.stringify(product.itemBarcode));
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, 'Products/' + product.itemBarcode)).then((snapshot) => {
-            if(snapshot.exists()){
-                console.log(snapshot.val());
-                // this.removeProduct(product);
-            } else {
-                console.log('No Quantity Available');
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
-
-    // getProduct(product:ItemModel){
-    //     console.log(JSON.stringify(product.itemBarcode));
-    //     const dbRef = ref(getDatabase());
-    //     get(child(dbRef, 'Products/' + product.itemBarcode)).then((snapshot) => {
-    //         if(snapshot.exists()){
-    //             console.log(snapshot.val());
-    //             this.removeProduct(product);
-    //         } else {
-    //             console.log('No Quantity Available');
-    //         }
-    //     }).catch((error) => {
-    //         console.error(error);
-    //     });
-    // }
-
     //Calls isNull to find null item folder
     //Uses null folder to add new value into database
     addProduct(product:ItemModel, counter:number){
