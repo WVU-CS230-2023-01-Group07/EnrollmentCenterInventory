@@ -11,20 +11,24 @@
         <b class="lable">Include:</b>
         <div class="d-flex gap-3 flex-wrap align-middle">
             
-            <input type="checkbox" class="btn-check" id="btn-shelf-capacity" autocomplete="off" checked>
+            <input (click)="toggleName()" type="checkbox" class="btn-check" id="btn-item-name" autocomplete="off" checked>
+            <label class="btn btn-outline-success" for="btn-item-name">Item Name</label><br>
+
+            <input (click)="toggleCapacity()" type="checkbox" class="btn-check" id="btn-shelf-capacity" autocomplete="off" checked>
             <label class="btn btn-outline-success" for="btn-shelf-capacity">Shelf Capacity</label><br>
 
-            <input type="checkbox" class="btn-check" id="btn-item-quanity" autocomplete="off" checked>
+            <input (click)="toggleQuantity()" type="checkbox" class="btn-check" id="btn-item-quanity" autocomplete="off" checked>
             <label class="btn btn-outline-success" for="btn-item-quanity">Item Quantity</label><br>
 
-            <input type="checkbox" class="btn-check" id="btn-item-type" autocomplete="off" checked>
+            <input (click)="toggleType()" type="checkbox" class="btn-check" id="btn-item-type" autocomplete="off" checked>
             <label class="btn btn-outline-success" for="btn-item-type">Item Type</label><br>
 
-            <input type="checkbox" class="btn-check" id="btn-item-barcode" autocomplete="off" checked>
-            <label class="btn btn-outline-success" for="btn-item-barcode">Item Barcode</label><br>
+            <input (click)="toggleLocation()" type="checkbox" class="btn-check" id="btn-storage-location" autocomplete="off" checked>
+            <label class="btn btn-outline-success" for="btn-storage-location">Storage Location</label><br>
 
         </div>
-
-        <button type="button" class="btn-generate">Generate</button>
+        
+        <!-- calls the function to generate the report -->
+        <button (click)="generate()" type="button" class="btn-generate">Generate</button>
     </div>
 </form>
