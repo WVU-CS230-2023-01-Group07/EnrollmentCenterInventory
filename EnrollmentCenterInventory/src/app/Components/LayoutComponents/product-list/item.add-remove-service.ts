@@ -2,6 +2,7 @@ import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ItemModel } from "./item.model";
 import { getDatabase, ref, set} from "firebase/database";
+import { AddRemoveLayoutComponent } from "src/app/Layouts/add-remove-layout/add-remove-layout.component"
 
 @Injectable(
     {providedIn: 'root'}
@@ -9,24 +10,18 @@ import { getDatabase, ref, set} from "firebase/database";
 export class ProductService{
     private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
     private productsEndPoint = "Products.json";
-    private counter = 0;
     constructor(private http: HttpClient){
     }
 
-    // ngOnInit(): void{
-
-    // }
-
     getProduct(){
-       return this.http.get<ItemModel[]>(this.baseUrl + this.productsEndPoint);
+       return this.http.get<ItemModel []>(this.baseUrl + this.productsEndPoint);
     }
 
-    addProduct(product:ItemModel){
+    //Calls isNull to find null item folder
+    //Uses null folder to add new value into database
+    addProduct(product:ItemModel, counter:number){
         const db = getDatabase();
-        if(this.counter > 100){
-            
-        }
-        set(ref(db, `Products/${this.counter}`), {
+        set(ref(db, `Products/${counter}`), {
             itemBarcode: product.itemBarcode,
             itemName: product.itemName,
             shelfCapacity: product.shelfCapacity,
@@ -34,9 +29,11 @@ export class ProductService{
             storageLocation: product.storageLocation,
             itemType: product.itemType
         })
-        this.counter++;
     }
 
+    //Sets the ItemModel values to null
+    //Implements tombstone to work around HTTP 403 error
+    //ie. removing index file 0 under file 1 created Display Error
     removeProduct(number: number){
         console.log("The barcode: "+number);
         const db = getDatabase();
@@ -48,7 +45,5 @@ export class ProductService{
             storageLocation: null,
             itemType: null
         })
-        // this.http.delete('https://wvu-ec-database-default-rtdb.firebaseio.com/Products/' + number +'.json')
-        // .subscribe();
     }
 }
