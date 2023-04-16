@@ -84,7 +84,14 @@ export class AddRemoveLayoutComponent implements OnInit {
   //Removes items from database upon user interaction through add/remove layout
   removeItem() {
     const barcode = this.remove.value.itemBarcode;
-    console.log(barcode);
+    const item = this.ps.getProduct();
+    console.log(" " + item);
+    //   for (var item of data1){
+    //     console.log(item);
+    //     // this.items.push(item);
+    //   }
+    // }); 
+    // console.log(barcode);
     if (this.remove.valid && barcode != null && barcode != '') {
       // const products = new ItemModel('', 0, 0, '', '', barcode.trim())
       this.ps.removeProduct(barcode);

@@ -35,7 +35,7 @@ export class ProductService{
     }
 
     removeProduct(barcode:ItemModel["itemBarcode"]){
-        console.log("The barcode: "+barcode);
+        // console.log("The barcode: "+barcode);
         const item = this.getProduct();
         const item2 = this.getProduct();
         console.log(JSON.stringify(item) + " " + item2)
