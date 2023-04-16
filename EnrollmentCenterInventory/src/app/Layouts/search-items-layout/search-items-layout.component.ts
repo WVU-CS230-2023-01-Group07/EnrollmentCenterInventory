@@ -46,9 +46,9 @@ export class SearchItemsLayoutComponent {
     return this.ps.getProductBranch().subscribe((data:ItemModel []) => {
       for (var product of data) {
         console.log("item name iteration: " + product.itemName);
-        if (product.itemName == itemName)
+        if (product.itemName.toUpperCase() == itemName.toUpperCase())
         {
-          console.log("Search value is returned");
+          console.log("Product found in database");
           console.log(product);
           return product;
         }
@@ -58,6 +58,5 @@ export class SearchItemsLayoutComponent {
       return null;
     })
   }
-
 }
 
