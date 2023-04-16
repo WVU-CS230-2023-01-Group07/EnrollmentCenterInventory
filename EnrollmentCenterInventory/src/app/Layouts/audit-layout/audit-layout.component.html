@@ -41,106 +41,18 @@
                         <div class="col" style="font-weight: 700;">
                             <p>Submit</p>
                         </div>
-                        <div class="w-100"></div>
-                    
-                        <div class="col">
-                            <p>Item 1</p>
+
+                        <div *ngFor="let item of items">
+                            <app-audit-products itemName={{item.itemName}}
+                            itemQuantity={{item.itemQuantity}}
+                            storageLocation = {{item.storageLocation}}
+                            flag = {{item.flag}}
+                            itemBarcode={{item.itemBarcode}}
+                            itemType={{item.itemType}}
+                            shelfCapacity = {{item.shelfCapacity}}>
+                            </app-audit-products>
                         </div>
-                        <div class="col">
-                            <p>Sample Number</p>
-                        </div>
-                        <div class="col d-flex justify-content-center">
-                            <input class="form-control" type="text" placeholder="0" style="width:34%">
-                        </div>
-                        <div class="col">
-                            <p>Sample Location</p>
-                        </div>
-                        <div class="col">
-                            <input class="form-control" type="text" placeholder="location">
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn " style="border-style:none;">
-                                <i class="bi bi-flag-fill flag" ></i>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-primary">Submit</button>
-                        </div>
-                        <div class="w-100"></div>
-                    
-                        <div class="col">
-                            <p>Item 2</p>
-                        </div>
-                        <div class="col">
-                            <p>Sample Number</p>
-                        </div>
-                        <div class="col d-flex justify-content-center">
-                            <input class="form-control" type="text" placeholder="0" style="width:34%">
-                        </div>
-                        <div class="col">
-                            <p>Sample Location</p>
-                        </div>
-                        <div class="col">
-                            <input class="form-control" type="text" placeholder="location">
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn " style="border-style:none;">
-                                <i class="bi bi-flag-fill flag" ></i>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-primary">Submit</button>
-                        </div>
-                        <div class="w-100"></div>
-                    
-                        <div class="col">
-                            <p>Item 3</p>
-                        </div>
-                        <div class="col">
-                            <p>Sample Number</p>
-                        </div>
-                        <div class="col d-flex justify-content-center">
-                            <input class="form-control" type="text" placeholder="0" style="width:34%">
-                        </div>
-                        <div class="col">
-                            <p>Sample Location</p>
-                        </div>
-                        <div class="col">
-                            <input class="form-control" type="text" placeholder="location">
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn " style="border-style:none;">
-                                <i class="bi bi-flag-fill flag" ></i>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-primary">Submit</button>
-                        </div>
-                        <div class="w-100"></div>
-                    
-                        <div class="col">
-                            <p>Item 4</p>
-                        </div>
-                        <div class="col">
-                            <p>Sample Number</p>
-                        </div>
-                        <div class="col d-flex justify-content-center">
-                            <input class="form-control" type="text" placeholder="0" style="width:34%">
-                        </div>
-                        <div class="col">
-                            <p>Sample Location</p>
-                        </div>
-                        <div class="col">
-                            <input class="form-control" type="text" placeholder="location">
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn " style="border-style:none;">
-                                <i class="bi bi-flag-fill flag" ></i>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-primary">Submit</button>
-                        </div>
+                
                     </div>
                 </div>
             </div>

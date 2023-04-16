@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ItemsService } from 'src/app/Components/Common/items.service';
 import { AuditModel } from './audit.model';
 
 @Component({
@@ -8,6 +9,65 @@ import { AuditModel } from './audit.model';
 })
 export class AuditLayoutComponent {
   items: AuditModel[] = [];
+  flaggedItems: AuditModel[] = [];
+
+  constructor(private itemsService:ItemsService){
+    
+  }
+
+  ngOnInit(): void {
+    this.itemsService.getItems().subscribe((data: AuditModel []) => {
+      console.log("Fetching items");
+      for (var item of data){
+        console.log(data);
+        this.items.push(item);
+        console.log();
+      }
+    });
+  }
   
+  auditControl() {
+
+  }
+
+  editLocation(item: AuditModel, location: string){
+    if (location == null){
+      console.log("error: location invalid");
+    }
+    item.storageLocation = location;
+  }
+
+  editQuantity(item: AuditModel, quantity: string){
+    if (quantity == null){
+      console.log("error: quantity invalid");
+    }
+    item.itemQuantity = quantity;
+  }
+
+  flagItem(item: AuditModel){
+    item.flag = "true";
+    this.flagItems();
+  }
+
+  unflagItem(item: AuditModel){
+    item.flag = "false";
+    this.flagItems();
+  }
+
+  isFlagged(item: AuditModel){
+    if (item.flag){
+      return true;
+    } else
+      return false;
+  }
+
+  flagItems(){
+    this.flaggedItems.splice(0);
+    this.items.forEach(element => {
+      if(this.isFlagged(element)){
+        this.flaggedItems.push()
+      }
+    });
+  }
 
 }

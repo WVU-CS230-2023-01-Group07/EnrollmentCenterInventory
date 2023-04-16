@@ -21,6 +21,8 @@ import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuditProductsComponent } from './Components/LayoutComponents/audit-products/audit-products.component';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuditLayoutComponent,
     AddRemoveLayoutComponent,
     NavBarComponent,
-    ProductListComponent
+    ProductListComponent,
+    AuditProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +49,10 @@ import { HttpClientModule } from '@angular/common/http';
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     provideRemoteConfig(() => getRemoteConfig()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    
   ],
-  providers: [],
+  providers: [AngularFireDatabase,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

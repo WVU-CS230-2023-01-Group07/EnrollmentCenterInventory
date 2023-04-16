@@ -1,0 +1,33 @@
+<form #postForm="ngForm" (ngSubmit)="submitChanges(postForm.value)">
+    <div class="row">
+        <div class="col">
+            <p>{{itemName}}</p>
+        </div>
+        <div class="col">
+            <p>{{itemQuantity}}</p>
+        </div>
+        <div class="col d-flex justify-content-center input-group">
+            <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="itemQuantity">
+        </div>
+        <div class="col">
+            <p>{{storageLocation}}</p>
+        </div>
+        <div class="col input-group">
+            <input class="form-control" type="text" placeholder="location" ngModel name="storageLocation">
+        </div>
+        <div class="col">
+            <form #postForm="ngForm" (ngSubmit)="flagControl()">
+                <button type="submit" class="btn" style="border-style:none;">
+                    <div *ngIf="flag== 'false'; else elseBlock">
+                        <i class="bi bi-flag-fill" style="color:rgb(27, 27, 27);"></i>
+                    </div>
+                    <ng-template #elseBlock>
+                        <i class="bi bi-flag-fill" style="color: rgb(255, 98, 0);"></i>
+                    </ng-template>
+                </button>
+            </form>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
