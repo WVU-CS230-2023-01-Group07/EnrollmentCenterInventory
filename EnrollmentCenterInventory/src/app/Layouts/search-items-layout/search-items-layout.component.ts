@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import * as firebase from 'firebase/compat';
 import 'firebase/database';
 import 'firebase/compat/database';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 interface Item {
@@ -26,64 +27,37 @@ interface Item {
   templateUrl: './search-items-layout.component.html',
   styleUrls: ['./search-items-layout.component.css']
 })
-export class SearchItemsLayoutComponent implements OnInit {
+export class SearchItemsLayoutComponent {
 
-
-  searchItem: String = '';
-  db = getDatabase();
-  productsRef = ref(this.db, '/Products');
 
   constructor(private ps: ProductService){
-    this.search("Clipboard");
+    this.storeInput();
   }
 
-  ngOnInit(): void {
-
+ storeInput(){
+    const input = document.getElementById("searchID") as HTMLInputElement;
+    if (input) {
+      const userInput = input.value;
+      this.searchInput(userInput);
+    }
   }
 
-  search(itemName: String): any {
+  searchInput(itemName: String): any {
     return this.ps.getProductBranch().subscribe((data:ItemModel []) => {
-      console.log("test 7");
       for (var product of data) {
+        console.log("item name iteration: " + product.itemName);
         if (product.itemName == itemName)
         {
-          console.log("value is returned");
+          console.log("Search value is returned");
           console.log(product);
           return product;
         }
         
       }
+      console.log("Product not found");
       return null;
     })
   }
-  
-
-
-
-
- // test = this.linearSearch("test");
-
-
-  // linearSearch(productName: String): void{
-  //   // Get a database reference to our posts
-  //   const db = getDatabase();
-  //   const name = "example name";
-  //   const productsRef = ref(db, '/Products');
-  //   const query = orderByChild('/Products');
-  //   var playersRef = firebase.database().ref("players/");
-
-  //   productsRef.orderByChild("name").on("child_added", function(data) {
-  //     console.log(data.val().name);
-  //  });
-    
-    
-  //   // Attach an asynchronous callback to read the data at our posts reference
-  //   onValue(productRef, (snapshot: DataSnapshot) => {
-  //     const data = snapshot.val();
-  //     console.log(snapshot.val());
-  //   }, (errorObject: any) => {
-  //     console.log('The read failed: ' + errorObject.name);
-  //   });
-  // }
 
 }
+
