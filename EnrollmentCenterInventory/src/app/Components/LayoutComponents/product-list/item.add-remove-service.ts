@@ -2,7 +2,6 @@ import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ItemModel } from "./item.model";
 import { getDatabase, ref, set} from "firebase/database";
-import { AddRemoveLayoutComponent } from "src/app/Layouts/add-remove-layout/add-remove-layout.component"
 
 @Injectable(
     {providedIn: 'root'}
@@ -22,6 +21,7 @@ export class ProductService{
     addProduct(product:ItemModel, counter:number){
         const db = getDatabase();
         set(ref(db, `Products/${counter}`), {
+            flag: false,
             itemBarcode: product.itemBarcode,
             itemName: product.itemName,
             shelfCapacity: product.shelfCapacity,
@@ -38,6 +38,7 @@ export class ProductService{
         console.log("The barcode: "+number);
         const db = getDatabase();
         set(ref(db, `Products/${number}`), {
+            flag: null,
             itemBarcode: null,
             itemName: null,
             shelfCapacity: null,
