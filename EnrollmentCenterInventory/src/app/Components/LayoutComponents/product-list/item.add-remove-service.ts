@@ -7,30 +7,23 @@ import { getDatabase, ref, set} from "firebase/database";
     {providedIn: 'root'}
 )
 export class ProductService{
-    private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/Products.json";
-    private productsEndPoint = "Products";
-
+    private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
+    private productsEndPoint = "Products.json";
+    private counter = 0;
     constructor(private http: HttpClient){
     }
 
-    // getProduct(product:ItemModel){
-    //     console.log(JSON.stringify(product.itemBarcode));
-    //     const dbRef = ref(getDatabase());
-    //     get(child(dbRef, 'Products/' + product.itemBarcode)).then((snapshot) => {
-    //         if(snapshot.exists()){
-    //             console.log(snapshot.val());
-    //             this.removeProduct(product);
-    //         } else {
-    //             console.log('No Quantity Available');
-    //         }
-    //     }).catch((error) => {
-    //         console.error(error);
-    //     });
+    // ngOnInit(): void{
+
     // }
+
+    getProduct(){
+       return this.http.get<ItemModel>(this.baseUrl + this.productsEndPoint);
+    }
 
     addProduct(product:ItemModel){
         const db = getDatabase();
-        set(ref(db, `Products/${product.itemBarcode}`), {
+        set(ref(db, `Products/${this.counter}`), {
             barcode: product.itemBarcode,
             name: product.itemName,
             capacity: product.shelfCapacity,
@@ -38,10 +31,15 @@ export class ProductService{
             storage: product.storageLocation,
             classification: product.itemType
         })
+        this.counter++;
     }
 
-    removeProduct(product:ItemModel){
-        this.http.delete('https://wvu-ec-database-default-rtdb.firebaseio.com/Products/' + product.itemBarcode +'.json')
-        .subscribe();
+    removeProduct(barcode:ItemModel["itemBarcode"]){
+        console.log("The barcode: "+barcode);
+        const item = this.getProduct();
+        const item2 = this.getProduct();
+        console.log(JSON.stringify(item) + " " + item2)
+        // this.http.delete('https://wvu-ec-database-default-rtdb.firebaseio.com/Products/' + product +'.json')
+        // .subscribe();
     }
 }
