@@ -18,28 +18,37 @@ export class ProductService{
     // }
 
     getProduct(){
-       return this.http.get<ItemModel>(this.baseUrl + this.productsEndPoint);
+       return this.http.get<ItemModel[]>(this.baseUrl + this.productsEndPoint);
     }
 
     addProduct(product:ItemModel){
         const db = getDatabase();
+        if(this.counter > 100){
+            
+        }
         set(ref(db, `Products/${this.counter}`), {
-            barcode: product.itemBarcode,
-            name: product.itemName,
-            capacity: product.shelfCapacity,
-            quantity: product.itemQuantity,
-            storage: product.storageLocation,
-            classification: product.itemType
+            itemBarcode: product.itemBarcode,
+            itemName: product.itemName,
+            shelfCapacity: product.shelfCapacity,
+            itemQuantity: product.itemQuantity,
+            storageLocation: product.storageLocation,
+            itemType: product.itemType
         })
         this.counter++;
     }
 
-    removeProduct(barcode:ItemModel["itemBarcode"]){
-        // console.log("The barcode: "+barcode);
-        const item = this.getProduct();
-        const item2 = this.getProduct();
-        console.log(JSON.stringify(item) + " " + item2)
-        // this.http.delete('https://wvu-ec-database-default-rtdb.firebaseio.com/Products/' + product +'.json')
+    removeProduct(number: number){
+        console.log("The barcode: "+number);
+        const db = getDatabase();
+        set(ref(db, `Products/${number}`), {
+            itemBarcode: null,
+            itemName: null,
+            shelfCapacity: null,
+            itemQuantity:null,
+            storageLocation: null,
+            itemType: null
+        })
+        // this.http.delete('https://wvu-ec-database-default-rtdb.firebaseio.com/Products/' + number +'.json')
         // .subscribe();
     }
 }

@@ -11,9 +11,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-remove-layout.component.css']
 })
 export class AddRemoveLayoutComponent implements OnInit {
+  constructor(private ps: ProductService) { }
+
+  ngOnInit(): void {
+    // this.add.valueChanges.subscribe(x => {
+    //   console.log(x);
+    // });
+    
+  }
+  items: ItemModel []=[];
   blankFlag = true;
   addFlag = false;
-  itemInfo: ItemModel | undefined;
+  // itemInfo: ItemModel | undefined;
 
   //Remove Form Group 
   remove = new FormGroup({
@@ -29,14 +38,6 @@ export class AddRemoveLayoutComponent implements OnInit {
     shelfCapacity: new FormControl(undefined, [Validators.required, Validators.pattern('([1-9]+[0-9]*)')]),
     storageLocation: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')])
   });
-
-  constructor(private ps: ProductService) { }
-
-  ngOnInit() {
-    this.add.valueChanges.subscribe(x => {
-      console.log(x);
-    })
-  }
 
   // Interacts with  Adding or Removing dropdown box for add/remove layout
   // Flags:
@@ -84,17 +85,23 @@ export class AddRemoveLayoutComponent implements OnInit {
   //Removes items from database upon user interaction through add/remove layout
   removeItem() {
     const barcode = this.remove.value.itemBarcode;
-    const item = this.ps.getProduct();
-    console.log(" " + item);
-    //   for (var item of data1){
-    //     console.log(item);
-    //     // this.items.push(item);
-    //   }
-    // }); 
+    
+    // console.log(" item: " + item);
     // console.log(barcode);
     if (this.remove.valid && barcode != null && barcode != '') {
       // const products = new ItemModel('', 0, 0, '', '', barcode.trim())
-      this.ps.removeProduct(barcode);
+      this.ps.getProduct().subscribe((data: ItemModel[]) => {
+        let counter = 0;
+        for(var items of data){
+          console.log("The counter: " + counter);
+          if(items.itemBarcode == barcode){
+            this.ps.removeProduct(counter);
+          }
+          counter++;
+          console.log(items.itemBarcode)
+        }
+      });
+      
       this.remove.reset();
       // alert("Item Removed Successfully");
     } else {
