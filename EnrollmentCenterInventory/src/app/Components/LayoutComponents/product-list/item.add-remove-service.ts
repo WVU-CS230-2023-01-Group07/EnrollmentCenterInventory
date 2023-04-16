@@ -1,25 +1,14 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import{Observable } from 'rxjs';
+import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ItemModel } from "./item.model";
-import { AngularFireDatabase } from "@angular/fire/compat/database";
-import { getDatabase, ref, set, push, child, update, get, onValue } from "firebase/database";
-import { getFirestore } from "@firebase/firestore";
-import { item_list } from "./item_list";
-// import { getAuth } from "firebase-admin/auth";
-
-console.log("test");
+import { getDatabase, ref, set, child, get } from "firebase/database";
 
 @Injectable(
     {providedIn: 'root'}
 )
 export class ProductService{
     private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
-    private productsEndPoint:string = "Products.json";
-
-    getProductBranch() {
-        return this.http.get<ItemModel []>(this.baseUrl + this.productsEndPoint);
-    }
+    private productsEndPoint: string = "Products.json";
 
     constructor(private http: HttpClient){
 
@@ -31,7 +20,7 @@ export class ProductService{
         get(child(dbRef, 'Products/' + product.itemBarcode)).then((snapshot) => {
             if(snapshot.exists()){
                 console.log(snapshot.val());
-                this.removeProduct(product);
+                // this.removeProduct(product);
             } else {
                 console.log('No Quantity Available');
             }
@@ -40,63 +29,51 @@ export class ProductService{
         });
     }
 
-    // TODO: Refer to notes in word doc
-    searchProduct(itemName: string) {
-        //console.log(JSON.stringify(product.itemBarcode));
+    // getProduct(product:ItemModel){
+    //     console.log(JSON.stringify(product.itemBarcode));
+    //     const dbRef = ref(getDatabase());
+    //     get(child(dbRef, 'Products/' + product.itemBarcode)).then((snapshot) => {
+    //         if(snapshot.exists()){
+    //             console.log(snapshot.val());
+    //             this.removeProduct(product);
+    //         } else {
+    //             console.log('No Quantity Available');
+    //         }
+    //     }).catch((error) => {
+    //         console.error(error);
+    //     });
+    // }
 
-        let branch = this.getProductBranch();
-        for (const newKey in branch)
-        {
-            console.log("newKey: " + newKey);
-        }
-        console.log("branch: " + branch);
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, 'Products/')).then((snapshot) => {
-            if(snapshot.exists()){
-                console.log(snapshot.val());
-                const data = snapshot.val();
-
-                for (const key in data) {
-                    console.log(key);
-                    const keyRef = ref(getDatabase(), 'Products/' + key);
-                    get(child(keyRef, '/itemName')).then((snapshot2) => {
-                        if (snapshot2.exists() && snapshot2.val() == itemName) {
-                            console.log("snapshot2: " + snapshot2.val());
-                            //createItem(snapshot.val());
-                            let item = new ItemModel("1", 1, 1, "1", "1", "1");
-                        }
-                    });
-
-                }
-
-            } else {
-                console.log('No Quantity Available');
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
-
-    addProduct(product:ItemModel){
+    //Calls isNull to find null item folder
+    //Uses null folder to add new value into database
+    addProduct(product:ItemModel, counter:number){
         const db = getDatabase();
-        set(ref(db, `Products/${product.itemBarcode}`), {
-            barcode: product.itemBarcode,
-            name: product.itemName,
-            capacity: product.shelfCapacity,
-            quantity: product.itemQuantity,
-            storage: product.storageLocation,
-            classification: product.itemType
+        set(ref(db, `Products/${counter}`), {
+            flag: false,
+            itemBarcode: product.itemBarcode,
+            itemName: product.itemName,
+            shelfCapacity: product.shelfCapacity,
+            itemQuantity: product.itemQuantity,
+            storageLocation: product.storageLocation,
+            itemType: product.itemType
         })
-
-        // .subscribe(data => {
-        //     if (!alert("Contract created successfully")) {
-        //        this.addForm.reset();
-        //     }
     }
 
-    removeProduct(product:ItemModel){
-        this.http.delete('https://wvu-ec-database-default-rtdb.firebaseio.com/Products/' + product.itemBarcode +'.json')
-        .subscribe();
+    //Sets the ItemModel values to null
+    //Implements tombstone to work around HTTP 403 error
+    //ie. removing index file 0 under file 1 created Display Error
+    removeProduct(number: number){
+        console.log("The barcode: "+number);
+        const db = getDatabase();
+        set(ref(db, `Products/${number}`), {
+            flag: null,
+            itemBarcode: null,
+            itemName: null,
+            shelfCapacity: null,
+            itemQuantity:null,
+            storageLocation: null,
+            itemType: null
+        })
     }
 
 

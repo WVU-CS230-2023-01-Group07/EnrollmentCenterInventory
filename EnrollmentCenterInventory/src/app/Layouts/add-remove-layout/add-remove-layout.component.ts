@@ -1,110 +1,136 @@
+//Interacts with Add/Remove Layout to add or remove products from firebase database
+
 import { Component, OnInit } from '@angular/core';
 import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item.model"
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove-service';
-import { HttpClient } from '@angular/common/http';
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms'
-// import { getDatabase } from 'firebase-admin/database';
 
 @Component({
   selector: 'app-add-remove-layout',
   templateUrl: './add-remove-layout.component.html',
   styleUrls: ['./add-remove-layout.component.css']
 })
-export class AddRemoveLayoutComponent implements OnInit{
-    blankFlag = true;
-    addFlag = false;
-    itemInfo: ItemModel | undefined;
-
-    barcode = new FormControl('');
-    name = new FormControl('');
-    type = new FormControl('');
-    quantity = new FormControl('');
-    capacity = new FormControl('');
-    location = new FormControl('');
-    // link = new FormControl('');
-    remove = new FormGroup({
-      itemBarcode: this.barcode
+export class AddRemoveLayoutComponent implements OnInit {
+  constructor(private ps: ProductService) { }
+  
+  ngOnInit(): void {
+    //Logs changes in realtime in Add-Remove page
+    this.add.valueChanges.subscribe(x => {
+      console.log(x);
     });
 
-    add = new FormGroup({
-      itemBarcode: this.barcode,
-      itemName: this.name,
-      itemType: this.type,
-      itemQuantity: this.quantity,
-      shelfCapacity: this.capacity,
-      storageLocation: this.location
-    });
+  }
+  blankFlag = true;
+  addFlag = false;
 
-    constructor(private ps: ProductService){   }
-
-    ngOnInit() {
-      // this.add.addControl("itemBarcode",this.barcode);
-      this.createFormControls();
-      this.createForm();
-    }
-
-    createFormControls() {
-      this.barcode = new FormControl('', Validators.required);
-      this.name = new FormControl('', Validators.required);
-      this.type = new FormControl('', Validators.required);
-      this.quantity = new FormControl('', Validators.required);
-      this.capacity = new FormControl('', Validators.required);
-      this.location = new FormControl('', Validators.required);
-      // this.email = new FormControl('', [
-      //   Validators.required,
-      //   Validators.pattern("[^ @]*@[^ @]*")
-      // ]);
-      // this.password = new FormControl('', [
-      //   Validators.required,
-      //   Validators.minLength(8)
-      // ]);
-      // this.language = new FormControl('');
-    }
-
-    createForm() {
-      this.add = new FormGroup({
-          itemBarcode: this.barcode,
-          itemName: this.name,
-          itemType: this.type,
-          itemQuantity: this.quantity,
-          shelfCapacity: this.capacity,
-          storageLocation: this.location
-      });
-      this.remove = new FormGroup({
-        itemBarcode: this.barcode
-    });
-    }
-
-    isAdd(selection: string){
-      if(selection == 'blank'){
-        this.blankFlag = true;
-      } else{
-        this.blankFlag = false;
-        if(selection == 'Add'){
-          this.addFlag = true;
-        } else{
-          this.addFlag = false;
+  //Searches for tombstone to fill null file in database
+  //Otherwise, will give maximum value for new folder
+  isNull() {
+    //Counter to find Null value
+    var counter = 0;
+    this.ps.getProduct().subscribe((data: ItemModel[]) => {
+      for (var items of data) {
+        if (items.itemBarcode == null) {
+          break;
         }
+        counter++;
       }
-      console.log("The blankFlag: " + this.blankFlag)
-      console.log("The addFlag: " + this.addFlag)
-    }
+    })
+    return counter;
+  }
 
-    addItem(product:ItemModel){
-      console.log(this.add.valid);
-      console.log("Adding Item: " + JSON.stringify(product));
-      this.ps.addProduct(product);
-      this.add.reset();
-    }
+  //Remove Form Group 
+    //For form Validation for button enabling
+  remove = new FormGroup({
+    itemBarcode: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern('([a-zA-z0-9-_]+)')])
+  });
 
-    removeItem(product:ItemModel){
-      console.log("Removing Item: " + JSON.stringify(product));
-      this.ps.removeProduct(product)
-      this.remove.reset();
-    }
+  //Add Form Group 
+    //For form Validation for button enabling
+  add = new FormGroup({
+    itemBarcode: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern('([a-zA-z0-9-_]+)')]),
+    itemName: new FormControl('', [Validators.required, Validators.pattern('([a-zA-Z0-9]+(?:\s*[-A-Za-z0-9])*)+'), Validators.maxLength(20)]),
+    itemType: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')]),
+    itemQuantity: new FormControl(undefined, [Validators.required, Validators.pattern('([1-9]+[0-9]*)')]),
+    shelfCapacity: new FormControl(undefined, [Validators.required, Validators.pattern('([1-9]+[0-9]*)')]),
+    storageLocation: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')])
+  });
 
-    adjustItem(product:ItemModel){
-      console.log("Adjusting product: " + product.itemQuantity);
-      // this.ps.adjustProduct(product)
+  // Interacts with  Adding or Removing dropdown box for add/remove layout
+  // Flags:
+  //  blankFlag
+  //  addFlag
+  isAdd(selection: string) {
+    if (selection == 'blank') {
+      this.blankFlag = true;
+    } else {
+      this.blankFlag = false;
+      if (selection == 'Add') {
+        this.addFlag = true;
+      } else {
+        this.addFlag = false;
+      }
     }
+  }
+
+  //Adds items into the database
+  //Once added to database, form resets to add/remove other products
+  addItem() {
+    //Gets newItem values from add FormGroup
+    const quantity = this.add.value.itemQuantity;
+    const capacity = this.add.value.shelfCapacity;
+    const name = this.add.value.itemName;
+    const storage = this.add.value.storageLocation;
+    const barcode = this.add.value.itemBarcode;
+    const type = this.add.value.itemType;
+
+    //Counter finds file to insert new item
+    const counter = this.isNull();
+
+    if (this.add.valid && capacity != null && quantity != null && name != null && storage != null && barcode != null && type != null) {
+      //create new ItemModel with new values
+      const products = new ItemModel(name, capacity, quantity, storage, type, barcode)
+
+      if (capacity < quantity) {
+        alert("ERROR: Item Quantity Cannot Exceed Item Capacity")//ERROR CATCH
+      }
+      else {
+        this.ps.addProduct(products, counter);
+        this.add.reset();
+        alert("SUCCESS: " + quantity + " " + name + " Is now in Inventory");
+      }
+    }
+     else {
+      alert("ERROR: Item was not added to Inventory");//ERROR CATCH
+    }
+  }
+
+  //Removes items from database upon user interaction through add/remove layout
+  removeItem() {
+    const barcode = this.remove.value.itemBarcode;
+    var flag = false;
+
+    if (this.remove.valid && barcode != null && barcode != '') {
+
+      this.ps.getProduct().subscribe((data: ItemModel[]) => {
+        let counter = 0;
+        for (var items of data) {
+          //COMPARE input Barcode with Database Barcode
+          if (items.itemBarcode == barcode) {
+            this.ps.removeProduct(counter);
+            flag = true;
+            break;
+          }
+          counter++;
+        }
+      });
+
+    }
+    if (flag == false) {
+      alert("ERROR: Item not found");
+    } else {
+      alert("SUCCESS: Item removed");
+    }
+    this.remove.reset();
+  }
 }
