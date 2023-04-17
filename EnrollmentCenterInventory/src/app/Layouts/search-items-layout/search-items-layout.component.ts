@@ -11,17 +11,6 @@ import 'firebase/database';
 import 'firebase/compat/database';
 import { FormControl, FormGroup } from '@angular/forms';
 
-
-interface Item {
-  itemName: string;
-  shelfCapacity: number;
-  itemQuantity: number;
-  storageLocation: string;
-  itemType: string;
-  itemBarcode: string;
-}
-
-
 @Component({
   selector: 'app-search-items-layout',
   templateUrl: './search-items-layout.component.html',
@@ -30,31 +19,42 @@ interface Item {
 export class SearchItemsLayoutComponent {
 
 
-  constructor(private ps: ProductService){
+  constructor(private ps: ProductService) {
     this.storeInput();
   }
 
- storeInput(){
+  // Function called by html upon button click
+  storeInput() {
     const input = document.getElementById("searchID") as HTMLInputElement;
+    // If user input is given, search database
     if (input) {
       const userInput = input.value;
       this.searchInput(userInput);
     }
   }
 
+  // Searches database for product with name that corresponds with user input
   searchInput(itemName: String): any {
-    return this.ps.getProductsBranch().subscribe((data:ItemModel []) => {
+    return this.ps.getProductsBranch().subscribe((data: ItemModel[]) => {
       for (var product of data) {
         console.log("item name iteration: " + product.itemName);
-        if (product.itemName.toUpperCase() == itemName.toUpperCase())
-        {
+        if (product.itemName.toUpperCase() == itemName.toUpperCase()) {
           console.log("Product found in database");
           console.log(product);
+          alert(
+            "Product found in inventory: \n" +
+            "Name: " + product.itemName + "\n" +
+            "Barcode: " + product.itemBarcode + "\n" +
+            "Quantity: " + product.itemQuantity + "\n" +
+            "Shelf Capacity: " + product.shelfCapacity + "\n" +
+            "Storage Location: " + product.storageLocation + "\n" +
+            "Type: " + product.itemType
+          );
           return product;
         }
-        
       }
       console.log("Product not found");
+      alert("Item not found in inventory");
       return null;
     })
   }
