@@ -4,7 +4,6 @@ import { ItemModel } from "./item.model";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { getDatabase, ref, set, push, child, update, get, onValue } from "firebase/database";
 import { getFirestore } from "@firebase/firestore";
-import { item_list } from "./item_list";
 // import { getAuth } from "firebase-admin/auth";
 
 console.log("test");

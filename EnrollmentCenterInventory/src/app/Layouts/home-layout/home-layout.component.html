@@ -24,6 +24,7 @@
     </div>
     <div *ngFor="let item of items">
         <app-product-list itemName={{item.itemName}} shelfCapacity={{item.shelfCapacity}} itemQuantity={{item.itemQuantity}} storageLocation={{item.storageLocation}} itemType={{item.itemType}} itemBarcode={{item.itemBarcode}}></app-product-list>
+        <div class="flex-container" style="background-color: grey; height: 1px; width: 1610px; margin-bottom: 30px"></div>
     </div>
     <div style="text-align: center">
         <button class="btn btn-primary" style="border-radius: 40px; margin-bottom: 70px">

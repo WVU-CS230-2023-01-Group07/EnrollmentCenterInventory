@@ -1,4 +1,5 @@
 export class ItemModel {
+    //will be adding "flag" parameter in later update
     itemName: string;
     shelfCapacity: number;
     itemQuantity: number;
