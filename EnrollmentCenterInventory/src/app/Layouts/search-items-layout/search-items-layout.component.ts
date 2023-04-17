@@ -43,7 +43,7 @@ export class SearchItemsLayoutComponent {
   }
 
   searchInput(itemName: String): any {
-    return this.ps.getProductBranch().subscribe((data:ItemModel []) => {
+    return this.ps.getProductsBranch().subscribe((data:ItemModel []) => {
       for (var product of data) {
         console.log("item name iteration: " + product.itemName);
         if (product.itemName.toUpperCase() == itemName.toUpperCase())

@@ -16,6 +16,10 @@ export class ProductService{
     private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
     private productsEndPoint: string = "Products.json";
 
+    getProductsBranch() {
+        return this.http.get<ItemModel[]>(this.baseUrl + this.productsEndPoint);
+    }
+
     constructor(private http: HttpClient){
 
     }
@@ -39,7 +43,7 @@ export class ProductService{
     searchProduct(itemName: string) {
         //console.log(JSON.stringify(product.itemBarcode));
 
-        let branch = this.getProductBranch();
+        let branch = this.getProductsBranch();
         for (const newKey in branch)
         {
             console.log("newKey: " + newKey);
