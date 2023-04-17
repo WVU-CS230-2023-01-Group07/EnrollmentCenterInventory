@@ -46,3 +46,8 @@ h1, h2{
 .organizeInner {
     width: 30%;
 }
+
+#sign-up{
+    margin-left:15px;
+    justify-content: center;
+}
