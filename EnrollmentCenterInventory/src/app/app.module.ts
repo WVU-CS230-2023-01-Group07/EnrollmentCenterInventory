@@ -26,7 +26,9 @@ import { AuditProductsComponent } from './Components/LayoutComponents/audit-prod
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { ProductService } from './Components/LayoutComponents/product-list/item.add-remove-service';
 import { ItemsService } from './Components/Common/items.service';
-
+import { UserService } from './Components/Common/auth.service';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 
 @NgModule({
@@ -44,6 +46,7 @@ import { ItemsService } from './Components/Common/items.service';
     AuditProductsComponent
   ],
   imports: [
+    AngularFireAuthModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -57,7 +60,8 @@ import { ItemsService } from './Components/Common/items.service';
     provideStorage(() => getStorage()),
     
   ],
-  providers: [AngularFireDatabase,],
+  providers: [AngularFireDatabase,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
