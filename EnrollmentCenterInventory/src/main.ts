@@ -25,11 +25,11 @@ const firebaseConfig = {
 };
 
 // Get a reference to the database
-const dbRef = ref(getDatabase(app));
+//const dbRef = ref(getDatabase(app));
 
 // Listen for changes to the data
-onValue(dbRef, (snapshot) => {
-  console.log(snapshot.val());
-});
+// onValue(dbRef, (snapshot) => {
+//   console.log(snapshot.val());
+// });
 
 
