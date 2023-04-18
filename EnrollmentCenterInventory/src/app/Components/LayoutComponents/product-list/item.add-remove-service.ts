@@ -1,10 +1,8 @@
 import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ItemModel } from "./item.model";
-import { AngularFireDatabase } from "@angular/fire/compat/database";
-import { getDatabase, ref, set, push, child, update, get, onValue } from "firebase/database";
-import { getFirestore } from "@firebase/firestore";
-// import { getAuth } from "firebase-admin/auth";
+import { getDatabase, ref, set, child, get } from "firebase/database";
+
 
 console.log("test");
 
@@ -36,6 +34,43 @@ export class ProductService{
             storageLocation: product.storageLocation,
             itemType: product.itemType
         })
+    }
+
+    // TODO: Refer to notes in word doc
+    searchProduct(itemName: string) {
+        //console.log(JSON.stringify(product.itemBarcode));
+
+        let branch = this.getProductsBranch();
+        for (const newKey in branch)
+        {
+            console.log("newKey: " + newKey);
+        }
+        console.log("branch: " + branch);
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, 'Products/')).then((snapshot) => {
+            if(snapshot.exists()){
+                console.log(snapshot.val());
+                const data = snapshot.val();
+
+                for (const key in data) {
+                    console.log(key);
+                    const keyRef = ref(getDatabase(), 'Products/' + key);
+                    get(child(keyRef, '/itemName')).then((snapshot2) => {
+                        if (snapshot2.exists() && snapshot2.val() == itemName) {
+                            console.log("snapshot2: " + snapshot2.val());
+                            //createItem(snapshot.val());
+                            let item = new ItemModel("1", 1, 1, "1", "1", "1");
+                        }
+                    });
+
+                }
+
+            } else {
+                console.log('No Quantity Available');
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
     }
 
     removeProduct(number:number){

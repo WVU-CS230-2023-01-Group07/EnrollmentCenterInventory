@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item.model"
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove-service';
 import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service'
-import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms'
+import {FormControl, FormGroup, Validators} from '@angular/forms'
 
 @Component({
   selector: 'app-add-remove-layout',
