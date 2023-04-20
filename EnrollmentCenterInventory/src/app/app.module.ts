@@ -29,6 +29,8 @@ import { ItemsService } from './Components/Common/items.service';
 import { UserService } from './Components/Common/auth.service';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { SignUpLayoutComponent } from './Layouts/sign-up-layout/sign-up-layout.component';
+
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     AddRemoveLayoutComponent,
     NavBarComponent,
     ProductListComponent,
-    AuditProductsComponent
+    AuditProductsComponent,
+    SignUpLayoutComponent,
+
   ],
   imports: [
     AngularFireAuthModule,

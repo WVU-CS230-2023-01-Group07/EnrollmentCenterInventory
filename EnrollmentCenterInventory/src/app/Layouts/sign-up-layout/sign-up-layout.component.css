@@ -1,0 +1,54 @@
+input {
+    width: 100%;
+
+    padding: 15px;
+}
+
+#sign-in {
+    margin-left: 15px;
+    justify-content: center;
+    left: 50%;
+}
+
+.container-fluid {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.outer {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+.inner {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.header {
+    width: 100%;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+.organize {
+    justify-content: center;
+    align-items: center;
+    margin-top:-450px;
+}
+
+.organizeInner {
+    width: 30%;
+}
+
+#sign-up{
+    margin-left:15px;
+    justify-content: center;
+}
