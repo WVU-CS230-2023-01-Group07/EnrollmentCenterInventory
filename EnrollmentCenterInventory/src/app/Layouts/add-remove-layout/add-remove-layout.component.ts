@@ -5,11 +5,6 @@ import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove-service';
 import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
-import { DataSnapshot, get } from 'firebase/database';
-import { Observable, map } from 'rxjs';
-import { getBlob } from 'firebase/storage';
-import { getAdditionalUserInfo, getIdToken } from '@angular/fire/auth';
-import { GeoPoint } from 'firebase/firestore';
 
 @Component({
   selector: 'app-add-remove-layout',
@@ -19,7 +14,6 @@ import { GeoPoint } from 'firebase/firestore';
 export class AddRemoveLayoutComponent implements OnInit {
   counter = 0;
   items : ItemModel[]= [];
-  // item: Observable<any[]>;
   constructor(private ps: ProductService, private psGet: DisplayService) {
     this.items = psGet.getProduct();
    }
@@ -107,8 +101,7 @@ export class AddRemoveLayoutComponent implements OnInit {
     if (this.remove.valid && barcode != null && barcode != '') {
         this.items.forEach((data) => {
           if(data.itemBarcode == barcode){
-            console.log()
-            this.ps.removeProduct(data);
+            this.ps.removeProduct(barcode);
             this.remove.reset();
             flag = true;
           }

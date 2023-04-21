@@ -3,23 +3,20 @@ import { Injectable } from "@angular/core";
 import { ItemModel } from "./item.model";
 import { getDatabase, ref, set, child, get, remove } from "firebase/database";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
-
-
-console.log("test");
+import { DisplayService } from "./display.service";
 
 @Injectable(
     {providedIn: 'root'}
 )
 export class ProductService{
     private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
-    private productsEndPoint: string = "Products.json";
-    private ProductsRef = this.Angdb.list<ItemModel>("Products/")
+    private productsEndPoint: string = "Products/";
+    
     getProductsBranch() {
         return this.http.get<ItemModel[]>(this.baseUrl + this.productsEndPoint);
     }
 
     constructor(private http: HttpClient, private Angdb: AngularFireDatabase){
-        
     }
 
     //Calls isNull to find null item folder
@@ -75,20 +72,8 @@ export class ProductService{
         });
     }
 
-    removeProduct(item: ItemModel){
-        
-        const db = getDatabase();
-        // return this.ProductsRef.remove(item.getParent())
-        // return this.http.delete('Products/' + item.itemBarcode+'.json').subscribe();
-        set(ref(db, `Products/` +item.itemBarcode), {
-            flag: null,
-            itemBarcode: null,
-            itemName: null,
-            shelfCapacity: null,
-            itemQuantity:null,
-            storageLocation: null,
-            itemType: null
-        })
+    removeProduct(barcode: string){
+        return this.http.delete( this.baseUrl + this.productsEndPoint +barcode+'.json').subscribe();
     }
 
 

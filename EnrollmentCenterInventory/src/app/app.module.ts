@@ -66,3 +66,5 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 })
 export class AppModule {}
 
+export { AngularFireDatabase };
+

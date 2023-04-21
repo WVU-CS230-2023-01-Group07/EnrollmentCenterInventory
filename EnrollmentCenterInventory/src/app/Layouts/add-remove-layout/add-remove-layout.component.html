@@ -66,8 +66,8 @@
                     <div class="d-flex">
                         ADDING<br>
                         Description: Sets new item into Inventory <br>
-                        1) All Fields except PRODUCT LINK must be entered
-                        2) BARCODE: >=6 Characters<br>
+                        1) All Fields except PRODUCT LINK must be entered <br>
+                        2) BARCODE: >=6 Characters, UNIQUE TO ALL ITEMS<br>
                         3) ITEM NAME: <=20 Characters, Use "-" instead of space<br>
                         4) CAPACITY >= QUANTITY<br>
                         5) ILLEGAL CHARACTERS: <br>SPACE BRACKET , ! @ # $ % ^ & * ( ) + = ? / \ | ` ' " ~ ; : > <
@@ -165,7 +165,7 @@
                                         <div id="input">
                                             <datalist id="suggestions5">
                                             </datalist>
-                                            <input autoComplete="on" list="suggestions5" required ngModel id="barcode"
+                                            <input autoComplete="on" list="suggestions5" id="barcode"
                                                 formControlName="itemBarcode" />
                                         </div>
                                     </div>
