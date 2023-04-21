@@ -16,17 +16,18 @@ export class HomeLayoutComponent implements OnInit{
 
 
   constructor(private DisplaysService:DisplayService){
+    this.items = this.DisplaysService.getProduct();
   }
 
   ngOnInit(): void {
     //retrieves array of items from database
-    this.DisplaysService.getProduct().subscribe((data1:ItemModel []) => {
-      //for loop pushes all items to HTML file
-      for (var item of data1){
-        console.log(item);
-        //"item" is counter, starting at 0 and ending at number of items in data1
-        this.items.push(item);
-      }
-    }); 
+    // this.DisplaysService.getProduct().subscribe((data1:ItemModel []) => {
+    //   //for loop pushes all items to HTML file
+    //   for (var item of data1){
+    //     console.log(item);
+    //     //"item" is counter, starting at 0 and ending at number of items in data1
+    //     this.items.push(item);
+    //   }
+    // }); 
   }
 }

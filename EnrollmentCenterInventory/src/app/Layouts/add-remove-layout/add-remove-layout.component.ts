@@ -5,6 +5,11 @@ import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove-service';
 import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
+import { DataSnapshot, get } from 'firebase/database';
+import { Observable, map } from 'rxjs';
+import { getBlob } from 'firebase/storage';
+import { getAdditionalUserInfo, getIdToken } from '@angular/fire/auth';
+import { GeoPoint } from 'firebase/firestore';
 
 @Component({
   selector: 'app-add-remove-layout',
@@ -12,33 +17,21 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
   styleUrls: ['./add-remove-layout.component.css']
 })
 export class AddRemoveLayoutComponent implements OnInit {
-  constructor(private ps: ProductService, private psGet: DisplayService) { }
+  counter = 0;
+  items : ItemModel[]= [];
+  // item: Observable<any[]>;
+  constructor(private ps: ProductService, private psGet: DisplayService) {
+    this.items = psGet.getProduct();
+   }
   
   ngOnInit(): void {
     //Logs changes in realtime in Add-Remove page
     this.add.valueChanges.subscribe(x => {
       console.log(x);
     });
-
   }
   blankFlag = true;
   addFlag = false;
-
-  //Searches for tombstone to fill null file in database
-  //Otherwise, will give maximum value for new folder
-  isNull() {
-    //Counter to find Null value
-    var counter = 0;
-    this.psGet.getProduct().subscribe((data: ItemModel[]) => {
-      for (var items of data) {
-        if (items.itemBarcode == null) {
-          break;
-        }
-        counter++;
-      }
-    })
-    return counter;
-  }
 
   //Remove Form Group 
     //For form Validation for button enabling
@@ -86,7 +79,7 @@ export class AddRemoveLayoutComponent implements OnInit {
     const type = this.add.value.itemType;
 
     //Counter finds file to insert new item
-    const counter = this.isNull();
+    // const counter = this.isNull();
 
     if (this.add.valid && capacity != null && quantity != null && name != null && storage != null && barcode != null && type != null) {
       //create new ItemModel with new values
@@ -96,7 +89,7 @@ export class AddRemoveLayoutComponent implements OnInit {
         alert("ERROR: Item Quantity Cannot Exceed Item Capacity")//ERROR CATCH
       }
       else {
-        this.ps.addProduct(products, counter);
+        this.ps.addProduct(products);
         this.add.reset();
         alert("SUCCESS: " + quantity + " " + name + " Is now in Inventory");
       }
@@ -112,19 +105,14 @@ export class AddRemoveLayoutComponent implements OnInit {
     var flag = false;
 
     if (this.remove.valid && barcode != null && barcode != '') {
-
-      this.psGet.getProduct().subscribe((data: ItemModel[]) => {
-        let counter = 0;
-        for (var items of data) {
-          //COMPARE input Barcode with Database Barcode
-          if (items.itemBarcode == barcode) {
-            this.ps.removeProduct(counter);
+        this.items.forEach((data) => {
+          if(data.itemBarcode == barcode){
+            console.log()
+            this.ps.removeProduct(data);
+            this.remove.reset();
             flag = true;
-            break;
           }
-          counter++;
-        }
-      });
+        })
 
     }
     if (flag == false) {

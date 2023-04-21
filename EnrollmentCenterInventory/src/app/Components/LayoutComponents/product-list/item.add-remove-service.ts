@@ -1,7 +1,8 @@
 import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ItemModel } from "./item.model";
-import { getDatabase, ref, set, child, get } from "firebase/database";
+import { getDatabase, ref, set, child, get, remove } from "firebase/database";
+import { AngularFireDatabase } from "@angular/fire/compat/database";
 
 
 console.log("test");
@@ -12,20 +13,21 @@ console.log("test");
 export class ProductService{
     private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
     private productsEndPoint: string = "Products.json";
-
+    private ProductsRef = this.Angdb.list<ItemModel>("Products/")
     getProductsBranch() {
         return this.http.get<ItemModel[]>(this.baseUrl + this.productsEndPoint);
     }
 
-    constructor(private http: HttpClient){
-
+    constructor(private http: HttpClient, private Angdb: AngularFireDatabase){
+        
     }
 
     //Calls isNull to find null item folder
     //Uses null folder to add new value into database
-    addProduct(product:ItemModel, counter:number){
+    addProduct(product:ItemModel){
         const db = getDatabase();
-        set(ref(db, `Products/${counter}`), {
+        // return this.ProductsRef.push(product);
+        set(ref(db, `Products/` + product.itemBarcode), {///////////////////////////////////////
             flag: false,
             itemBarcode: product.itemBarcode,
             itemName: product.itemName,
@@ -73,9 +75,12 @@ export class ProductService{
         });
     }
 
-    removeProduct(number:number){
+    removeProduct(item: ItemModel){
+        
         const db = getDatabase();
-        set(ref(db, `Products/${number}`), {
+        // return this.ProductsRef.remove(item.getParent())
+        // return this.http.delete('Products/' + item.itemBarcode+'.json').subscribe();
+        set(ref(db, `Products/` +item.itemBarcode), {
             flag: null,
             itemBarcode: null,
             itemName: null,
