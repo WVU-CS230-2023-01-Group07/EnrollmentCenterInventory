@@ -21,6 +21,8 @@ import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { HttpClientModule } from '@angular/common/http';
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage())
   ],
-  providers: [],
+  providers: [ AngularFireDatabase,  { provide: FIREBASE_OPTIONS, useValue: environment.firebase },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export { AngularFireDatabase };
+
