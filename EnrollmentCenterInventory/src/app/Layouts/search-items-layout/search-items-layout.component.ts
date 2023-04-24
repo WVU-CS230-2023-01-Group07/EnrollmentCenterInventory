@@ -10,6 +10,7 @@ import * as firebase from 'firebase/compat';
 import 'firebase/database';
 import 'firebase/compat/database';
 import { FormControl, FormGroup } from '@angular/forms';
+import { FoundLayoutComponent } from '../found-layout/found-layout.component';
 
 @Component({
   selector: 'app-search-items-layout',
@@ -26,37 +27,48 @@ export class SearchItemsLayoutComponent {
   // Function called by html upon button click
   storeInput() {
     const input = document.getElementById("searchID") as HTMLInputElement;
-    // If user input is given, search database
     if (input) {
       const userInput = input.value;
-      this.searchInput(userInput);
+      this.searchInput(userInput).then(product => {
+        if (product === null) {
+          window.location.href = "not-found";
+          return null;
+        } else {
+          console.log("product below");
+          console.log(product);
+          window.location.href = "found";
+          return product;
+        }
+      });
     }
   }
 
   // Searches database for product with name that corresponds with user input
-  searchInput(itemName: String): any {
-    return this.ps.getProductsBranch().subscribe((data: ItemModel[]) => {
-      for (var product of data) {
-        console.log("item name iteration: " + product.itemName);
-        if (product.itemName.toUpperCase() == itemName.toUpperCase()) {
-          console.log("Product found in database");
-          console.log(product);
-          alert(
-            "Product found in inventory: \n" +
-            "Name: " + product.itemName + "\n" +
-            "Barcode: " + product.itemBarcode + "\n" +
-            "Quantity: " + product.itemQuantity + "\n" +
-            "Shelf Capacity: " + product.shelfCapacity + "\n" +
-            "Storage Location: " + product.storageLocation + "\n" +
-            "Type: " + product.itemType
-          );
-          return product;
+  searchInput(itemName: string): Promise<ItemModel | null> {
+    return new Promise((resolve) => {
+      this.ps.getProductsBranch().subscribe((data: ItemModel[]) => {
+        for (var product of data) {
+          if (product.itemName.toUpperCase() == itemName.toUpperCase()) {
+            console.log("Product found in database");
+            console.log(product);
+            // alert(
+            //   "Product found in inventory: \n" +
+            //   "Name: " + product.itemName + "\n" +
+            //   "Barcode: " + product.itemBarcode + "\n" +
+            //   "Quantity: " + product.itemQuantity + "\n" +
+            //   "Shelf Capacity: " + product.shelfCapacity + "\n" +
+            //   "Storage Location: " + product.storageLocation + "\n" +
+            //   "Type: " + product.itemType
+            // );
+            resolve(product);
+            return;
+          }
         }
-      }
-      console.log("Product not found");
-      alert("Item not found in inventory");
-      return null;
-    })
+        console.log("Product not found");
+        // alert("Item not found in inventory");
+        resolve(null);
+      });
+    });
   }
 }
 
