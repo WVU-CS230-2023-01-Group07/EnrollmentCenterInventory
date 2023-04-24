@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item.model"
-import { ReportService } from 'src/app/Components/LayoutComponents/product-list/item-report.service';
+import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service'
+
 
 @Component({
   selector: 'app-report-layout',
@@ -17,21 +18,13 @@ export class ReportLayoutComponent {
     itemQuantity: boolean = true;
     itemType: boolean = true;
     storageLocation: boolean = true;
-    
-    constructor(private ReportService:ReportService){}
 
-    //fills the array with items from the Firebase Realtime Database
-    ngOnInit(): void {
-      this.ReportService.getItems().subscribe((data1:ItemModel []) => {
-        for (var item of data1){
-          this.items.push(item);
-        }
-      }); 
+    constructor(private DisplaysService:DisplayService){
+      this.items = this.DisplaysService.getProduct();
     }
 
-
     //what the buttons call to toggle of different properties are included
-    toggleName(): void{ this.itemName = !this.itemName; console.log(this.itemName);}
+    toggleName(): void{ this.itemName = !this.itemName; }
     toggleCapacity(): void{ this.shelfCapacity = !this.shelfCapacity; }
     toggleQuantity(): void{ this.itemQuantity = !this.itemQuantity; }
     toggleType(): void{ this.itemType = !this.itemType; }
@@ -50,7 +43,7 @@ export class ReportLayoutComponent {
       let csvContent = this.generateCSV(data);
   
       //creates a download
-      var hiddenElement = document.createElement('a');
+      let hiddenElement = document.createElement('a');
       hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
       hiddenElement.target = '_blank';
       hiddenElement.download = name + '.csv';
@@ -67,7 +60,7 @@ export class ReportLayoutComponent {
       }
   
       //creates the top row of names for the columns
-      var propertyNames: any[] = [];
+      let propertyNames: any[] = [];
       for (let key of Object.keys(data[0])) {
 
         //Skips over the key if it was toggled off
@@ -95,10 +88,8 @@ export class ReportLayoutComponent {
       
           let val: any = item[key];
 
-          // console.log("key: " + key+ "Value: " + val);
-    
           if (val !== undefined && val !== null) {
-            val = new String(val);
+            val = String(val);
           } else {
             val = '';
           }
@@ -117,12 +108,17 @@ export class ReportLayoutComponent {
 
 
     //used to tell if the user wants an attribute included in the file
-    public includeAttribute(value: String): boolean{
-      if (value == "itemName" && this.itemName == false){  return false;  }
-      if (value == "itemQuantity" && this.itemQuantity == false){  return false;  }
-      if (value == "itemType" && this.itemType == false){  return false;  }
-      if (value == "shelfCapacity" && this.shelfCapacity == false){  return false;  }
-      if (value == "storageLocation" && this.storageLocation == false){  return false;  }
+    public includeAttribute(value: string): boolean{
+
+      if(value == "flag") return false;
+
+      if (value == "itemName" ) return this.itemName;  
+      if (value == "itemQuantity" ) return this.itemQuantity;
+      if (value == "itemType" ) return this.itemType;
+      if (value == "shelfCapacity" ) return this.shelfCapacity; 
+      if (value == "storageLocation" ) return this.storageLocation; 
+
       return true
+      
     }
 }
