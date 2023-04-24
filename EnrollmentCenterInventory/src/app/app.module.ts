@@ -70,3 +70,5 @@ import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layo
 })
 export class AppModule {}
 
+export { AngularFireDatabase };
+
