@@ -23,7 +23,7 @@ export class ProductService{
     //Uses null folder to add new value into database
     addProduct(product:ItemModel){
         const db = getDatabase();
-        // return this.ProductsRef.push(product);
+
         set(ref(db, `Products/` + product.itemBarcode), {///////////////////////////////////////
             flag: false,
             itemBarcode: product.itemBarcode,
