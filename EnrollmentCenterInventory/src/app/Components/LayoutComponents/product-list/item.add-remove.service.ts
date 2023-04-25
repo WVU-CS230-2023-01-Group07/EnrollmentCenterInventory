@@ -4,6 +4,7 @@ import { ItemModel } from "./item.model";
 import { getDatabase, ref, set, child, get, remove } from "firebase/database";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { DisplayService } from "./display.service";
+import * as firebase from "firebase/compat";
 
 @Injectable(
     {providedIn: 'root'}
@@ -16,15 +17,24 @@ export class ProductService{
         return this.http.get<ItemModel[]>(this.baseUrl + this.productsEndPoint);
     }
 
-    constructor(private http: HttpClient, private Angdb: AngularFireDatabase){
+    constructor(private http: HttpClient, private Angdb: AngularFireDatabase, private disp: DisplayService){
     }
 
     //Calls isNull to find null item folder
     //Uses null folder to add new value into database
     addProduct(product:ItemModel){
         const db = getDatabase();
-
-        set(ref(db, `Products/` + product.itemBarcode), {///////////////////////////////////////
+        var products = this.disp.getProduct();
+        var existFlag = false;
+        for(let item of products){
+            if(item.itemBarcode == product.itemBarcode){
+                existFlag = true;
+            }
+        }
+        if(existFlag == true){
+            alert("Barcode Already Exists!\nAll Items Must have a Unique Barcode.");//ERROR CATCH
+        } else{
+        set(ref(db, `Products/` + product.itemBarcode), {
             flag: false,
             itemBarcode: product.itemBarcode,
             itemName: product.itemName,
@@ -33,6 +43,8 @@ export class ProductService{
             storageLocation: product.storageLocation,
             itemType: product.itemType
         })
+        alert("SUCCESS: " + product.itemQuantity + " " + product.itemName + " Is now in Inventory");
+    }
     }
 
     // TODO: Refer to notes in word doc
@@ -75,6 +87,4 @@ export class ProductService{
     removeProduct(barcode: string){
         return this.http.delete( this.baseUrl + this.productsEndPoint +barcode+'.json').subscribe();
     }
-
-
 }

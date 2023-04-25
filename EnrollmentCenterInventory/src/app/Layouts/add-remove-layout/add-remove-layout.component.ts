@@ -85,7 +85,6 @@ export class AddRemoveLayoutComponent implements OnInit {
       else {
         this.ps.addProduct(products);
         this.add.reset();
-        alert("SUCCESS: " + quantity + " " + name + " Is now in Inventory");
       }
     }
      else {
