@@ -4,7 +4,6 @@ import { ItemModel } from "./item.model";
 import { getDatabase, ref, set, child, get, remove } from "firebase/database";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { DisplayService } from "./display.service";
-import * as firebase from "firebase/compat";
 
 @Injectable(
     {providedIn: 'root'}
@@ -17,11 +16,19 @@ export class ProductService{
         return this.http.get<ItemModel[]>(this.baseUrl + this.productsEndPoint);
     }
 
+    /*
+    @param http 
+    @param Angdb
+    @param disp
+    */
     constructor(private http: HttpClient, private Angdb: AngularFireDatabase, private disp: DisplayService){
     }
 
-    //Calls isNull to find null item folder
-    //Uses null folder to add new value into database
+    /* @param product
+       @func alert
+        Adds product to database
+        Checks if barcode is already stored, throws error if so
+    */
     addProduct(product:ItemModel){
         const db = getDatabase();
         var products = this.disp.getProduct();
@@ -84,6 +91,10 @@ export class ProductService{
         });
     }
 
+    /*
+    @param barcode
+        Deletes item from database using HttpClient, given barcode input
+    */
     removeProduct(barcode: string){
         return this.http.delete( this.baseUrl + this.productsEndPoint +barcode+'.json').subscribe();
     }

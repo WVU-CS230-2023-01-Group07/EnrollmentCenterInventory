@@ -12,10 +12,14 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
   styleUrls: ['./add-remove-layout.component.css']
 })
 export class AddRemoveLayoutComponent implements OnInit {
-  counter = 0;
-  items : ItemModel[]= [];
+  blankFlag = true;
+  addFlag = false;
+  /*
+  @param ps
+  @param psGet
+  */
   constructor(private ps: ProductService, private psGet: DisplayService) {
-    this.items = psGet.getProduct();
+    
    }
   
   ngOnInit(): void {
@@ -24,8 +28,6 @@ export class AddRemoveLayoutComponent implements OnInit {
       console.log(x);
     });
   }
-  blankFlag = true;
-  addFlag = false;
 
   //Remove Form Group 
     //For form Validation for button enabling
@@ -44,10 +46,13 @@ export class AddRemoveLayoutComponent implements OnInit {
     storageLocation: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')])
   });
 
-  // Interacts with  Adding or Removing dropdown box for add/remove layout
-  // Flags:
-  //  blankFlag
-  //  addFlag
+  /*
+  @param selection
+   Interacts with  Adding or Removing dropdown box for add/remove layout
+   Flags:
+    blankFlag
+    addFlag
+  */
   isAdd(selection: string) {
     if (selection == 'blank') {
       this.blankFlag = true;
@@ -60,9 +65,11 @@ export class AddRemoveLayoutComponent implements OnInit {
       }
     }
   }
-
-  //Adds items into the database
-  //Once added to database, form resets to add/remove other products
+  /*
+  @func alert
+  Adds items into the database
+  Once added to database, form resets to add/remove other products
+  */
   addItem() {
     //Gets newItem values from add FormGroup
     const quantity = this.add.value.itemQuantity;
@@ -71,9 +78,6 @@ export class AddRemoveLayoutComponent implements OnInit {
     const storage = this.add.value.storageLocation;
     const barcode = this.add.value.itemBarcode;
     const type = this.add.value.itemType;
-
-    //Counter finds file to insert new item
-    // const counter = this.isNull();
 
     if (this.add.valid && capacity != null && quantity != null && name != null && storage != null && barcode != null && type != null) {
       //create new ItemModel with new values
@@ -92,13 +96,18 @@ export class AddRemoveLayoutComponent implements OnInit {
     }
   }
 
-  //Removes items from database upon user interaction through add/remove layout
+  /*
+  @func alert
+  Removes items from database upon user interaction through add/remove layout
+  Finds correct item to remove, sends barcode to add-remove service method removeProduct()
+  */
   removeItem() {
     const barcode = this.remove.value.itemBarcode;
     var flag = false;
 
     if (this.remove.valid && barcode != null && barcode != '') {
-        this.items.forEach((data) => {
+      var items = this.psGet.getProduct();
+        items.forEach((data) => {
           if(data.itemBarcode == barcode){
             this.ps.removeProduct(barcode);
             this.remove.reset();
