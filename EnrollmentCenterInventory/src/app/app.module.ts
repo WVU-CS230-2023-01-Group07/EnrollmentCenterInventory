@@ -29,6 +29,8 @@ import { ItemsService } from './Components/Common/items.service';
 import { UserService } from './Components/Common/auth.service';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { SignUpLayoutComponent } from './Layouts/sign-up-layout/sign-up-layout.component';
+
 import { FoundLayoutComponent } from './Layouts/found-layout/found-layout.component';
 import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layout/product-not-found-layout.component';
 
@@ -47,7 +49,9 @@ import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layo
     ProductListComponent,
     AuditProductsComponent,
     FoundLayoutComponent,
-    ProductNotFoundLayoutComponent
+    ProductNotFoundLayoutComponent,
+    SignUpLayoutComponent,
+
   ],
   imports: [
     AngularFireAuthModule,

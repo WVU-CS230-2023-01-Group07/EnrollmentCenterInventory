@@ -25,6 +25,23 @@ export class UserService {
         this.isLoggedIn = false;
     }
 }
+
+async SignUp(user: HTMLInputElement, pass: HTMLInputElement){
+    try{
+        const userS: string = user.value;
+        const passS: string = pass.value;
+        /*Call the createUserWithEmailAndPassword method of the AngularFireAuth class, passing in the user and pass as parameters.*/
+        const result = await this.auth.createUserWithEmailAndPassword(userS, passS);
+        /*If the result is successful, alert the user, log the reuslt and create the account*/
+        console.log(result);
+        alert("Sign up successful!");
+    } catch (error) {
+        /*If there is an error in the sign in process, log the error and ensure isLoggedIn is set to false (again, see sign-in-layout.component.ts for more info) */
+        console.log(error);
+        alert("Sorry! Your sign up was unsuccessful. Please try again.");
+    }
+}
+
 public isAuth(){
     return this.isLoggedIn
   }

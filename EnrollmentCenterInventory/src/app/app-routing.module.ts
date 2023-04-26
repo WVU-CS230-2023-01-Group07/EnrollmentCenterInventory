@@ -7,6 +7,7 @@ import { ReportLayoutComponent } from './Layouts/report-layout/report-layout.com
 import { SearchItemsLayoutComponent } from './Layouts/search-items-layout/search-items-layout.component';
 import { SignInLayoutComponent } from './Layouts/sign-in-layout/sign-in-layout.component';
 import { SignOutLayoutComponent } from './Layouts/sign-out-layout/sign-out-layout.component';
+import { SignUpLayoutComponent } from './Layouts/sign-up-layout/sign-up-layout.component';
 import { FoundLayoutComponent } from './Layouts/found-layout/found-layout.component';
 import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layout/product-not-found-layout.component';
 
@@ -38,6 +39,10 @@ const routes: Routes = [
 {
   path: 'sign-out',
   component: SignOutLayoutComponent
+},
+{
+  path: 'sign-up',
+  component: SignUpLayoutComponent
 },
 {
   path: 'found',
