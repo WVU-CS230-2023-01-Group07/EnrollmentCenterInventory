@@ -1,4 +1,4 @@
-<div class="flex-container text-center">
+<div class="flex-container text-center" style="width: 173vh">
     <div class="row" style="margin-bottom: 30px">
       <div class="col">
         <b style="background-color: white">{{itemName}}</b>
@@ -17,6 +17,14 @@
       </div>
       <div class="col">
         <b style="background-color: white">{{itemBarcode}}</b>
+      </div>
+      <div class="col">
+        <a *ngIf="itemLink != ''; else blank">
+        <a style="background-color: white" href="{{itemLink}}">Item Link</a>
+        </a>
+        <ng-template #blank>
+          <a style="background-color: white">N/A</a>
+        </ng-template>
       </div>
     </div>
 </div>

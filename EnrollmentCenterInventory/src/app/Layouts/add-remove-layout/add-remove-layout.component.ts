@@ -5,6 +5,7 @@ import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove.service';
 import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-remove-layout',
@@ -39,11 +40,12 @@ export class AddRemoveLayoutComponent implements OnInit {
     //For form Validation for button enabling
   add = new FormGroup({
     itemBarcode: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern('([a-zA-z0-9-_]+)')]),
-    itemName: new FormControl('', [Validators.required, Validators.pattern('([a-zA-Z0-9]+(?:\s*[-A-Za-z0-9])*)+'), Validators.maxLength(20)]),
+    itemName: new FormControl('', [Validators.required, Validators.pattern('([a-zA-Z0-9]+(?:\s*[.-A-Za-z0-9])*)+'), Validators.maxLength(20)]),
     itemType: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')]),
     itemQuantity: new FormControl(undefined, [Validators.required, Validators.pattern('([1-9]+[0-9]*)')]),
     shelfCapacity: new FormControl(undefined, [Validators.required, Validators.pattern('([1-9]+[0-9]*)')]),
-    storageLocation: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')])
+    storageLocation: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')]),
+    itemLink: new FormControl('')
   });
 
   /*
@@ -78,10 +80,11 @@ export class AddRemoveLayoutComponent implements OnInit {
     const storage = this.add.value.storageLocation;
     const barcode = this.add.value.itemBarcode;
     const type = this.add.value.itemType;
+    const link = this.add.value.itemLink;
 
-    if (this.add.valid && capacity != null && quantity != null && name != null && storage != null && barcode != null && type != null) {
+    if (this.add.valid && capacity != null && quantity != null && name != null && storage != null && barcode != null && type != null && link != undefined) {
       //create new ItemModel with new values
-      const products = new ItemModel(name, capacity, quantity, storage, type, barcode)
+      const products = new ItemModel(name, capacity, quantity, storage, type, barcode, link)
 
       if (capacity < quantity) {
         alert("ERROR: Item Quantity Cannot Exceed Item Capacity")//ERROR CATCH

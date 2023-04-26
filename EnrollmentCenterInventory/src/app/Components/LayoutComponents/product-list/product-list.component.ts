@@ -12,6 +12,7 @@ export class ProductListComponent {
   @Input() storageLocation: string;
   @Input() itemType: string;
   @Input() itemBarcode: string;
+  @Input() itemLink: string | null;
 
   constructor(){
     this.itemName ="No Item Name Found";
@@ -20,5 +21,6 @@ export class ProductListComponent {
     this.storageLocation ="No Storage Location Found";
     this.itemType ="No Item Type Found";
     this.itemBarcode ="No Item Barcode Found";
+    this.itemLink = "No Link Found";
   }
 }

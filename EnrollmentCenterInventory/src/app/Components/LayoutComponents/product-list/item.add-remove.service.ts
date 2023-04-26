@@ -48,7 +48,8 @@ export class ProductService{
             shelfCapacity: product.shelfCapacity,
             itemQuantity: product.itemQuantity,
             storageLocation: product.storageLocation,
-            itemType: product.itemType
+            itemType: product.itemType,
+            itemLink: product.itemLink
         })
         alert("SUCCESS: " + product.itemQuantity + " " + product.itemName + " Is now in Inventory");
     }
@@ -77,7 +78,7 @@ export class ProductService{
                         if (snapshot2.exists() && snapshot2.val() == itemName) {
                             console.log("snapshot2: " + snapshot2.val());
                             //createItem(snapshot.val());
-                            let item = new ItemModel("1", 1, 1, "1", "1", "1");
+                            let item = new ItemModel("1", 1, 1, "1", "1", "1", "1");
                         }
                     });
 
