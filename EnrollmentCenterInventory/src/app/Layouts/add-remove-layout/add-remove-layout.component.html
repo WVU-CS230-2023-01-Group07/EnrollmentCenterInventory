@@ -146,8 +146,16 @@
                                             formControlName="itemType" />
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-warning" style="border-radius: 12px"
-                                    [disabled]="!add.valid">COMPLETE</button>
+                                <div class="d-flex">
+                                    <p id="right">Link to Product: </p>
+                                    <div id="input">
+                                        <datalist id="suggestions6">
+                                        </datalist>
+                                        <input autoComplete="on" list="suggestions6" id="link" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-warning" style="border-radius: 12px; color:white"
+                                    [disabled]="!add.valid"><b>Complete</b></button>
                             </form>
                             <!-- ELSE DISPLAY FOR REMOVING -->
                             <ng-template #removing>
@@ -161,8 +169,8 @@
                                                 formControlName="itemBarcode" />
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-warning" style="border-radius: 12px"
-                                        [disabled]="!remove.valid">COMPLETE</button>
+                                    <button type="submit" class="btn btn-warning" style="border-radius: 12px; color:white"
+                                        [disabled]="!remove.valid"><b>Complete</b></button>
                                 </form>
                             </ng-template>
                         </span>

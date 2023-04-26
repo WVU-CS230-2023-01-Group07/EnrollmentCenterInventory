@@ -42,7 +42,7 @@
     background-color: #002855;
     border-color: #002855;
 }
-.btn-check:hover+.btn-outline-success {
+.btn-check:btn-outline-success {
 
     color: #fff;
     background-color: #002855;

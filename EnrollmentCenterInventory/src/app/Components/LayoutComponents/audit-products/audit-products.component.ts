@@ -38,9 +38,9 @@ export class AuditProductsComponent {
     product.itemType = this.itemType;
     product.itemBarcode = this.itemBarcode;
     console.log(product);
-    this.itemsService.addProduct(product);
+    this.itemsService.updateProduct(product);
     console.log("sent product to service")
-    
+    window.location.reload();
   }
 
   flagControl(){
@@ -51,7 +51,8 @@ export class AuditProductsComponent {
       this.flagItem(this);
       console.log("Manually flagged item:" + this.itemName)
     }
-    this.itemsService.addProduct(this);
+    this.itemsService.updateProduct(this);
+    window.location.reload();
   }
 
   flagItem(item: AuditModel){

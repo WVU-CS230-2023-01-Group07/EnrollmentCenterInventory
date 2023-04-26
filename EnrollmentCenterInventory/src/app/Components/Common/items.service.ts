@@ -1,4 +1,5 @@
-import { HttpClient} from "@angular/common/http";
+import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { getDatabase, ref, set} from "firebase/database";
 import { AuditModel } from "src/app/Layouts/audit-layout/audit.model";
@@ -9,21 +10,27 @@ import { AuditModel } from "src/app/Layouts/audit-layout/audit.model";
 export class ItemsService{
     private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
     private productsEndPoint = "Products.json";
+    products: AuditModel[] = [];
+    items: Observable<AuditModel []>
     private counter = 0;
-    constructor(private http: HttpClient){
+    constructor(private db: AngularFireDatabase){
+        this.items = this.db.list<AuditModel>('Products').valueChanges();
     }
 
 
     getItems(){
-       return this.http.get<AuditModel[]>(this.baseUrl + this.productsEndPoint);
+        this.items.subscribe((data: AuditModel []) => {
+            console.log("Data received");
+            for(let item of data){
+                this.products.push(item);
+            }
+        })
+        return this.products;
     }
 
-    addProduct(product:AuditModel){
+    updateProduct(product:AuditModel){
         const db = getDatabase();
-        if(this.counter > 100){
-            
-        }
-        set(ref(db, `Products/${this.counter}`), {
+        set(ref(db, `Products/${product.itemBarcode}`), {
             itemBarcode: product.itemBarcode,
             itemName: product.itemName,
             shelfCapacity: product.shelfCapacity,

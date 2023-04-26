@@ -3,7 +3,6 @@
 </div>
 <div class="container-fluid mx-auto"
     style="background-color: white; background-image: url('/assets/background-image.png'); width: 1610px; height: 930px; margin-top: 90px">
-    >
     <h1 style="text-align: center; font-size:45px; padding:30px; font-weight: 700;">Audit System</h1>
     <div class="d-flex justify-content-center">
         <div class="card" style="width:50%">
@@ -12,13 +11,15 @@
             <div class="d-flex justify-content-between" style="padding:20px; padding-left:50px; padding-right:50px">
                 <form #postForm="ngForm" (ngSubmit)="showFlagged()">
                     <div *ngIf="this.showingFlagged==false; else elseBlock">
-                        <button type="submit" class="btn btn-primary controls">View Flagged Items</button>
+                        <button type="submit" class="btn controls" style="color:white"><b>View Flagged Items</b></button>
                     </div>
                     <ng-template #elseBlock>
-                        <button type="submit" class="btn btn-primary controls">View All Items</button>
+                        <button type="submit" class="btn controls" style="color:white"><b>View All Items</b></button>
                     </ng-template>
                 </form>
-                <button type="button" class="btn btn-primary controls">Get Audit Report</button>
+                <form #postForm="ngForm" (ngSubmit)="generate()">
+                    <button type="submit" class="btn controls" style="color:white"><b>Get Audit Report</b></button>
+                </form>
             </div>
         </div>
     </div>

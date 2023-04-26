@@ -30,8 +30,8 @@ select{
 
 .btn{
     margin-top:1rem;
-    background-color: #eaaa00;
-    color: #002855;
+    color: white;
+    border-radius: 12px;
 }
 
 .btn:active{
