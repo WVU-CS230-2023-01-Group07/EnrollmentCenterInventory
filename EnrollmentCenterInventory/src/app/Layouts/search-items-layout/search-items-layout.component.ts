@@ -27,7 +27,9 @@ export class SearchItemsLayoutComponent {
   // Function called by html upon button click
   storeInput() {
     const input = document.getElementById("searchID") as HTMLInputElement;
+    console.log("inside store input");
     if (input) {
+      console.log("inside if block");
       const userInput = input.value;
       this.searchInput(userInput).then(product => {
         if (product === null) {
@@ -45,8 +47,11 @@ export class SearchItemsLayoutComponent {
 
   // Searches database for product with name that corresponds with user input
   searchInput(itemName: string): Promise<ItemModel | null> {
+    console.log("inside search input");
     return new Promise((resolve) => {
+      console.log("inside promise");
       this.ps.getProductsBranch().subscribe((data: ItemModel[]) => {
+        console.log("inside products branch");
         for (var product of data) {
           if (product.itemName.toUpperCase() == itemName.toUpperCase()) {
             console.log("Product found in database");
