@@ -56,10 +56,10 @@
 <body>
     <app-nav-bar></app-nav-bar>
     <div class="box mx-auto"
-        style="background-color: white; background-image: url('/assets/background-image.png'); width: 1610px; height: 930px; margin-top: 90px">
+        style="background-color: white; background-image: url('/assets/background-image.png'); width: 1610px; height: 1400px; margin-top: 90px">
         <div class="container-fluid center">
                 <div class="card"
-                 style="width: 500px; background-color: lightgrey; border: none; border-radius: 40px; font-family: Georgia, serif;"
+                 style="width: 500px; background-color: lightgrey; border: none; border-radius: 40px; font-family: sans-serif;"
                     id="description">
                     <h1>Add/Remove</h1>
                     <div class="d-flex">INSTRUCTIONS:</div>
@@ -154,7 +154,7 @@
                                         <input autoComplete="on" list="suggestions6" id="link" />
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-warning" style="border-radius: 40px"
+                                <button type="submit" class="btn btn-warning" style="border-radius: 12px"
                                     [disabled]="!add.valid">COMPLETE</button>
                             </form>
                             <!-- ELSE DISPLAY FOR REMOVING -->
@@ -169,7 +169,7 @@
                                                 formControlName="itemBarcode" />
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-warning" style="border-radius: 40px"
+                                    <button type="submit" class="btn btn-warning" style="border-radius: 12px"
                                         [disabled]="!remove.valid">COMPLETE</button>
                                 </form>
                             </ng-template>

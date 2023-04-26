@@ -1,6 +1,6 @@
 import { Component, OnInit, Query } from '@angular/core';
 import { DataSnapshot, get, getDatabase, onValue, orderByChild, ref } from 'firebase/database';
-import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove-service';
+import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove.service';
 import { ItemModel } from 'src/app/Components/LayoutComponents/product-list/item.model';
 import { FirebaseApp } from '@angular/fire/app';
 import { inject } from '@angular/core';

@@ -16,15 +16,32 @@ export class ProductService{
         return this.http.get<ItemModel[]>(this.baseUrl + this.productsEndPoint);
     }
 
-    constructor(private http: HttpClient, private Angdb: AngularFireDatabase){
+    /*
+    @param http 
+    @param Angdb
+    @param disp
+    */
+    constructor(private http: HttpClient, private Angdb: AngularFireDatabase, private disp: DisplayService){
     }
 
-    //Calls isNull to find null item folder
-    //Uses null folder to add new value into database
+    /* @param product
+       @func alert
+        Adds product to database
+        Checks if barcode is already stored, throws error if so
+    */
     addProduct(product:ItemModel){
         const db = getDatabase();
-        // return this.ProductsRef.push(product);
-        set(ref(db, `Products/` + product.itemBarcode), {///////////////////////////////////////
+        var products = this.disp.getProduct();
+        var existFlag = false;
+        for(let item of products){
+            if(item.itemBarcode == product.itemBarcode){
+                existFlag = true;
+            }
+        }
+        if(existFlag == true){
+            alert("Barcode Already Exists!\nAll Items Must have a Unique Barcode.");//ERROR CATCH
+        } else{
+        set(ref(db, `Products/` + product.itemBarcode), {
             flag: false,
             itemBarcode: product.itemBarcode,
             itemName: product.itemName,
@@ -33,6 +50,8 @@ export class ProductService{
             storageLocation: product.storageLocation,
             itemType: product.itemType
         })
+        alert("SUCCESS: " + product.itemQuantity + " " + product.itemName + " Is now in Inventory");
+    }
     }
 
     // TODO: Refer to notes in word doc
@@ -72,9 +91,11 @@ export class ProductService{
         });
     }
 
+    /*
+    @param barcode
+        Deletes item from database using HttpClient, given barcode input
+    */
     removeProduct(barcode: string){
         return this.http.delete( this.baseUrl + this.productsEndPoint +barcode+'.json').subscribe();
     }
-
-
 }
