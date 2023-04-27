@@ -1,6 +1,9 @@
 <form #postForm="ngForm" (ngSubmit)="submitChanges(postForm.value)">
     <div class="row">
         <div class="col">
+            <p>{{itemBarcode}}</p>
+        </div>
+        <div class="col">
             <p>{{itemName}}</p>
         </div>
         <div class="col">
