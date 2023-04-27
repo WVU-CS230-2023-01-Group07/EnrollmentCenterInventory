@@ -1,29 +1,70 @@
 <app-nav-bar></app-nav-bar>
+
 <body>
-<div class="container-fluid">
-  <div class="card">
-    <div class="card-title">
-      <h2>Search</h2>
-    </div>
-    <div class="card-body">
-      Search By:
-      <select class="form-select">
-        <option selected>Name</option>
-        <option value="1">Category</option>
-        <option value="2">Product ID</option>
-      </select>
-      <form>
-        <label class="form-label">Input your search below:</label>
-        <input id = "searchID" type="search" class="form-control">
-      </form>
-      <div class="d-grid">
-        <button (click) = "storeInput()" class="btn btn-warning"><b>Search</b></button>
+  <div class="container-fluid" *ngIf="!found">
+    <div class="card">
+      <div class="card-title">
+        <h2>Search</h2>
+      </div>
+      <div class="card-body">
+        Search By:
+        <select class="form-select">
+          <option selected>Name</option>
+          <option value="1">Category</option>
+          <option value="2">Product ID</option>
+        </select>
+        <form>
+          <label class="form-label">Input your search below:</label>
+          <input id="searchID" type="search" class="form-control">
+        </form>
+        <div class="d-grid">
+          <button (click)="storeInput()" class="btn btn-warning"><b>Search</b></button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-crossorigin="anonymous"></script>
+  <div class="box mx-auto"
+    style="background-color: white; background-image: url('/assets/background-image.png'); width:1610px; height:900px"
+    *ngIf="found">
+    <div class="flex-container text-center" style="margin-top: 130px">
+      <div class="row" style="margin-bottom: 60px">
+        <div class="col" style="font-size: 30px">
+          <b>Item Name</b>
+        </div>
+        <div class="col" style="font-size: 30px">
+          <b>Shelf Capacity</b>
+        </div>
+        <div class="col" style="font-size: 30px">
+          <b>Item Quantity</b>
+        </div>
+        <div class="col" style="font-size: 30px">
+          <b>Storage Location</b>
+        </div>
+        <div class="col" style="font-size: 30px">
+          <b>Item Type</b>
+        </div>
+        <div class="col" style="font-size: 30px">
+          <b>Item Barcode</b>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let item of results">
+      <app-product-list itemName={{item.itemName}} shelfCapacity={{item.shelfCapacity}}
+        itemQuantity={{item.itemQuantity}} storageLocation={{item.storageLocation}} itemType={{item.itemType}}
+        itemBarcode={{item.itemBarcode}}></app-product-list>
+    </div>
+    <div class="flex-container" style="background-color: grey; height: 1px; width: 1610px; margin-bottom: 30px">
+
+      <div style="text-align: center">
+        <button class="btn btn-primary" style="border-radius: 40px; margin-bottom: 70px">
+          <a href="home" style="color: white; text-decoration: none">Back to Top</a>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 </body>

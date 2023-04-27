@@ -21,7 +21,8 @@ import { SearchService } from './search.service';
   styleUrls: ['./search-items-layout.component.css']
 })
 export class SearchItemsLayoutComponent {
-  results: ItemModel[] = [];
+  public results: ItemModel[] = [];
+  found: boolean = false;
 
   constructor(private ps: ProductService, private psGet: DisplayService, private sv: SearchService) {
     this.storeInput();
@@ -42,7 +43,8 @@ export class SearchItemsLayoutComponent {
         } else {
           console.log(product);
           this.PassData();
-          window.location.href = "found";
+          this.found = true;
+          //window.location.href = "found";
           return product;
         }
       });
