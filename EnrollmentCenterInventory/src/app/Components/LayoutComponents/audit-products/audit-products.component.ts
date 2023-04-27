@@ -32,6 +32,12 @@ export class AuditProductsComponent {
   }
 
   submitChanges(product:AuditModel){
+    if(product.itemQuantity == ''){
+      product.itemQuantity = this.itemQuantity;
+    }
+    if(product.storageLocation == ''){
+      product.storageLocation = this.storageLocation;
+    }
     product.itemName = this.itemName;
     product.flag = "true";
     product.shelfCapacity = this.shelfCapacity;
@@ -39,7 +45,7 @@ export class AuditProductsComponent {
     product.itemBarcode = this.itemBarcode;
     console.log(product);
     this.itemsService.updateProduct(product);
-    console.log("sent product to service")
+    console.log("sent product to service");
     window.location.reload();
   }
 
