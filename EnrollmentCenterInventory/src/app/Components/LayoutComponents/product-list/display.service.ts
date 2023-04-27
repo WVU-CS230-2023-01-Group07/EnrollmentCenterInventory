@@ -25,10 +25,15 @@ export class DisplayService{
         this.items.subscribe((data: ItemModel []) => {
             console.log("Data received");
             for(let item of data){
+                //console.log(item);
                 this.products.push(item);
             }
         })
         return this.products;
         // return this.db.list<ItemModel>(this.baseUrl + this.ProductsEndPoint);
+    }
+
+    getProducts() {
+        return this.items;
     }
 }

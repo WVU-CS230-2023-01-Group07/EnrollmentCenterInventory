@@ -33,12 +33,11 @@ export class SearchItemsLayoutComponent {
     if (input) {
       console.log("inside if block");
       const userInput = input.value;
-      this.searchInput(userInput).then(product => {
+      this.searchByName(userInput).then(product => {
         if (product === null) {
-          //window.location.href = "not-found";
+          window.location.href = "not-found";
           return null;
         } else {
-          console.log("product below");
           console.log(product);
           window.location.href = "found";
           return product;
@@ -48,27 +47,28 @@ export class SearchItemsLayoutComponent {
   }
 
   // Searches database for product with name that corresponds with user input
-  searchInput(itemName: string): Promise<ItemModel | null> {
+  searchByName(itemName: string): Promise<ItemModel | null> {
     console.log("inside search input");
     return new Promise((resolve) => {
-      var items = this.psGet.getProduct();
-      console.log(items);
-      var found = false;
-      console.log(items.length);
-      items.forEach((item) => {
-        console.log("iterate");
-        console.log(item.itemName);
-        if (item.itemName.toUpperCase() == itemName.toUpperCase()) {
-          found=true;
-          resolve(item);
+      var items = this.psGet.getProducts();
+      items.subscribe((data: ItemModel[]) => {
+        for (let item of data) {
+          if (item.itemName.toUpperCase() == itemName.toUpperCase()) {
+            resolve(item);
+          }
         }
       });
-      if (!found){
-        console.log("item not found");
-        resolve(null);
-      }
+
     });
-    // return new Promise((resolve) => {
+
+  }
+
+  // TODO: Search by category
+
+
+  // TODO: Search by Product ID
+}
+ // return new Promise((resolve) => {
     //   console.log("inside promise");
     //   this.ps.getProductsBranch().subscribe((data: ItemModel[]) => {
     //     console.log("inside products branch");
@@ -94,6 +94,4 @@ export class SearchItemsLayoutComponent {
     //     resolve(null);
     //   });
     // });
-  }
-}
 

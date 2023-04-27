@@ -10,8 +10,8 @@ import { SearchItemsLayoutComponent } from '../search-items-layout/search-items-
 export class FoundLayoutComponent implements OnInit {
 product = ItemModel;
 
-  constructor(private sl: SearchItemsLayoutComponent){
-  }
+  // constructor(private sl: SearchItemsLayoutComponent){
+  // }
 
   ngOnInit(): void {
     //let product = this.sl.storeInput;
