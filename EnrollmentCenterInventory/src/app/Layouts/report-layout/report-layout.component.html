@@ -1,34 +1,37 @@
 <!-- Puts in the navbar -->
 <app-nav-bar></app-nav-bar>
 
-<form class="container-fluid mx-auto" style="background-color: white; background-image: url('/assets/background-image.png'); width: 1610px; height: 930px; margin-top: 90px">
+<form class="container-fluid mx-auto"
+    style="background-color: white; background-image: url('/assets/background-image.png'); width: 176dvh; height: 100dvh; padding-top: 180px">
+        <b class="text-center header">Generate Report</b>
+        <div class="d-flex flex-column middle gap-2">
 
-    <b class="text-center header">Generate Report</b>
+            <b class="lable">Include:</b>
+            <div class="d-flex gap-3 flex-wrap align-middle">
 
-    <div class = "d-flex flex-column middle gap-2">
-        
+                <input (click)="toggleName()" type="checkbox" class="btn-check" id="btn-item-name" autocomplete="off"
+                    checked>
+                <label class="btn btn-outline-success" for="btn-item-name">Item Name</label><br>
 
-        <b class="lable">Include:</b>
-        <div class="d-flex gap-3 flex-wrap align-middle">
-            
-            <input (click)="toggleName()" type="checkbox" class="btn-check" id="btn-item-name" autocomplete="off" checked>
-            <label class="btn btn-outline-success" for="btn-item-name">Item Name</label><br>
+                <input (click)="toggleCapacity()" type="checkbox" class="btn-check" id="btn-shelf-capacity"
+                    autocomplete="off" checked>
+                <label class="btn btn-outline-success" for="btn-shelf-capacity">Shelf Capacity</label><br>
 
-            <input (click)="toggleCapacity()" type="checkbox" class="btn-check" id="btn-shelf-capacity" autocomplete="off" checked>
-            <label class="btn btn-outline-success" for="btn-shelf-capacity">Shelf Capacity</label><br>
+                <input (click)="toggleQuantity()" type="checkbox" class="btn-check" id="btn-item-quanity"
+                    autocomplete="off" checked>
+                <label class="btn btn-outline-success" for="btn-item-quanity">Item Quantity</label><br>
 
-            <input (click)="toggleQuantity()" type="checkbox" class="btn-check" id="btn-item-quanity" autocomplete="off" checked>
-            <label class="btn btn-outline-success" for="btn-item-quanity">Item Quantity</label><br>
+                <input (click)="toggleType()" type="checkbox" class="btn-check" id="btn-item-type" autocomplete="off"
+                    checked>
+                <label class="btn btn-outline-success" for="btn-item-type">Item Type</label><br>
 
-            <input (click)="toggleType()" type="checkbox" class="btn-check" id="btn-item-type" autocomplete="off" checked>
-            <label class="btn btn-outline-success" for="btn-item-type">Item Type</label><br>
+                <input (click)="toggleLocation()" type="checkbox" class="btn-check" id="btn-storage-location"
+                    autocomplete="off" checked>
+                <label class="btn btn-outline-success" for="btn-storage-location">Storage Location</label><br>
 
-            <input (click)="toggleLocation()" type="checkbox" class="btn-check" id="btn-storage-location" autocomplete="off" checked>
-            <label class="btn btn-outline-success" for="btn-storage-location">Storage Location</label><br>
+            </div>
 
+            <!-- calls the function to generate the report -->
+            <button (click)="generate()" type="button" class="btn-generate">Generate</button>
         </div>
-        
-        <!-- calls the function to generate the report -->
-        <button (click)="generate()" type="button" class="btn-generate">Generate</button>
-    </div>
 </form>

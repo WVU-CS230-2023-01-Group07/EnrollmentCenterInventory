@@ -16,11 +16,12 @@
 
 .container-fluid{
     text-align: center;
+    height:fit-content;
 }
 
 /* Text at the top of page */
 .header{
-    color: whi;
+    /* color: whi; */
     font-size: 3em;
     text-align: center;
 }
