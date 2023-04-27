@@ -11,6 +11,8 @@ import 'firebase/database';
 import 'firebase/compat/database';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FoundLayoutComponent } from '../found-layout/found-layout.component';
+import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service'
+
 
 @Component({
   selector: 'app-search-items-layout',
@@ -20,7 +22,7 @@ import { FoundLayoutComponent } from '../found-layout/found-layout.component';
 export class SearchItemsLayoutComponent {
 
 
-  constructor(private ps: ProductService) {
+  constructor(private ps: ProductService, private psGet: DisplayService) {
     this.storeInput();
   }
 
@@ -33,7 +35,7 @@ export class SearchItemsLayoutComponent {
       const userInput = input.value;
       this.searchInput(userInput).then(product => {
         if (product === null) {
-          window.location.href = "not-found";
+          //window.location.href = "not-found";
           return null;
         } else {
           console.log("product below");
@@ -49,31 +51,49 @@ export class SearchItemsLayoutComponent {
   searchInput(itemName: string): Promise<ItemModel | null> {
     console.log("inside search input");
     return new Promise((resolve) => {
-      console.log("inside promise");
-      this.ps.getProductsBranch().subscribe((data: ItemModel[]) => {
-        console.log("inside products branch");
-        for (var product of data) {
-          if (product.itemName.toUpperCase() == itemName.toUpperCase()) {
-            console.log("Product found in database");
-            console.log(product);
-            // alert(
-            //   "Product found in inventory: \n" +
-            //   "Name: " + product.itemName + "\n" +
-            //   "Barcode: " + product.itemBarcode + "\n" +
-            //   "Quantity: " + product.itemQuantity + "\n" +
-            //   "Shelf Capacity: " + product.shelfCapacity + "\n" +
-            //   "Storage Location: " + product.storageLocation + "\n" +
-            //   "Type: " + product.itemType
-            // );
-            resolve(product);
-            return;
-          }
+      var items = this.psGet.getProduct();
+      console.log(items);
+      var found = false;
+      console.log(items.length);
+      items.forEach((item) => {
+        console.log("iterate");
+        console.log(item.itemName);
+        if (item.itemName.toUpperCase() == itemName.toUpperCase()) {
+          found=true;
+          resolve(item);
         }
-        console.log("Product not found");
-        // alert("Item not found in inventory");
-        resolve(null);
       });
+      if (!found){
+        console.log("item not found");
+        resolve(null);
+      }
     });
+    // return new Promise((resolve) => {
+    //   console.log("inside promise");
+    //   this.ps.getProductsBranch().subscribe((data: ItemModel[]) => {
+    //     console.log("inside products branch");
+    //     for (var product of data) {
+    //       if (product.itemName.toUpperCase() == itemName.toUpperCase()) {
+    //         console.log("Product found in database");
+    //         console.log(product);
+    //         // alert(
+    //         //   "Product found in inventory: \n" +
+    //         //   "Name: " + product.itemName + "\n" +
+    //         //   "Barcode: " + product.itemBarcode + "\n" +
+    //         //   "Quantity: " + product.itemQuantity + "\n" +
+    //         //   "Shelf Capacity: " + product.shelfCapacity + "\n" +
+    //         //   "Storage Location: " + product.storageLocation + "\n" +
+    //         //   "Type: " + product.itemType
+    //         // );
+    //         resolve(product);
+    //         return;
+    //       }
+    //     }
+    //     console.log("Product not found");
+    //     // alert("Item not found in inventory");
+    //     resolve(null);
+    //   });
+    // });
   }
 }
 
