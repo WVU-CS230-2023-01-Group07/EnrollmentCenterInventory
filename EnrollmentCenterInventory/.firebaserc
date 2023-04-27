@@ -1,4 +1,8 @@
 {
+  "projects": {
+    "default": "wvu-ec-database",
+    "Outreach-Inventory": "wvu-ec-database"
+  },
   "targets": {
     "wvu-ec-database": {
       "hosting": {
@@ -8,7 +12,5 @@
       }
     }
   },
-  "projects": {
-    "default": "wvu-ec-database"
-  }
+  "etags": {}
 }
