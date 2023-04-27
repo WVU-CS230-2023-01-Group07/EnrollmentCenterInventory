@@ -33,6 +33,7 @@ import { SignUpLayoutComponent } from './Layouts/sign-up-layout/sign-up-layout.c
 
 import { FoundLayoutComponent } from './Layouts/found-layout/found-layout.component';
 import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layout/product-not-found-layout.component';
+import { SearchService } from './Layouts/search-items-layout/search.service';
 
 
 @NgModule({
@@ -69,7 +70,7 @@ import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layo
     
   ],
   providers: [AngularFireDatabase,
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },],
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
