@@ -24,43 +24,44 @@
     </div>
   </div>
 
+  <!------------>
+
   <div class="box mx-auto"
-    style="background-color: white; background-image: url('/assets/background-image.png'); width:1610px; height:900px"
+    style="background-color: white; background-image: url('/assets/background-image.png'); width:174.5dvh"
     *ngIf="found">
-    <div class="flex-container text-center" style="margin-top: 130px">
+    <div class="flex-container text-center" style="margin-top: 130px; width:170vh">
       <div class="row" style="margin-bottom: 60px">
         <div class="col" style="font-size: 30px">
-          <b>Item Name</b>
+          <b>Item <br> Name</b>
         </div>
         <div class="col" style="font-size: 30px">
-          <b>Shelf Capacity</b>
+          <b>Shelf <br> Capacity</b>
         </div>
         <div class="col" style="font-size: 30px">
-          <b>Item Quantity</b>
+          <b>Item <br> Quantity</b>
         </div>
         <div class="col" style="font-size: 30px">
-          <b>Storage Location</b>
+          <b>Storage <br> Location</b>
         </div>
         <div class="col" style="font-size: 30px">
-          <b>Item Type</b>
+          <b>Item <br> Type</b>
         </div>
         <div class="col" style="font-size: 30px">
-          <b>Item Barcode</b>
+          <b>Item <br> Barcode</b>
         </div>
       </div>
     </div>
-    <div *ngFor="let item of results">
+    <div *ngFor="let item of items">
       <app-product-list itemName={{item.itemName}} shelfCapacity={{item.shelfCapacity}}
         itemQuantity={{item.itemQuantity}} storageLocation={{item.storageLocation}} itemType={{item.itemType}}
         itemBarcode={{item.itemBarcode}}></app-product-list>
-    </div>
-    <div class="flex-container" style="background-color: grey; height: 1px; width: 1610px; margin-bottom: 30px">
-
-      <div style="text-align: center">
-        <button class="btn btn-primary" style="border-radius: 40px; margin-bottom: 70px">
-          <a href="home" style="color: white; text-decoration: none">Back to Top</a>
-        </button>
+      <div class="flex-container" style="background-color: grey; height: 1px; width: 174.5dvh; margin-bottom: 30px">
       </div>
+    </div>
+    <div style="text-align: center">
+      <button class="btn btn-warning" style="border-radius: 12px; margin-bottom: 70px">
+        <a href="home" style="color: white; text-decoration: none"><b>Back to Top</b></a>
+      </button>
     </div>
   </div>
 
