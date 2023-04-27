@@ -5,13 +5,14 @@ import { ItemModel } from 'src/app/Components/LayoutComponents/product-list/item
 import { FirebaseApp } from '@angular/fire/app';
 import { inject } from '@angular/core';
 import { Firestore, collectionData, collection, query, CollectionReference } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import * as firebase from 'firebase/compat';
 import 'firebase/database';
 import 'firebase/compat/database';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FoundLayoutComponent } from '../found-layout/found-layout.component';
 import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service'
+import { SearchService } from './search.service';
 
 
 @Component({
@@ -20,11 +21,12 @@ import { DisplayService } from 'src/app/Components/LayoutComponents/product-list
   styleUrls: ['./search-items-layout.component.css']
 })
 export class SearchItemsLayoutComponent {
+  results: ItemModel[] = [];
 
-
-  constructor(private ps: ProductService, private psGet: DisplayService) {
+  constructor(private ps: ProductService, private psGet: DisplayService, private sv: SearchService) {
     this.storeInput();
   }
+
 
   // Function called by html upon button click
   storeInput() {
@@ -34,11 +36,12 @@ export class SearchItemsLayoutComponent {
       console.log("inside if block");
       const userInput = input.value;
       this.searchByName(userInput).then(product => {
-        if (product === null) {
-          window.location.href = "not-found";
+        if (product === null || product.length === 0) {
+          // window.location.href = "not-found";
           return null;
         } else {
           console.log(product);
+          this.PassData();
           window.location.href = "found";
           return product;
         }
@@ -47,20 +50,29 @@ export class SearchItemsLayoutComponent {
   }
 
   // Searches database for product with name that corresponds with user input
-  searchByName(itemName: string): Promise<ItemModel | null> {
+  searchByName(itemName: string): Promise<ItemModel[] | null> {
     console.log("inside search input");
+    
     return new Promise((resolve) => {
       var items = this.psGet.getProducts();
       items.subscribe((data: ItemModel[]) => {
         for (let item of data) {
           if (item.itemName.toUpperCase() == itemName.toUpperCase()) {
-            resolve(item);
+            console.log("before push");
+            this.results.push(item);
+            console.log("after push");
           }
         }
+        resolve(this.results);
       });
 
     });
 
+  }
+
+  PassData() {
+    console.log(this.results);
+    this.sv.allPassedData.next(this.results); // here you emit
   }
 
   // TODO: Search by category
