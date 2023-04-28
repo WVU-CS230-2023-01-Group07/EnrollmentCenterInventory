@@ -46,10 +46,6 @@ const routes: Routes = [
   component: SignUpLayoutComponent, canActivate: [AuthGuard]
 },
 {
-  path: 'found',
-  component: FoundLayoutComponent, canActivate: [AuthGuard]
-},
-{
   path: 'not-found',
   component: ProductNotFoundLayoutComponent, canActivate: [AuthGuard]
 },
