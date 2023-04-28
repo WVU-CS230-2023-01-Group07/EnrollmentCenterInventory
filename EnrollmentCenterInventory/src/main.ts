@@ -10,7 +10,8 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 import firebase from 'firebase/compat/app';
 import 'firebase/database';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { initializeApp } from 'firebase/app';
+//import { initializeApp } from 'firebase/app';
+import { getAnalytics } from "firebase/analytics";
 import { SearchItemsLayoutComponent } from './app/Layouts/search-items-layout/search-items-layout.component';
 
 // Initialize Firebase app
@@ -23,7 +24,6 @@ const firebaseConfig = {
   appId: "1:822312610806:web:31d6079d4fece09d4cf5d7",
   measurementId: "G-6JWJ4FNF16"
 };
-
 // Get a reference to the database
 //const dbRef = ref(getDatabase(app));
 
