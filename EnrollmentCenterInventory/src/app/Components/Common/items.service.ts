@@ -28,6 +28,8 @@ export class ItemsService{
         return this.products;
     }
 
+    
+
     updateProduct(product:AuditModel){
         const db = getDatabase();
         set(ref(db, `Products/${product.itemBarcode}`), {
