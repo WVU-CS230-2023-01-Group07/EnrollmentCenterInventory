@@ -8,8 +8,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
 
 @Component({
   selector: 'app-add-remove-layout',
-  templateUrl: './add-remove-layout.component.html',
-  styleUrls: ['./add-remove-layout.component.css']
+  templateUrl: './add-remove-layout.component.html'
 })
 export class AddRemoveLayoutComponent implements OnInit {
   blankFlag = true;

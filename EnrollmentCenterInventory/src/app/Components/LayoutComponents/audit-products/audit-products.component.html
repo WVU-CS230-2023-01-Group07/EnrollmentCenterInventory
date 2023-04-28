@@ -22,15 +22,15 @@
             <form #postForm="ngForm" (ngSubmit)="flagControl()">
                 <button type="submit" class="btn" style="border-style:none;">
                     <div *ngIf="flag== 'false'; else elseBlock">
-                        <i class="bi bi-flag-fill" style="color:rgb(27, 27, 27);"></i>
+                        <em class="bi bi-flag-fill" style="color:rgb(27, 27, 27);"></em>
                     </div>
                     <ng-template #elseBlock>
-                        <i class="bi bi-flag-fill" style="color: rgb(255, 98, 0);"></i>
+                        <em class="bi bi-flag-fill" style="color: rgb(255, 98, 0);"></em>
                     </ng-template>
                 </button>
             </form>
         </div>
         <div class="col">
-            <button type="submit" class="btn btn-warning" style="color:white"><b>Submit</b></button>
+            <button type="submit" class="btn btn-warning" style="color:white"><strong>Submit</strong></button>
         </div>
     </div>

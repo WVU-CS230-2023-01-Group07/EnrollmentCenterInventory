@@ -6,8 +6,7 @@ import { DisplayService } from 'src/app/Components/LayoutComponents/product-list
 
 @Component({
   selector: 'app-home-layout',
-  templateUrl: './home-layout.component.html',
-  styleUrls: ['./home-layout.component.css']
+  templateUrl: './home-layout.component.html'
 })
 
 
