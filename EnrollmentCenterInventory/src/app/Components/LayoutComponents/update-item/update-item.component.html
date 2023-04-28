@@ -1,0 +1,105 @@
+<form #postForm="ngForm" (ngSubmit)="submitChanges(postForm.value)">
+    <div class = "row p-1">
+    <div class="col" style="font-weight: 700;">
+        <h2>Item Barcode: {{itemBarcode}}</h2>
+    </div>
+    
+</div>
+    <div class="flex-container p-1"
+        style="border-bottom: 1px; border-style:solid; border-left: 0; border-right: 0; border-top: 0;">
+        <div class="row">
+            <div class="col">
+                <b>Item Name</b>
+            </div>
+            <div class="col">
+                <p>{{itemName}}</p>
+            </div>
+            <div class="col d-flex justify-content-center input-group">
+                <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="itemName">
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-container p-1"
+        style="border-bottom: 1px; border-style:solid; border-left: 0; border-right: 0; border-top: 0;">
+        <div class="row">
+            <div class="col">
+                <b>Item Quantity</b>
+            </div>
+            <div class="col">
+                <p>{{itemQuantity}}</p>
+            </div>
+            <div class="col d-flex justify-content-center input-group">
+                <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="itemQuantity">
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-container p-1"
+        style="border-bottom: 1px; border-style:solid; border-left: 0; border-right: 0; border-top: 0;">
+        <div class="row">
+            <div class="col">
+                <b>Storage Location</b>
+            </div>
+            <div class="col">
+                <p>{{storageLocation}}</p>
+            </div>
+            <div class="col input-group">
+                <input class="form-control" type="text" placeholder="location" ngModel name="storageLocation">
+            </div>
+        </div>
+    </div>
+    <div class="flex-container p-1"
+        style="border-bottom: 1px; border-style:solid; border-left: 0; border-right: 0; border-top: 0;">
+        <div class="row">
+            <div class="col">
+                <b>Shelf Capacity</b>
+            </div>
+            <div class="col">
+                <p>{{shelfCapacity}}</p>
+            </div>
+            <div class="col d-flex justify-content-center input-group">
+                <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="shelfCapacity">
+            </div>
+        </div>
+    </div>
+    <div class="flex-container p-1"
+        style="border-bottom: 1px; border-style:solid; border-left: 0; border-right: 0; border-top: 0;">
+        <div class="row">
+            <div class="col">
+                <b>Item Type</b>
+            </div>
+            <div class="col">
+                <p>{{shelfCapacity}}</p>
+            </div>
+            <div class="col d-flex justify-content-center input-group">
+                <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="itemType">
+            </div>
+        </div>
+    </div>
+    <div class="flex-container p-1"
+        style="border-bottom: 1px; border-style:solid; border-left: 0; border-right: 0; border-top: 0;">
+        <div class="row">
+            <div class="col">
+                <b>Flag</b>
+            </div>
+            <div class="col">
+                <form #postForm="ngForm" (ngSubmit)="flagControl()">
+                    <button type="submit" class="btn" style="border-style:none;">
+                        <div *ngIf="flag== 'false'; else elseBlock">
+                            <i class="bi bi-flag-fill" style="color:rgb(27, 27, 27);"></i>
+                        </div>
+                        <ng-template #elseBlock>
+                            <i class="bi bi-flag-fill" style="color: rgb(255, 98, 0);"></i>
+                        </ng-template>
+                    </button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="d-flex flex-row-reverse p-1">
+        <div>
+            <button type="submit" class="btn btn-warning" style="color:white"><b>Submit</b></button>
+        </div>
+    </div>

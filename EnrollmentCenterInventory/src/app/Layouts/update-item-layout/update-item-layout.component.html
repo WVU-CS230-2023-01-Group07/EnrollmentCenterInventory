@@ -1,0 +1,41 @@
+<div>
+    <app-nav-bar></app-nav-bar>
+</div>
+<div class="container-fluid mx-auto"
+    style="background-color: white; background-image: url('/assets/background-image.png'); width: 174dvh; height: 930px; margin-top: 90px">
+    <h1 style="text-align: center; font-size:45px; padding:30px; font-weight: 700;">Update Item</h1>
+    <div class="d-flex justify-content-center">
+        <div class="card" style="width:50%">
+            <h2 style="text-align: center; padding-top:30px; font-size:35px">
+                Find Item</h2>
+            <div class="justify-content-center" style="padding:20px; padding-left:50px; padding-right:50px">
+                <form #postForm="ngForm" (ngSubmit)="findItem(postForm.value)">
+                    <label class="form-label">Enter item barcode below:</label>
+                    <input id="searchID" type="search" class="form-control" ngModel name="itemBarcode">
+                    <div class="d-grid">
+                        <button type="submit" class="btn controls" style="color:white"><b>Search</b></button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="this.foundItem==true;">
+        <div class="d-flex justify-content-center" style="padding: 30px">
+            <div class="container-fluid" style="width:90%">
+                <div class="container-fluid" style="padding:20px; font-size: 20px">
+                    <div class="card" style="padding: 20px;">
+                        <div *ngFor="let item of item">
+                            <app-update-item itemName={{item.itemName}} itemQuantity={{item.itemQuantity}}
+                                storageLocation={{item.storageLocation}} flag={{item.flag}}
+                                itemBarcode={{item.itemBarcode}} itemType={{item.itemType}}
+                                shelfCapacity={{item.shelfCapacity}} itemBarcode={{item.itemBarcode}}>
+                            </app-update-item>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

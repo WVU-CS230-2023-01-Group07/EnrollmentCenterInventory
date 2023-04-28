@@ -17,6 +17,11 @@
                         <button type="submit" class="btn controls" style="color:white"><b>View All Items</b></button>
                     </ng-template>
                 </form>
+                <form>
+                    <button type="button" class="btn controls" style="color:white">
+                        <a href="audit/update-item" style="color:white; text-decoration: none;"><b>Update Specific Item</b></a>
+                    </button>
+                </form>
                 <form #postForm="ngForm" (ngSubmit)="generate()">
                     <button type="submit" class="btn controls" style="color:white"><b>Get Audit Report</b></button>
                 </form>
