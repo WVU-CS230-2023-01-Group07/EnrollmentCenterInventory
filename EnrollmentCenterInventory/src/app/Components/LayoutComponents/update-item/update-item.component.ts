@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { AuditModel } from 'src/app/Layouts/audit-layout/audit.model';
-import { ItemsService } from 'src/app/Components/Common/items.service';
+import { ItemsService } from '../../Common/items.service';
 
 @Component({
-  selector: 'app-audit-products',
-  templateUrl: './audit-products.component.html',
-  styleUrls: ['./audit-products.component.css']
+  selector: 'app-update-item',
+  templateUrl: './update-item.component.html',
+  styleUrls: ['./update-item.component.css']
 })
-export class AuditProductsComponent {
+export class UpdateItemComponent {
   @Input() itemName: string;
   @Input() itemQuantity: string;
   @Input() storageLocation: string;
@@ -37,14 +37,21 @@ export class AuditProductsComponent {
     if(product.storageLocation == ''){
       product.storageLocation = this.storageLocation;
     }
-    product.itemName = this.itemName;
+    if(product.itemName == ''){
+      product.itemName = this.itemName;
+    }
+    if(product.shelfCapacity == ''){
+      product.shelfCapacity = this.shelfCapacity;
+    }
     product.flag = "true";
-    product.shelfCapacity = this.shelfCapacity;
-    product.itemType = this.itemType;
+    if(product.itemType = ''){
+      product.itemType = this.itemType;
+    }
     product.itemBarcode = this.itemBarcode;
     console.log(product);
     this.itemsService.updateProduct(product);
     console.log("sent product to service");
+    window.location.reload();
   }
 
   flagControl(){
@@ -56,6 +63,7 @@ export class AuditProductsComponent {
       console.log("Manually flagged item:" + this.itemName)
     }
     this.itemsService.updateProduct(this);
+    window.location.reload();
   }
 
   flagItem(item: AuditModel){

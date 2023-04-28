@@ -9,3 +9,7 @@
 .flag:hover{
     color: rgb(255, 98, 0);
 }
+
+.col{
+    font-weight: 700;
+}

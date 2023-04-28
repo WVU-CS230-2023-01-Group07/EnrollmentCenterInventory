@@ -30,8 +30,10 @@ import { UserService } from './Components/Common/auth.service';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { SignUpLayoutComponent } from './Layouts/sign-up-layout/sign-up-layout.component';
-
 import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layout/product-not-found-layout.component';
+import { SearchService } from './Layouts/search-items-layout/search.service';
+import { UpdateItemLayoutComponent } from './Layouts/update-item-layout/update-item-layout.component';
+import { UpdateItemComponent } from './Components/LayoutComponents/update-item/update-item.component';
 
 
 @NgModule({
@@ -49,6 +51,8 @@ import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layo
     AuditProductsComponent,
     ProductNotFoundLayoutComponent,
     SignUpLayoutComponent,
+    UpdateItemLayoutComponent,
+    UpdateItemComponent,
 
   ],
   imports: [

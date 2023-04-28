@@ -1,15 +1,15 @@
 <form class="container-fluid row mx-auto"
-    style="background-image: url('/assets/background-image.png'); height: 930px; width: 174dvh">
+    style="background-image: url('/assets/background-image.png'); height: 100%; width: 100%">
     <div class="col organize">
         <div class="header row">
-            <h1 class="display-3"><b>WVU Statler Outreach Center</b></h1>
+            <h1 class="display-3"><strong>WVU Statler Outreach Center</strong></h1>
             <h2 class="display-8"> Inventory Management System</h2>
         </div>
         <div class="outer row d-flex">
 
             <div class="organizeInner">
                 <div class="form-group mt-2 mb-3">
-                    <input type="text" placeholder="Username" #user>
+                    <input type="text" placeholder="E-Mail" #user>
                 </div>
                 <div class="form-group mb-3">
                     <input type="password" placeholder="Password" #pass>
@@ -17,7 +17,7 @@
 
                 <div class="inner">
                     <button id="sign-in" type="button" class="btn btn-warning btn-block" style="color:white" (click)="signIn(user, pass)">
-                        <b>Sign in</b>
+                        <strong>Sign in</strong>
                     </button>
                 </div>
             </div>

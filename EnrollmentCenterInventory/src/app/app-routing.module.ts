@@ -10,6 +10,7 @@ import { SignOutLayoutComponent } from './Layouts/sign-out-layout/sign-out-layou
 import { SignUpLayoutComponent } from './Layouts/sign-up-layout/sign-up-layout.component';
 import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layout/product-not-found-layout.component';
 import { AuthGuard } from './Components/Common/auth.guard';
+import { UpdateItemLayoutComponent } from './Layouts/update-item-layout/update-item-layout.component';
 
 const routes: Routes = [   
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
 {
   path: 'not-found',
   component: ProductNotFoundLayoutComponent, canActivate: [AuthGuard]
+},
+{
+  path: 'audit/update-item',
+  component: UpdateItemLayoutComponent
 }
 ];
 

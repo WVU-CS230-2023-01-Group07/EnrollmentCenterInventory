@@ -39,9 +39,9 @@ h1, h2{
 }
 
 .organize {
-    justify-content: center;
-    align-items: center;
-    margin-top:-450px;
+    position:absolute;
+    top:30%;
+    padding-left:20px;
 }
 
 .organizeInner {
