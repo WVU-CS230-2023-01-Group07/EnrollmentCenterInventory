@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AuditModel } from 'src/app/Layouts/audit-layout/audit.model';
 import { ItemsService } from 'src/app/Components/Common/items.service';
-import { AuditLayoutComponent } from 'src/app/Layouts/audit-layout/audit-layout.component';
 
 @Component({
   selector: 'app-audit-products',
@@ -46,7 +45,6 @@ export class AuditProductsComponent {
     console.log(product);
     this.itemsService.updateProduct(product);
     console.log("sent product to service");
-    window.location.reload();
   }
 
   flagControl(){
@@ -58,7 +56,6 @@ export class AuditProductsComponent {
       console.log("Manually flagged item:" + this.itemName)
     }
     this.itemsService.updateProduct(this);
-    window.location.reload();
   }
 
   flagItem(item: AuditModel){

@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
-<div class="box mx-auto" style="background-color: white; background-image: url('/assets/background-image.png'); width:174.5vh">
-    <div class="flex-container text-center" style="margin-top: 130px; width:170vh">
-        <div class="row" style="margin-bottom: 60px">
+<div class="box mx-auto" style="background-color: white; background-image: url('/assets/background-image.png'); width:100%">
+    <div class="flex-container text-center" style="margin-top: 150px">
+        <div class="row" style="margin-bottom: 60px; width:100%">
           <div class="col" style="font-size: 30px">
             <strong>Item <br> Name</strong>
           </div>
@@ -24,11 +24,11 @@
     </div>
     <div *ngFor="let item of items">
         <app-product-list itemName={{item.itemName}} shelfCapacity={{item.shelfCapacity}} itemQuantity={{item.itemQuantity}} storageLocation={{item.storageLocation}} itemType={{item.itemType}} itemBarcode={{item.itemBarcode}}></app-product-list>
-        <div class="flex-container" style="background-color: grey; height: 1px; width: 174.5vh; margin-bottom: 30px"></div>
+        <div class="flex-container" style="background-color: grey; height: 1px; width: 100%; margin-bottom: 30px"></div>
     </div>
     <div style="text-align: center">
-        <button class="btn btn-warning" style="border-radius: 12px; margin-bottom: 70px">
-            <a href="home" style="color: white; text-decoration: none"><strong>Back to Top</strong></a>
+        <button class="btn btn-warning" style="border-radius: 12px; margin-bottom: 70px;color: white; text-decoration: none" (click)="top()" id="topbtn" title="Go to Top">
+          <strong>Back to Top</strong>
         </button>
     </div>
 </div>

@@ -2,7 +2,7 @@
     <app-nav-bar></app-nav-bar>
 </div>
 <div class="container-fluid mx-auto"
-    style="background-color: white; background-image: url('/assets/background-image.png'); width: 174vh; height: 930px; margin-top: 90px">
+    style="background-color: white; background-image: url('/assets/background-image.png'); width: 100%; height: 930px; margin-top: 120px">
     <h1 style="text-align: center; font-size:45px; padding:30px; font-weight: 700;">Audit System</h1>
     <div class="d-flex justify-content-center">
         <div class="card" style="width:50%">
@@ -30,28 +30,28 @@
             <div class="container-fluid" style="padding:20px; font-size: 20px">
                 <div class="card">
                     <div class="row" style="text-align: center; padding: 20px;">
-                        <div class="col" style="font-weight: 700;">
+                        <div class="col">
                             <p>Barcode</p>
                         </div>
-                        <div class="col" style="font-weight: 700;">
+                        <div class="col">
                             <p>Item Name</p>
                         </div>
-                        <div class="col" style="font-weight: 700;">
+                        <div class="col">
                             <p>Quantity</p>
                         </div>
-                        <div class="col" style="font-weight: 700;">
+                        <div class="col">
                             <p>Actual Quantity</p>
                         </div>
-                        <div class="col" style="font-weight: 700;">
+                        <div class="col">
                             <p>Location</p>
                         </div>
-                        <div class="col" style="font-weight: 700;">
+                        <div class="col">
                             <p>Actual Location</p>
                         </div>
-                        <div class="col" style="font-weight: 700;">
+                        <div class="col">
                             <p>Flag</p>
                         </div>
-                        <div class="col" style="font-weight: 700;">
+                        <div class="col">
                             <p>Submit</p>
                         </div>
                         <div *ngIf="this.showingFlagged==false; else elseBlock2">
