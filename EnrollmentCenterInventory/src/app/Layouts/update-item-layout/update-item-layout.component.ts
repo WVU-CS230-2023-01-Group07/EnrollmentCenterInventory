@@ -5,7 +5,6 @@ import { DisplayService } from 'src/app/Components/LayoutComponents/product-list
 import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove.service';
 import { ItemModel } from 'src/app/Components/LayoutComponents/product-list/item.model';
 import { AuditModel } from '../audit-layout/audit.model';
-import { SearchService } from '../search-items-layout/search.service';
 
 @Component({
   selector: 'app-update-item-layout',
