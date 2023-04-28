@@ -10,27 +10,28 @@ import { SignOutLayoutComponent } from './Layouts/sign-out-layout/sign-out-layou
 import { SignUpLayoutComponent } from './Layouts/sign-up-layout/sign-up-layout.component';
 import { FoundLayoutComponent } from './Layouts/found-layout/found-layout.component';
 import { ProductNotFoundLayoutComponent } from './Layouts/product-not-found-layout/product-not-found-layout.component';
+import { AuthGuard } from './Components/Common/auth.guard';
 
 const routes: Routes = [   
   {
   path: 'home',
-  component: HomeLayoutComponent
+  component: HomeLayoutComponent, canActivate: [AuthGuard]
  },
  {
   path: 'audit',
- component: AuditLayoutComponent
+ component: AuditLayoutComponent, canActivate: [AuthGuard]
 },
 {
   path: 'add-remove',
-  component: AddRemoveLayoutComponent
+  component: AddRemoveLayoutComponent, canActivate: [AuthGuard]
 },
 {
   path: 'report',
-  component: ReportLayoutComponent
+  component: ReportLayoutComponent, canActivate: [AuthGuard]
 },
 {
   path:'search',
-  component: SearchItemsLayoutComponent
+  component: SearchItemsLayoutComponent, canActivate: [AuthGuard]
 },
 {
   path: '',
@@ -38,19 +39,19 @@ const routes: Routes = [
 },
 {
   path: 'sign-out',
-  component: SignOutLayoutComponent
+  component: SignOutLayoutComponent, canActivate: [AuthGuard]
 },
 {
   path: 'sign-up',
-  component: SignUpLayoutComponent
+  component: SignUpLayoutComponent, canActivate: [AuthGuard]
 },
 {
   path: 'found',
-  component: FoundLayoutComponent
+  component: FoundLayoutComponent, canActivate: [AuthGuard]
 },
 {
   path: 'not-found',
-  component: ProductNotFoundLayoutComponent
+  component: ProductNotFoundLayoutComponent, canActivate: [AuthGuard]
 }
 ];
 

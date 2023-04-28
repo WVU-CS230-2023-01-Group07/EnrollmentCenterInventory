@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/Components/Common/auth.service';
 
 @Component({
   selector: 'app-sign-out-layout',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class SignOutLayoutComponent {
 
+  constructor(private authentication: UserService, private router: Router ) {}
+  
+  public signOut(){
+    this.authentication.signOut();
+    this.router.navigate(['home']);
+  }
 }
