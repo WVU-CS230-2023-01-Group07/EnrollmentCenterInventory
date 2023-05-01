@@ -58,13 +58,21 @@ export class ReportLayoutComponent {
 
       let csvContent = this.arrayToCSV(data);
   
-      //creates a download
-      let hiddenElement = document.createElement('a');
-      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
-      hiddenElement.target = '_blank';
-      hiddenElement.download = name + '.csv';
-      hiddenElement.click();
-      
+      if(csvContent == ''){
+        
+        //inform the user that there was nothing found in the database
+        alert("No items were found in the database. Please ensure that at least one item has been added and try again.");
+
+      }else{
+
+        //creates a download
+        let hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = name + '.csv';
+        hiddenElement.click();
+
+      }
     }
 
     /**
