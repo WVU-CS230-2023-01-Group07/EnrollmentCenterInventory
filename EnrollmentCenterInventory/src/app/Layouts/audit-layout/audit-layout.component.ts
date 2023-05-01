@@ -7,6 +7,10 @@ import { AuditModel } from './audit.model';
   templateUrl: './audit-layout.component.html',
   styleUrls: ['./audit-layout.component.css']
 })
+/**
+ * @author Ray King
+ * @classdesc - Provides methods for auditing the items in the database
+ */
 export class AuditLayoutComponent {
   items: AuditModel[] = [];
   flaggedItems: AuditModel[] = [];
@@ -26,6 +30,9 @@ export class AuditLayoutComponent {
     this.items = this.itemsService.getItems();
   }
   
+  /**
+   * @summary Toggles the state of a flag
+   */
   showFlagged(){
     this.flagItems();
     if(this.showingFlagged)
@@ -34,6 +41,11 @@ export class AuditLayoutComponent {
     this.showingFlagged = true;
   }
 
+  /**
+   * @param item Item in the database
+   * @param location User given location to modify in database
+   * @summary Modifies location of item in database
+   */
   editLocation(item: AuditModel, location: string){
     if (location == null){
       console.log("error: location invalid");
@@ -41,6 +53,11 @@ export class AuditLayoutComponent {
     item.storageLocation = location;
   }
 
+    /**
+   * @param item Item in the database
+   * @param location User given quantity to modify in database
+   * @summary Modifies location of item in database
+   */
   editQuantity(item: AuditModel, quantity: string){
     if (quantity == null){
       console.log("error: quantity invalid");
@@ -48,16 +65,30 @@ export class AuditLayoutComponent {
     item.itemQuantity = quantity;
   }
 
+  /**
+   * @param item Item in the database
+   * @summary flags item in database
+   */
   flagItem(item: AuditModel){
     item.flag = "true";
     this.flagItems();
   }
 
+    /**
+   * @param item Item in the database
+   * @summary unflags item in database
+   */
   unflagItem(item: AuditModel){
     item.flag = "false";
     this.flagItems();
   }
 
+  /**
+   * 
+   * @param item Item in the database
+   * @returns boolean of flag
+   * @summary Checks if an item is flagged
+   */
   isFlagged(item: AuditModel){
     if (item.flag == "true"){
       return true;
@@ -65,6 +96,9 @@ export class AuditLayoutComponent {
       return false;
   }
 
+  /**
+   * @summary Stores items that are flagged in an array
+   */
   flagItems(){
     this.flaggedItems.splice(0);
     this.items.forEach(element => {
@@ -74,12 +108,19 @@ export class AuditLayoutComponent {
     });
   }
 
+  /**
+   * @summary Generates a CSV of audited items
+   */
   generate(): void{
     this.saveDataInCSV(this.filename, this.items)
   }
 
 
-  //Turns an array into a string and creates a download for the user
+  /**
+   * @param name Name of CSV
+   * @param data Array of items
+   * @summary Turns an array into a string and creates a download for the user
+   */
   public saveDataInCSV(name: string, data: Array<any>): void {
 
     let csvContent = this.generateCSV(data);
@@ -93,7 +134,12 @@ export class AuditLayoutComponent {
   }
 
   
-  //converts a array to a CSV file 
+  /**
+   * 
+   * @param data Array of items
+   * @returns CSV content
+   * @summary Converts a array to a CSV file 
+   */
   public generateCSV(data: Array<any>): string {
 
     // guard condition
