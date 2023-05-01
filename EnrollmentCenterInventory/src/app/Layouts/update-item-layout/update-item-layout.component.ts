@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import { throwError } from 'rxjs';
 import { ItemsService } from 'src/app/Components/Common/items.service';
-import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service';
-import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove.service';
-import { ItemModel } from 'src/app/Components/LayoutComponents/product-list/item.model';
 import { AuditModel } from '../audit-layout/audit.model';
 
 @Component({
@@ -11,6 +7,10 @@ import { AuditModel } from '../audit-layout/audit.model';
   templateUrl: './update-item-layout.component.html',
   styleUrls: ['./update-item-layout.component.css']
 })
+/**
+ * @author Ray King
+ * @classdesc Updates items in the inventory
+ */
 export class UpdateItemLayoutComponent {
   items: AuditModel[] = [];
   item: AuditModel[] = [];
@@ -24,6 +24,10 @@ export class UpdateItemLayoutComponent {
     this.items = this.ps.getItems();
   }
 
+  /**
+   * @param product item in the inventory
+   * @summary finds item in the inventory based on barcode
+   */
   findItem(product:AuditModel){
     console.log("Searching for: " + product.itemBarcode);
     for(let item of this.items){

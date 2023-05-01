@@ -7,6 +7,11 @@ import { AuditModel } from "src/app/Layouts/audit-layout/audit.model";
 @Injectable(
     {providedIn: 'root'}
 )
+
+/**
+ * @author Ray King
+ * @classdesc Service for receiving and updating items for Auditing
+ */
 export class ItemsService{
     private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
     private productsEndPoint = "Products.json";
@@ -18,6 +23,10 @@ export class ItemsService{
     }
 
 
+    /**
+     * @returns list of products in database
+     * @summary retrieves list of items from database and places in array
+     */
     getItems(){
         this.items.subscribe((data: AuditModel []) => {
             console.log("Data received");
@@ -30,7 +39,10 @@ export class ItemsService{
     }
 
     
-
+    /**
+     * @param product Product from database
+     * @summary Updates products' attributes in database
+     */
     updateProduct(product:AuditModel){
         const db = getDatabase();
         set(ref(db, `Products/${product.itemBarcode}`), {
