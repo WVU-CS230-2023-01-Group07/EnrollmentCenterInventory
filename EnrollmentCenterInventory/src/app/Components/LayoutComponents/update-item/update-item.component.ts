@@ -63,7 +63,6 @@ export class UpdateItemComponent {
       console.log("Manually flagged item:" + this.itemName)
     }
     this.itemsService.updateProduct(this);
-    window.location.reload();
   }
 
   flagItem(item: AuditModel){

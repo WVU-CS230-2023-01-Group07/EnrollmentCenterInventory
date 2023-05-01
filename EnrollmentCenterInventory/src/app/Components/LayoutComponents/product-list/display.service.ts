@@ -11,26 +11,32 @@ import { ItemModel } from 'src/app/Components/LayoutComponents/product-list/item
 //class used in Home Layout
 export class DisplayService{
     private baseUrl:string = "https://wvu-ec-database-default-rtdb.firebaseio.com/";
-    //items located on database at endpoint "Products"
     private ProductsEndPoint:string = "Products.json";
     products: ItemModel[] = [];
-    items: Observable<ItemModel []>
-    //Http Client currently used, will be changing to angular firebase connection
-    constructor(private http:HttpClient, private db: AngularFireDatabase) {
+    items: Observable<ItemModel []>;
+
+    /*
+        Constructor uses AngularFireDatabase to grab all items from firebase under the parent folder 'Products'
+        Stores the list of class ItemModel in an Observable of class ItemModel Array
+            @param db: AngularFireDatabase
+            @property items: Observable<ItemModel []>
+    */
+    constructor(private db: AngularFireDatabase) {
         this.items = this.db.list<ItemModel>('Products').valueChanges();
     }
 
-    //returns entire array of items in the database
+    /*
+    returns entire array of items in the database
+        @param data : ItemModel []
+    */
     getProduct() {
         this.items.subscribe((data: ItemModel []) => {
             console.log("Data received");
             for(let item of data){
-                //console.log(item);
                 this.products.push(item);
             }
         })
         return this.products;
-        // return this.db.list<ItemModel>(this.baseUrl + this.ProductsEndPoint);
     }
 
     getProducts() {
