@@ -8,17 +8,18 @@
       </div>
       <div class="card-body">
         Search By:
-        <select class="form-select">
-          <option selected>Name</option>
-          <option value="1">Category</option>
-          <option value="2">Product ID</option>
+        <select class="form-select" (change)="searchType(searchField.value)" #searchField>
+          <option value="Name" selected>Name</option>
+          <option value="Type">Type</option>
+          <option value="Barcode">Barcode</option>
+          <option value="Location">Location</option>
         </select>
-        <form>
-          <label class="form-label">Input your search below:</label>
-          <input id="searchID" type="search" class="form-control">
+        <form id="searchForm">
+          <label for="searchID" class="form-label">Input your search below:</label>
+          <input id="searchID" type="search" class="form-control" [formControl]="searchID">
         </form>
         <div class="d-grid">
-          <button (click)="storeInput()" class="btn btn-warning"><strong>Search</strong></button>
+          <button (click)="storeResults()" class="btn btn-warning"><strong>Search</strong></button>
         </div>
       </div>
     </div>
@@ -60,7 +61,7 @@
     </div>
     <div style="text-align: center">
       <button class="btn btn-warning" style="border-radius: 12px; margin-bottom: 70px">
-        <a href="home" style="color: white; text-decoration: none"><strong>Back to Top</strong></a>
+        <a href="search" style="color: white; text-decoration: none"><strong>Back to Search</strong></a>
       </button>
     </div>
   </div>
