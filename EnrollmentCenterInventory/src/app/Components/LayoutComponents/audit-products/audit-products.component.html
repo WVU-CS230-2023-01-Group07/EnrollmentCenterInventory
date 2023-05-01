@@ -10,16 +10,16 @@
             <p>{{itemQuantity}}</p>
         </div>
         <div class="col d-flex justify-content-center input-group">
-            <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="itemQuantity">
+            <input class="form-control" type="number" placeholder="0" style="width:34%" ngModel name="itemQuantity" pattern='([1-9]+[0-9]*)'>
         </div>
         <div class="col">
             <p>{{storageLocation}}</p>
         </div>
         <div class="col input-group">
-            <input class="form-control" type="text" placeholder="location" ngModel name="storageLocation">
+            <input class="form-control" type="text" placeholder="location" ngModel name="storageLocation" pattern="([a-zA-z0-9-]+)">
         </div>
         <div class="col">
-            <form #postForm="ngForm" (ngSubmit)="flagControl()">
+            <form #postForm2="ngForm" (ngSubmit)="flagControl()">
                 <button type="submit" class="btn" style="border-style:none;">
                     <div *ngIf="flag== 'false'; else elseBlock">
                         <em class="bi bi-flag-fill" style="color:rgb(27, 27, 27);"></em>
@@ -31,6 +31,6 @@
             </form>
         </div>
         <div class="col">
-            <button type="submit" class="btn btn-warning" style="color:white" ><strong>Submit</strong></button>
+            <button type="submit" class="btn btn-warning" style="color:white" [disabled]="!postForm.valid"><strong>Submit</strong></button>
         </div>
     </div>

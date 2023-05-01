@@ -1,4 +1,9 @@
-//Interacts with Add/Remove Layout to add or remove products from firebase database
+/***************************************************
+ Interacts with Add/Remove Layout to add or remove products from firebase database
+  Implements boolean variables that communicate with html page dropdown box
+    Boolean Variables used in ngIf blocks for html page to show neccessary 
+    information according to add/remove selection
+ **************************************************/
 
 import { Component, OnInit } from '@angular/core';
 import { ItemModel } from "src/app/Components/LayoutComponents/product-list/item.model"
@@ -96,9 +101,11 @@ export class AddRemoveLayoutComponent implements OnInit {
   }
 
   /*
-  @func alert
   Removes items from database upon user interaction through add/remove layout
   Finds correct item to remove, sends barcode to add-remove service method removeProduct()
+    @func alert
+    @const barcode: FormControl
+    @var flag: boolean
   */
   removeItem() {
     const barcode = this.remove.value.itemBarcode;
@@ -116,9 +123,9 @@ export class AddRemoveLayoutComponent implements OnInit {
 
     }
     if (flag == false) {
-      alert("ERROR: Item not found");
+      alert("ERROR: Item not found");//ERROR CATCH
     } else {
-      alert("SUCCESS: Item removed");
+      alert("SUCCESS: Item removed");//SUCCESS
     }
     this.remove.reset();
   }
