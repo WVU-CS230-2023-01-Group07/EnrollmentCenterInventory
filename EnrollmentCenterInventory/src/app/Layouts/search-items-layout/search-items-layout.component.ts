@@ -12,6 +12,11 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './search-items-layout.component.html',
   styleUrls: ['./search-items-layout.component.css']
 })
+
+/**
+ * @author Jacob Comer
+ * @classdesc Searches through database and returns array of results.
+ */
 export class SearchItemsLayoutComponent {
   // initalize search type to default to name
   searchBy: string = "Name";
@@ -25,6 +30,10 @@ export class SearchItemsLayoutComponent {
   // boolean representing if items were found from search
   found: boolean = false;
 
+  /**
+   * @param ps Product service instance
+   * @param psGet Display service instance
+   */
   constructor(private ps: ProductService, private psGet: DisplayService) {
     this.storeResults();
   }
@@ -35,8 +44,10 @@ export class SearchItemsLayoutComponent {
   }
 
 
-  // Function called by html upon button click
-  // Stores search results in results array
+
+  /**
+   * @summary Waits for user input, verifies input when received.  Input value is extracted and search function called.
+   */
   async storeResults() {
     var input = document.getElementById("searchID") as HTMLInputElement;
 
@@ -55,18 +66,20 @@ export class SearchItemsLayoutComponent {
         if (product === null || product.length === 0) {
           console.log("item not found");
           alert("Item not found in inventory");
-          return null;
         } else {
           console.log(product);
           this.found = true;
-          return product;
         }
       });
     }
   }
 
-  // Searches database for product with value that corresponds with user input
-  search(itemProperty: string): Promise<ItemModel[] | null> {
+  /**
+   * @param userInput - Search input from user
+   * @returns ItemModel[] - array of search results that match user input 
+   * @summary Searches database for product with value that corresponds with user input, storing results in array.
+   */
+  search(userInput: string): Promise<ItemModel[] | null> {
     return new Promise((resolve) => {
       var items = this.psGet.getProducts();
       items.subscribe((data: ItemModel[]) => {
@@ -74,7 +87,7 @@ export class SearchItemsLayoutComponent {
         // Search by name
         if (this.searchBy == "Name") {
           for (let item of data) {
-            if (item.itemName.toUpperCase() == itemProperty.toUpperCase()) {
+            if (item.itemName.toUpperCase() == userInput.toUpperCase()) {
               this.resultsArray.push(item);
             }
           }
@@ -83,7 +96,7 @@ export class SearchItemsLayoutComponent {
         // Search by type
         if (this.searchBy == "Type") {
           for (let item of data) {
-            if (item.itemType.toUpperCase() == itemProperty.toUpperCase()) {
+            if (item.itemType.toUpperCase() == userInput.toUpperCase()) {
               this.resultsArray.push(item);
             }
           }
@@ -92,7 +105,7 @@ export class SearchItemsLayoutComponent {
         // Search by barcode
         if (this.searchBy == "Barcode") {
           for (let item of data) {
-            if (item.itemBarcode.toUpperCase() == itemProperty.toUpperCase()) {
+            if (item.itemBarcode.toUpperCase() == userInput.toUpperCase()) {
               this.resultsArray.push(item);
             }
           }
@@ -101,7 +114,7 @@ export class SearchItemsLayoutComponent {
         // Search by location
         if (this.searchBy == "Location") {
           for (let item of data) {
-            if (item.storageLocation.toUpperCase() == itemProperty.toUpperCase()) {
+            if (item.storageLocation.toUpperCase() == userInput.toUpperCase()) {
               this.resultsArray.push(item);
             }
           }
