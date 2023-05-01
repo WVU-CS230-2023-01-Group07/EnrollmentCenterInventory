@@ -23,7 +23,7 @@ export class ReportLayoutComponent {
       this.items = this.DisplaysService.getProduct();
     }
 
-    //what the buttons call to toggle of different properties are included
+    //what the buttons call to toggle if different properties are included
     toggleName(): void{ this.itemName = !this.itemName; }
     toggleCapacity(): void{ this.shelfCapacity = !this.shelfCapacity; }
     toggleQuantity(): void{ this.itemQuantity = !this.itemQuantity; }
@@ -31,16 +31,32 @@ export class ReportLayoutComponent {
     toggleLocation(): void{ this.storageLocation = !this.storageLocation; }
 
 
-    //starts generating the report
+    /**
+    * Generates a report that will be automatically downloaded
+    */
     generate(): void{
-      this.saveDataInCSV(this.filename, this.items)
+
+      try {
+
+        this.downloadCSV(this.filename, this.items)
+
+      } catch (error) {
+
+        //inform the user that something went wrong
+        alert("There was an issue with generating and downloading your report. Please try again.");
+
+      }
     }
 
 
-    //Turns an array into a string and creates a download for the user
-    public saveDataInCSV(name: string, data: Array<any>): void {
+    /**
+    * Turns an array into a string and creates a download for the user
+    * @param name - name of the file that will be downloaded
+    * @param data - the array that will be downloaded as a CSV
+    */
+    private downloadCSV(name: string, data: Array<any>): void {
 
-      let csvContent = this.generateCSV(data);
+      let csvContent = this.arrayToCSV(data);
   
       //creates a download
       let hiddenElement = document.createElement('a');
@@ -48,13 +64,16 @@ export class ReportLayoutComponent {
       hiddenElement.target = '_blank';
       hiddenElement.download = name + '.csv';
       hiddenElement.click();
+      
     }
 
-    
-    //converts a array to a CSV file 
-    public generateCSV(data: Array<any>): string {
+    /**
+    * Converts a array to a CSV file while skipping over any toggled off elements
+    * @param data - array that will be converted
+    */
+    private arrayToCSV(data: Array<any>): string {
 
-      // guard condition
+      // guard condition for an empty array
       if (data.length == 0) {
         return '';
       }
@@ -107,8 +126,11 @@ export class ReportLayoutComponent {
     }
 
 
-    //used to tell if the user wants an attribute included in the file
-    public includeAttribute(value: string): boolean{
+    /**
+    * Used to tell if the user wants an attribute included in the file
+    * @param value - string of the attribute thats being checked
+    */
+    private includeAttribute(value: string): boolean{
 
       if(value == "flag") return false;
 
