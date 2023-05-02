@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ItemsService } from 'src/app/Components/Common/items.service';
 import { AuditModel } from './audit.model';
 
@@ -16,12 +16,7 @@ export class AuditLayoutComponent {
   flaggedItems: AuditModel[] = [];
   showingFlagged: boolean = false;
   filename = "Audit"
-  itemName: boolean = true;
-  shelfCapacity: boolean = true;
-  itemQuantity: boolean = true;
-  itemType: boolean = true;
-  storageLocation: boolean = true;
-
+  
   constructor(private itemsService:ItemsService){
     
   }

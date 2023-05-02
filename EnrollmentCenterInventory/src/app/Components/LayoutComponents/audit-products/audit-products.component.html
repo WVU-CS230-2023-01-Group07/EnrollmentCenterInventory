@@ -10,13 +10,13 @@
             <p>{{itemQuantity}}</p>
         </div>
         <div class="col d-flex justify-content-center input-group">
-            <input class="form-control" type="number" placeholder="0" style="width:34%" ngModel name="itemQuantity" pattern='([1-9]+[0-9]*)'>
+            <input class="form-control" type="number" placeholder="0" style="width:34%" ngModel name="itemQuantity" pattern="([1-9]+[0-9]*)">
         </div>
         <div class="col">
             <p>{{storageLocation}}</p>
         </div>
         <div class="col input-group">
-            <input class="form-control" type="text" placeholder="location" ngModel name="storageLocation" pattern="([a-zA-z0-9-]+)">
+            <input class="form-control" type="text" placeholder="location" ngModel name="storageLocation" maxlength="6">
         </div>
         <div class="col">
             <form #postForm2="ngForm" (ngSubmit)="flagControl()">
