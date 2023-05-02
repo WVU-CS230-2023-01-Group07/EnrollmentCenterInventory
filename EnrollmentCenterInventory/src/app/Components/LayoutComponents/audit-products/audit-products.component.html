@@ -16,7 +16,7 @@
             <p>{{storageLocation}}</p>
         </div>
         <div class="col input-group">
-            <input class="form-control" type="text" placeholder="location" ngModel name="storageLocation" maxlength="6">
+            <input class="form-control" type="text" placeholder="location" ngModel name="storageLocation" maxlength="7" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
         </div>
         <div class="col">
             <form #postForm2="ngForm" (ngSubmit)="flagControl()">

@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import { throwError } from 'rxjs';
 import { ItemsService } from 'src/app/Components/Common/items.service';
-import { DisplayService } from 'src/app/Components/LayoutComponents/product-list/display.service';
-import { ProductService } from 'src/app/Components/LayoutComponents/product-list/item.add-remove.service';
-import { ItemModel } from 'src/app/Components/LayoutComponents/product-list/item.model';
 import { AuditModel } from '../audit-layout/audit.model';
 
 @Component({
