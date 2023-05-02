@@ -9,22 +9,20 @@
             <h2 style="text-align: center; padding-top:30px; font-size:40px">
                 Audit Controls</h2>
             <div class="d-flex justify-content-between" style="padding:20px; padding-left:50px; padding-right:50px">
-                <form #postForm="ngForm" (ngSubmit)="showFlagged()">
-                    <div *ngIf="this.showingFlagged==false; else elseBlock">
-                        <button type="submit" class="btn controls" style="color:white"><strong>View Flagged Items</strong></button>
-                    </div>
-                    <ng-template #elseBlock>
-                        <button type="submit" class="btn controls" style="color:white"><strong>View All Items</strong></button>
-                    </ng-template>
-                </form>
-                <form>
-                    <button type="button" class="btn controls" style="color:white">
-                        <a href="audit/update-item" style="color:white; text-decoration: none;"><b>Update Specific Item</b></a>
-                    </button>
-                </form>
-                <form #postForm="ngForm" (ngSubmit)="generate()">
-                    <button type="submit" class="btn controls" style="color:white"><strong>Get Audit Report</strong></button>
-                </form>
+                <div *ngIf="this.showingFlagged==false; else elseBlock">
+                    <button type="submit" class="btn controls" style="color:white; font-size: 20px;"
+                        (click)="showFlagged()"><strong>View Flagged Items</strong></button>
+                </div>
+                <ng-template #elseBlock>
+                    <button type="submit" class="btn controls" style="color:white" (click)="showFlagged()"><strong>View
+                            All Items</strong></button>
+                </ng-template>
+                <button type="button" class="btn controls" style="color:white; font-size: 20px">
+                    <a href="audit/update-item" style="color:white; text-decoration: none;"><b>Update Specific
+                            Item</b></a>
+                </button>
+                <button type="submit" class="btn controls" style="color:white; font-size: 20px" (click)="generate()"><strong>Get Audit
+                        Report</strong></button>
             </div>
         </div>
     </div>

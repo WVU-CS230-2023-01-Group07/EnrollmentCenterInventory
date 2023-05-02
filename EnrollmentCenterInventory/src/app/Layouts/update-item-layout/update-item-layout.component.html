@@ -11,7 +11,7 @@
             <div class="justify-content-center" style="padding:20px; padding-left:50px; padding-right:50px">
                 <form #postForm="ngForm" (ngSubmit)="findItem(postForm.value)">
                     <label class="form-label">Enter item barcode below:</label>
-                    <input id="searchID" type="search" class="form-control" ngModel name="itemBarcode">
+                    <input id="searchID" type="search" class="form-control mb-2" ngModel name="itemBarcode">
                     <div class="d-grid">
                         <button type="submit" class="btn controls" style="color:white"><b>Search</b></button>
                     </div>

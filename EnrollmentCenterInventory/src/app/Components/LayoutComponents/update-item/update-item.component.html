@@ -42,7 +42,7 @@
                 <p>{{storageLocation}}</p>
             </div>
             <div class="col input-group">
-                <input class="form-control" type="text" placeholder="Location" ngModel name="storageLocation" maxlength="6">
+                <input class="form-control" type="text" placeholder="Location" ngModel name="storageLocation" maxlength="7" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@
                 <p>{{itemType}}</p>
             </div>
             <div class="col d-flex justify-content-center input-group">
-                <input class="form-control" type="text" placeholder="Type" style="width:34%" ngModel name="itemType" maxlength="12">
+                <input class="form-control" type="text" placeholder="Type" style="width:34%" ngModel name="itemType" maxlength="12" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
             </div>
         </div>
     </div>
