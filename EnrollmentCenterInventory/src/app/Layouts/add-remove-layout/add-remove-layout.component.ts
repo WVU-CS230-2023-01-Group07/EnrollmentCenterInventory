@@ -47,7 +47,7 @@ export class AddRemoveLayoutComponent implements OnInit {
     itemType: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')]),
     itemQuantity: new FormControl(undefined, [Validators.required, Validators.pattern('([1-9]+[0-9]*)')]),
     shelfCapacity: new FormControl(undefined, [Validators.required, Validators.pattern('([1-9]+[0-9]*)')]),
-    storageLocation: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)')])
+    storageLocation: new FormControl('', [Validators.required, Validators.pattern('([a-zA-z0-9-]+)'), Validators.maxLength(6)])
   });
 
   /*

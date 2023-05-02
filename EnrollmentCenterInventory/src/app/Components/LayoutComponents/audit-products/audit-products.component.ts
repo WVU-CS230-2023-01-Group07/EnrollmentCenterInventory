@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AuditModel } from 'src/app/Layouts/audit-layout/audit.model';
 import { ItemsService } from 'src/app/Components/Common/items.service';
+import { PatternValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-audit-products',
@@ -16,58 +17,68 @@ export class AuditProductsComponent {
   @Input() itemType: string;
   @Input() itemBarcode: string;
 
-  constructor(private itemsService:ItemsService){
-    this.itemName ="No Item Name Found";
+  constructor(private itemsService: ItemsService) {
+    this.itemName = "No Item Name Found";
     this.itemQuantity = "No Quantity Found";
-    this.storageLocation ="No Storage Location Found";
+    this.storageLocation = "No Storage Location Found";
     this.flag = "false";
-    this.shelfCapacity = "No capacity found";
+    this.shelfCapacity = "No Capacity Found";
     this.itemType = "No type found";
     this.itemBarcode = "No Barcode found";
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
 
   }
 
-  submitChanges(product:AuditModel){
-    if(product.itemQuantity == ''){
+  submitChanges(product: AuditModel) {
+    const pattern = new PatternValidator;
+    console.log("Is it Validated? " + pattern.enabled(product.itemQuantity));
+    if (product.itemQuantity == '') {
       product.itemQuantity = this.itemQuantity;
     }
-    if(product.storageLocation == ''){
+    if (product.storageLocation == '') {
       product.storageLocation = this.storageLocation;
     }
-    product.itemName = this.itemName;
-    product.flag = "true";
-    product.shelfCapacity = this.shelfCapacity;
-    product.itemType = this.itemType;
-    product.itemBarcode = this.itemBarcode;
-    console.log(product);
-    this.itemsService.updateProduct(product);
-    console.log("sent product to service");
+    if (!pattern.enabled(product.itemQuantity)) {
+      alert("Item Quantity Must be Composed of Only Numbers");
+    }
+    else {
+      if (product.itemQuantity > this.shelfCapacity) {
+        alert("Quantity Must Not Exceed Capacity");
+      }
+      else {
+        product.itemName = this.itemName;
+        product.flag = "true";
+        product.shelfCapacity = this.shelfCapacity;
+        product.itemType = this.itemType;
+        product.itemBarcode = this.itemBarcode;
+        this.itemsService.updateProduct(product);
+      }
+    }
   }
 
-  flagControl(){
-    if(this.isFlagged(this)){
+  flagControl() {
+    if (this.isFlagged(this)) {
       this.unflagItem(this);
       console.log("Manually unflagged item:" + this.itemName)
-    } else{ 
+    } else {
       this.flagItem(this);
       console.log("Manually flagged item:" + this.itemName)
     }
     this.itemsService.updateProduct(this);
   }
 
-  flagItem(item: AuditModel){
+  flagItem(item: AuditModel) {
     item.flag = "true";
   }
 
-  unflagItem(item: AuditModel){
+  unflagItem(item: AuditModel) {
     item.flag = "false";
   }
 
-  isFlagged(item: AuditModel){
-    if (item.flag == "true"){
+  isFlagged(item: AuditModel) {
+    if (item.flag == "true") {
       return true;
     } else
       return false;

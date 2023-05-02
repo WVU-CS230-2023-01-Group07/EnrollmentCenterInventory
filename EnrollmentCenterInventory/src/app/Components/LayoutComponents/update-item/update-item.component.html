@@ -8,15 +8,12 @@
     <div class="flex-container p-1"
         style="border-bottom: 1px; border-style:solid; border-left: 0; border-right: 0; border-top: 0;">
         <div class="row">
-            <div class="col">
+            <div class="col-4">
                 <b>Item Name</b>
             </div>
-            <div class="col">
+            <div class="col-4">
                 <p>{{itemName}}</p>
             </div>
-            <!-- <div class="col d-flex justify-content-center input-group">
-                <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="itemName">
-            </div> -->
         </div>
     </div>
 
@@ -30,7 +27,7 @@
                 <p>{{itemQuantity}}</p>
             </div>
             <div class="col d-flex justify-content-center input-group">
-                <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="itemQuantity">
+                <input class="form-control" type="number" placeholder="0" style="width:34%" ngModel name="itemQuantity" pattern="([1-9]+[0-9]*)">
             </div>
         </div>
     </div>
@@ -45,7 +42,7 @@
                 <p>{{storageLocation}}</p>
             </div>
             <div class="col input-group">
-                <input class="form-control" type="text" placeholder="location" ngModel name="storageLocation">
+                <input class="form-control" type="text" placeholder="Location" ngModel name="storageLocation" maxlength="6">
             </div>
         </div>
     </div>
@@ -58,9 +55,9 @@
             <div class="col">
                 <p>{{shelfCapacity}}</p>
             </div>
-            <!-- <div class="col d-flex justify-content-center input-group">
-                <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="shelfCapacity">
-            </div> -->
+            <div class="col d-flex justify-content-center input-group">
+                <input class="form-control" type="number" placeholder="0" style="width:34%" ngModel name="shelfCapacity" pattern="([1-9]+[0-9]*)">
+            </div>
         </div>
     </div>
     <div class="flex-container p-1"
@@ -70,11 +67,11 @@
                 <b>Item Type</b>
             </div>
             <div class="col">
-                <p>{{shelfCapacity}}</p>
+                <p>{{itemType}}</p>
             </div>
-            <!-- <div class="col d-flex justify-content-center input-group">
-                <input class="form-control" type="text" placeholder="0" style="width:34%" ngModel name="itemType">
-            </div> -->
+            <div class="col d-flex justify-content-center input-group">
+                <input class="form-control" type="text" placeholder="Type" style="width:34%" ngModel name="itemType" maxlength="12">
+            </div>
         </div>
     </div>
     <div class="flex-container p-1"
