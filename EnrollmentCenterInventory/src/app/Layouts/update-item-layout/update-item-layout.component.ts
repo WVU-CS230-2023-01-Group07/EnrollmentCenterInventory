@@ -37,5 +37,8 @@ export class UpdateItemLayoutComponent {
         console.log(item);
       }
     }
+    if(this.foundItem != true){
+      alert("Item Was Not Found");
+    }
   }
 }
