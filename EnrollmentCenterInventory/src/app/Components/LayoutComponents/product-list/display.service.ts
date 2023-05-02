@@ -31,6 +31,7 @@ export class DisplayService{
     getProduct() {
         this.items.subscribe((data: ItemModel []) => {
             console.log("Data received");
+            this.products.splice(0);
             for(let item of data){
                 this.products.push(item);
             }
