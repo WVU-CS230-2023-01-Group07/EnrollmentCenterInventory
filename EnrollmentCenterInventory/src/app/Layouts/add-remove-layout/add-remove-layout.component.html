@@ -66,9 +66,9 @@
                     <div class="d-flex">
                         ADDING<br>
                         Description: Sets new item into Inventory <br>
-                        1) All Fields except PRODUCT LINK must be entered <br>
+                        1) All Fields must be entered <br>
                         2) BARCODE: >=6 Characters, UNIQUE TO ALL ITEMS<br>
-                        3) ITEM NAME: <=20 Characters, Use "-" instead of space<br>
+                        3) ITEM NAME: <=20 Characters, Use "-" instead of space, NO "_"<br>
                         4) CAPACITY >= QUANTITY<br>
                         5) ILLEGAL CHARACTERS: <br>SPACE BRACKET , ! @ # $ % ^ & * ( ) + = ? / \ | ` ' " ~ ; : > <
                      </div>
@@ -98,8 +98,6 @@
                                 <div class="d-flex">
                                     <p id="right">Barcode: </p>
                                     <div id="input">
-                                        <datalist id="suggestions5">
-                                        </datalist>
                                         <input autoComplete="on" list="suggestions5" id="itemBarcode"
                                             formControlName="itemBarcode" />
                                     </div>
@@ -107,8 +105,6 @@
                                 <div class="d-flex">
                                     <p id="right">Item Name: </p>
                                     <div id="input">
-                                        <datalist id="suggestions2">
-                                        </datalist>
                                         <input autoComplete="on" list="suggestions2" id="itemName"
                                             formControlName="itemName" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()"/>
                                     </div>

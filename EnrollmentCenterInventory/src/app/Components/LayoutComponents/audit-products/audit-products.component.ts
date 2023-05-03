@@ -45,7 +45,7 @@ export class AuditProductsComponent {
     }
     else {
       if (product.itemQuantity > this.shelfCapacity) {
-        alert("Quantity Must Not Exceed Capacity");
+        alert("Quantity Must Not Exceed Capacity\n The Capacity is: " + this.shelfCapacity);
       }
       else {
         product.itemName = this.itemName;
