@@ -9,6 +9,11 @@ This WebApp was designed for the WVU Statler College of Engineering and Mineral 
 - Audit the system to change the quantities and storage locations for items, then generate a report of the changes made
 - Gnerate a report of the items based on attributes
 
+# Use on Phone:
+- Use Safari or a search engine that allows page zoom
+- Adjust page zoom to 50%
+- Turn Phone Sideways to view all UI elements
+
 # To Implement This System:
 ## Local Hosting:
 1. Create a firebase database
