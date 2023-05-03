@@ -35,7 +35,7 @@ This specific project has been deployed to:
 #### https://www.Outreach-Inventory.com
 
 Engineers:
-- Andrew Degarmo
+- Andrew DeGarmo
 - Jacob Comer
 - Michael Barchett
 - Samual Maatman
